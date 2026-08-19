@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>数学图形实验室</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="ui-state.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span>∠</span> 数学图形实验室</a>
+    <nav><a class="active" href="index.html">图形实验室</a><a href="knowledge.html">知识点库</a></nav>
+    <button class="teacher-button" data-teacher-login>老师入口</button>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">拖一拖，看见公式为什么这样写</p>
+      <h1>让图形自己说明变化</h1>
+      <p>改变长、宽、半径和高，观察周长、面积与体积怎样一起变化。</p>
+    </section>
+    <section class="lab-grid" aria-label="图形实验">
+      <article class="lab-card">
+        <div class="lab-heading"><div><small>平面图形 01</small><h2>长方形</h2></div><output id="rectValues"></output></div>
+        <svg id="rectSvg" class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="可拖动长方形">
+          <rect id="rectShape" x="90" y="55" rx="10" class="shape-fill"></rect>
+          <circle id="rectHandle" r="13" class="drag-handle"></circle>
+        </svg>
+        <div class="controls"><label>长<input id="rectWidth" type="range" min="2" max="12" value="8"></label><label>宽<input id="rectHeight" type="range" min="2" max="9" value="5"></label></div>
+        <p class="formula" id="rectFormula"></p><p class="hint">拖动右下角圆点，也可以直接改变长和宽。</p>
+      </article>
+      <article class="lab-card">
+        <div class="lab-heading"><div><small>平面图形 02</small><h2>三角形</h2></div><output id="triValues"></output></div>
+        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="三角形底和高">
+          <polygon id="triShape" class="shape-fill"></polygon><line id="triHeightLine" x1="300" y1="300" x2="300" y2="100" class="guide-line"></line>
+        </svg>
+        <div class="controls"><label>底<input id="triBase" type="range" min="2" max="12" value="8"></label><label>高<input id="triHeight" type="range" min="2" max="9" value="6"></label></div>
+        <p class="formula" id="triFormula"></p><p class="hint">相同底和高的两个三角形，可以拼成一个平行四边形。</p>
+      </article>
+      <article class="lab-card">
+        <div class="lab-heading"><div><small>圆与扇形 03</small><h2>圆和扇形</h2></div><output id="circleValues"></output></div>
+        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="圆和扇形">
+          <path id="sectorShape" class="shape-fill"></path><line id="circleRadiusLine" x1="300" y1="180" x2="430" y2="180" class="guide-line"></line><circle id="circleHandle" cy="180" r="10" class="drag-handle"></circle>
+        </svg>
+        <div class="controls"><label>半径<input id="circleRadius" type="range" min="2" max="8" value="5"></label><label>圆心角<input id="sectorAngle" type="range" min="30" max="360" step="15" value="120"></label></div>
+        <p class="formula" id="circleFormula"></p><p class="hint">扇形占整圆的几分之几，面积和弧长也占相同的比例。</p>
+      </article>
+      <article class="lab-card">
+        <div class="lab-heading"><div><small>立体图形 04</small><h2>圆柱和圆锥</h2></div><output id="solidValues"></output></div>
+        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="同底同高圆柱和圆锥">
+          <rect id="cylSide" y="95" class="solid-fill"></rect><ellipse id="cylTop" cx="170" cy="95" ry="18" class="solid-top"></ellipse><ellipse id="cylBottom" cx="170" ry="18" class="solid-top"></ellipse>
+          <polygon id="coneShape" class="solid-fill"></polygon><ellipse id="coneBase" cx="430" ry="18" class="solid-top"></ellipse>
+          <text x="170" y="335" text-anchor="middle">圆柱</text><text x="430" y="335" text-anchor="middle">圆锥</text>
+        </svg>
+        <div class="controls"><label>半径<input id="solidRadius" type="range" min="2" max="7" value="4"></label><label>高<input id="solidHeight" type="range" min="3" max="10" value="7"></label></div>
+        <p class="formula" id="solidFormula"></p><p class="hint">同底同高时，圆锥体积是圆柱体积的三分之一。</p>
+      </article>
+    </section>
+  </main>
+  <script src="config.js" onerror="this.remove()"></script>
+  <script type="module" src="js/common.js"></script>
+  <script type="module" src="js/geometry.js"></script>
+</body>
+</html>

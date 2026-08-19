@@ -1,0 +1,5 @@
+.teacher-button:disabled {
+  background: #71808d;
+  cursor: not-allowed;
+  opacity: .9;
+}

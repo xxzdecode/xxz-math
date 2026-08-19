@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数学知识点库</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="ui-state.css"></head>
+<body>
+  <header class="site-header"><a class="brand" href="index.html"><span>∠</span> 数学图形实验室</a><nav><a href="index.html">图形实验室</a><a class="active" href="knowledge.html">知识点库</a></nav><button class="teacher-button" data-teacher-login>老师入口</button></header>
+  <main class="page-shell">
+    <section class="page-title"><p class="eyebrow">教学地图</p><h1>数学知识点库</h1><p>公共页面只显示通用知识结构；进入老师模式后，分别查看交接教学基线、下一动作与我们的实测掌握状态。</p></section>
+    <p class="notice" id="teacherProgressHint">当前为公共视图。学生状态需要进入老师模式。</p>
+    <div class="student-switch" id="studentSwitch" hidden></div>
+    <p class="inline-status" id="knowledgeStatus" aria-live="polite"></p>
+    <section class="teacher-summary" id="teacherSummary" hidden></section>
+    <div id="knowledgeGroups"></div>
+  </main>
+  <script src="config.js" onerror="this.remove()"></script><script type="module" src="js/knowledge.js"></script>
+</body>
+</html>

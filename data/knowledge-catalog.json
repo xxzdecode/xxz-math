@@ -1,0 +1,600 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-19T14:20:38.042Z",
+  "knowledge_points": [
+    {
+      "knowledge_id": "g6-integer-mixed-operations",
+      "stage": "g6-transition",
+      "domain": "数与运算",
+      "title": "整数四则混合运算"
+    },
+    {
+      "knowledge_id": "g6-integer-efficient-calculation",
+      "stage": "g6-transition",
+      "domain": "数与运算",
+      "title": "整数简便运算"
+    },
+    {
+      "knowledge_id": "g6-decimal-four-operations",
+      "stage": "g6-transition",
+      "domain": "数与运算",
+      "title": "小数四则计算"
+    },
+    {
+      "knowledge_id": "g6-decimal-point-shift",
+      "stage": "g6-transition",
+      "domain": "数与运算",
+      "title": "小数点移动"
+    },
+    {
+      "knowledge_id": "g6-fraction-concept",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "分数概念"
+    },
+    {
+      "knowledge_id": "g6-fraction-common-denominator",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "通分"
+    },
+    {
+      "knowledge_id": "g6-fraction-reduction",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "约分"
+    },
+    {
+      "knowledge_id": "g6-fraction-add-subtract",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "分数加减法"
+    },
+    {
+      "knowledge_id": "g6-fraction-multiply-divide",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "分数乘除法"
+    },
+    {
+      "knowledge_id": "g6-reciprocal",
+      "stage": "g6-transition",
+      "domain": "分数",
+      "title": "倒数"
+    },
+    {
+      "knowledge_id": "g6-fraction-decimal-mixed-operations",
+      "stage": "g6-transition",
+      "domain": "数与运算",
+      "title": "分数与小数混合四则运算"
+    },
+    {
+      "knowledge_id": "g6-percent",
+      "stage": "g6-transition",
+      "domain": "比与比例",
+      "title": "百分数基础、换算与计算"
+    },
+    {
+      "knowledge_id": "g6-ratio-proportion",
+      "stage": "g6-transition",
+      "domain": "比与比例",
+      "title": "比与比例基础"
+    },
+    {
+      "knowledge_id": "g6-solve-proportion",
+      "stage": "g6-transition",
+      "domain": "比与比例",
+      "title": "解比例方程"
+    },
+    {
+      "knowledge_id": "g6-linear-equation-basic",
+      "stage": "g6-transition",
+      "domain": "方程",
+      "title": "简单一元一次方程"
+    },
+    {
+      "knowledge_id": "g6-linear-equation-rational-coefficients",
+      "stage": "g6-transition",
+      "domain": "方程",
+      "title": "含分数或小数系数的一元一次方程"
+    },
+    {
+      "knowledge_id": "g6-circle-sector",
+      "stage": "g6-transition",
+      "domain": "图形与几何",
+      "title": "圆与扇形"
+    },
+    {
+      "knowledge_id": "g6-probability-statistics",
+      "stage": "g6-transition",
+      "domain": "统计与概率",
+      "title": "可能性与统计图表"
+    },
+    {
+      "knowledge_id": "g6-cylinder-surface-area",
+      "stage": "g6-transition",
+      "domain": "图形与几何",
+      "title": "圆柱表面积"
+    },
+    {
+      "knowledge_id": "g6-cylinder-volume",
+      "stage": "g6-transition",
+      "domain": "图形与几何",
+      "title": "圆柱体积"
+    },
+    {
+      "knowledge_id": "g6-cone-volume",
+      "stage": "g6-transition",
+      "domain": "图形与几何",
+      "title": "圆锥体积"
+    },
+    {
+      "knowledge_id": "g6-cylinder-cone-applications",
+      "stage": "g6-transition",
+      "domain": "图形与几何",
+      "title": "圆柱与圆锥综合应用"
+    },
+    {
+      "knowledge_id": "g6-system-two-linear-equations",
+      "stage": "g6-transition",
+      "domain": "方程",
+      "title": "二元一次方程组基础"
+    },
+    {
+      "knowledge_id": "g6-substitution-elimination",
+      "stage": "g6-transition",
+      "domain": "方程",
+      "title": "代入消元"
+    },
+    {
+      "knowledge_id": "g4-two-digit-multiply-divide",
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "两位数乘除法与速算"
+    },
+    {
+      "knowledge_id": "g4-two-step-mixed-operations",
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "两步四则混合运算"
+    },
+    {
+      "knowledge_id": "g4-perimeter-area-applications",
+      "stage": "g4",
+      "domain": "图形与几何",
+      "title": "周长与面积综合应用"
+    },
+    {
+      "knowledge_id": "g4-triangle-quadrilateral-classification",
+      "stage": "g4",
+      "domain": "图形与几何",
+      "title": "三角形与四边形分类"
+    },
+    {
+      "knowledge_id": "g4-unitary-totalization-problems",
+      "stage": "g4",
+      "domain": "解决问题",
+      "title": "归一归总问题"
+    },
+    {
+      "knowledge_id": "g4-travel-work-problems-intro",
+      "stage": "g4",
+      "domain": "解决问题",
+      "title": "行程与工程问题入门"
+    },
+    {
+      "knowledge_id": "g4-fraction-introduction",
+      "stage": "g4",
+      "domain": "分数",
+      "title": "分数初步认识"
+    },
+    {
+      "knowledge_id": "g4-statistics-calendar",
+      "stage": "g4",
+      "domain": "统计与时间",
+      "title": "统计与年月日综合"
+    },
+    {
+      "knowledge_id": "g4-grade3-comprehensive-review",
+      "stage": "g4",
+      "domain": "综合",
+      "title": "三年级综合检测与讲评"
+    },
+    {
+      "knowledge_id": "g4-add-subtract-relations-laws",
+      "stage": "g4",
+      "domain": "运算律",
+      "title": "加减法的关系与运算律"
+    },
+    {
+      "knowledge_id": "g4-multiply-divide-relations-laws",
+      "stage": "g4",
+      "domain": "运算律",
+      "title": "乘除法的关系与运算律"
+    },
+    {
+      "knowledge_id": "g4-distributive-law",
+      "stage": "g4",
+      "domain": "运算律",
+      "title": "乘法分配律"
+    },
+    {
+      "knowledge_id": "g4-operation-laws-shortcuts",
+      "stage": "g4",
+      "domain": "运算律",
+      "title": "运算律综合运用与简算技巧"
+    },
+    {
+      "knowledge_id": "g4-position-direction-1",
+      "stage": "g4",
+      "domain": "图形与位置",
+      "title": "位置与方向（一）"
+    },
+    {
+      "knowledge_id": "g4-position-direction-2",
+      "stage": "g4",
+      "domain": "图形与位置",
+      "title": "位置与方向（二）"
+    },
+    {
+      "knowledge_id": "g7-10-1-polynomials",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "整式"
+    },
+    {
+      "knowledge_id": "g7-10-2-like-terms",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "合并同类项"
+    },
+    {
+      "knowledge_id": "g7-10-3-polynomial-add-subtract",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "整式的加法和减法"
+    },
+    {
+      "knowledge_id": "g7-11-1-polynomial-multiplication",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "整式的乘法"
+    },
+    {
+      "knowledge_id": "g7-11-2-multiplication-formulas",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "乘法公式"
+    },
+    {
+      "knowledge_id": "g7-11-3-polynomial-division",
+      "stage": "g7",
+      "domain": "整式",
+      "title": "整式的除法"
+    },
+    {
+      "knowledge_id": "g7-12-1-factorization-meaning",
+      "stage": "g7",
+      "domain": "因式分解",
+      "title": "因式分解的意义"
+    },
+    {
+      "knowledge_id": "g7-12-2-factorization-methods",
+      "stage": "g7",
+      "domain": "因式分解",
+      "title": "因式分解的方法"
+    },
+    {
+      "knowledge_id": "g7-13-1-algebraic-fractions-properties",
+      "stage": "g7",
+      "domain": "分式",
+      "title": "分式以及性质"
+    },
+    {
+      "knowledge_id": "g7-13-2-algebraic-fraction-operations",
+      "stage": "g7",
+      "domain": "分式",
+      "title": "分式的运算"
+    },
+    {
+      "knowledge_id": "g7-13-3-algebraic-fraction-equations",
+      "stage": "g7",
+      "domain": "分式",
+      "title": "分式方程"
+    },
+    {
+      "knowledge_id": "g7-14-1-translation",
+      "stage": "g7",
+      "domain": "图形运动",
+      "title": "平移"
+    },
+    {
+      "knowledge_id": "g7-14-2-rotation",
+      "stage": "g7",
+      "domain": "图形运动",
+      "title": "旋转"
+    },
+    {
+      "knowledge_id": "g7-14-3-axial-symmetry",
+      "stage": "g7",
+      "domain": "图形运动",
+      "title": "轴对称"
+    },
+    {
+      "knowledge_id": "g7-14-4-central-symmetry",
+      "stage": "g7",
+      "domain": "图形运动",
+      "title": "中心对称"
+    },
+    {
+      "knowledge_id": "g7-practice-frieze-patterns",
+      "stage": "g7",
+      "domain": "综合与实践",
+      "title": "从传统连续纹样到现代镶嵌图案"
+    },
+    {
+      "knowledge_id": "g7-practice-reading-star",
+      "stage": "g7",
+      "domain": "综合与实践",
+      "title": "制订“阅读之星”评选方案"
+    },
+    {
+      "knowledge_id": "g4-2-large-numbers",
+      "stage": "g4",
+      "domain": "数与量",
+      "title": "大数的认识"
+    },
+    {
+      "knowledge_id": "g4-2-rounding",
+      "stage": "g4",
+      "domain": "数与量",
+      "title": "四舍五入法"
+    },
+    {
+      "knowledge_id": "g4-2-square-kilometre",
+      "stage": "g4",
+      "domain": "数与量",
+      "title": "平方千米"
+    },
+    {
+      "knowledge_id": "g4-2-ton",
+      "stage": "g4",
+      "domain": "数与量",
+      "title": "吨的认识"
+    },
+    {
+      "knowledge_id": "g4-2-millilitre-litre",
+      "stage": "g4",
+      "domain": "数与量",
+      "title": "毫升与升的认识"
+    },
+    {
+      "knowledge_id": "g4-3-fraction-comparison",
+      "stage": "g4",
+      "domain": "分数初步认识（二）",
+      "title": "分数的大小比较"
+    },
+    {
+      "knowledge_id": "g4-3-fraction-add-subtract",
+      "stage": "g4",
+      "domain": "分数初步认识（二）",
+      "title": "分数的加减计算"
+    },
+    {
+      "knowledge_id": "g4-3-fraction-wall",
+      "stage": "g4",
+      "domain": "分数初步认识（二）",
+      "title": "小探究——“分数墙”"
+    },
+    {
+      "knowledge_id": "g4-4-three-step-calculations",
+      "stage": "g4",
+      "domain": "整数四则运算",
+      "title": "三步计算式题"
+    },
+    {
+      "knowledge_id": "g4-4-forward-reasoning",
+      "stage": "g4",
+      "domain": "整数四则运算",
+      "title": "正推"
+    },
+    {
+      "knowledge_id": "g4-4-backward-reasoning",
+      "stage": "g4",
+      "domain": "整数四则运算",
+      "title": "逆推"
+    },
+    {
+      "knowledge_id": "g4-4-verbal-arithmetic-problems",
+      "stage": "g4",
+      "domain": "整数四则运算",
+      "title": "文字计算题"
+    },
+    {
+      "knowledge_id": "g4-4-problem-solving",
+      "stage": "g4",
+      "domain": "整数四则运算",
+      "title": "解决问题"
+    },
+    {
+      "knowledge_id": "g4-5-circle-intro",
+      "stage": "g4",
+      "domain": "几何小实践",
+      "title": "圆的初步认识"
+    },
+    {
+      "knowledge_id": "g4-5-segment-ray-line",
+      "stage": "g4",
+      "domain": "几何小实践",
+      "title": "线段、射线、直线"
+    },
+    {
+      "knowledge_id": "g4-5-angle",
+      "stage": "g4",
+      "domain": "几何小实践",
+      "title": "角"
+    },
+    {
+      "knowledge_id": "g4-5-angle-measurement",
+      "stage": "g4",
+      "domain": "几何小实践",
+      "title": "角的度量"
+    },
+    {
+      "knowledge_id": "g4-5-angle-calculation",
+      "stage": "g4",
+      "domain": "几何小实践",
+      "title": "角的计算"
+    },
+    {
+      "knowledge_id": "g4-6-large-numbers-rounding",
+      "stage": "g4",
+      "domain": "整理与提高",
+      "title": "大数与凑整"
+    },
+    {
+      "knowledge_id": "g4-6-fractions-number-line",
+      "stage": "g4",
+      "domain": "整理与提高",
+      "title": "数射线上的分数"
+    },
+    {
+      "knowledge_id": "g4-6-circle-angle-review",
+      "stage": "g4",
+      "domain": "整理与提高",
+      "title": "圆与角的复习"
+    },
+    {
+      "knowledge_id": "g4-6-equal-angles",
+      "stage": "g4",
+      "domain": "整理与提高",
+      "title": "数学广场——相等的角"
+    },
+    {
+      "knowledge_id": "g4-6-grid-estimation",
+      "stage": "g4",
+      "domain": "整理与提高",
+      "title": "数学广场——通过网格来估测"
+    }
+  ],
+  "textbook_sequences": [
+    {
+      "sequence_id": "shanghai-g7-semester1-2024",
+      "textbook_title": "沪教7上",
+      "chapters": [
+        {
+          "chapter": "第10章 整式的加减",
+          "knowledge_ids": [
+            "g7-10-1-polynomials",
+            "g7-10-2-like-terms",
+            "g7-10-3-polynomial-add-subtract"
+          ]
+        },
+        {
+          "chapter": "第11章 整式的乘除",
+          "knowledge_ids": [
+            "g7-11-1-polynomial-multiplication",
+            "g7-11-2-multiplication-formulas",
+            "g7-11-3-polynomial-division"
+          ]
+        },
+        {
+          "chapter": "第12章 因式分解",
+          "knowledge_ids": [
+            "g7-12-1-factorization-meaning",
+            "g7-12-2-factorization-methods"
+          ]
+        },
+        {
+          "chapter": "第13章 分式",
+          "knowledge_ids": [
+            "g7-13-1-algebraic-fractions-properties",
+            "g7-13-2-algebraic-fraction-operations",
+            "g7-13-3-algebraic-fraction-equations"
+          ]
+        },
+        {
+          "chapter": "第14章 图形的运动",
+          "knowledge_ids": [
+            "g7-14-1-translation",
+            "g7-14-2-rotation",
+            "g7-14-3-axial-symmetry",
+            "g7-14-4-central-symmetry"
+          ]
+        },
+        {
+          "chapter": "综合与实践",
+          "knowledge_ids": [
+            "g7-practice-frieze-patterns",
+            "g7-practice-reading-star"
+          ]
+        }
+      ]
+    },
+    {
+      "sequence_id": "shanghai-g4-semester1",
+      "textbook_title": "四年级上册数学沪教版电子课本",
+      "chapters": [
+        {
+          "chapter": "一、复习与提高",
+          "knowledge_ids": [
+            "g4-add-subtract-relations-laws",
+            "g4-multiply-divide-relations-laws",
+            "g4-two-digit-multiply-divide",
+            "g4-fraction-introduction"
+          ]
+        },
+        {
+          "chapter": "二、数与量",
+          "knowledge_ids": [
+            "g4-2-large-numbers",
+            "g4-2-rounding",
+            "g4-2-square-kilometre",
+            "g4-2-ton",
+            "g4-2-millilitre-litre"
+          ]
+        },
+        {
+          "chapter": "三、分数的初步认识（二）",
+          "knowledge_ids": [
+            "g4-3-fraction-comparison",
+            "g4-3-fraction-add-subtract",
+            "g4-3-fraction-wall"
+          ]
+        },
+        {
+          "chapter": "四、整数的四则运算",
+          "knowledge_ids": [
+            "g4-travel-work-problems-intro",
+            "g4-4-three-step-calculations",
+            "g4-4-forward-reasoning",
+            "g4-4-backward-reasoning",
+            "g4-4-verbal-arithmetic-problems",
+            "g4-operation-laws-shortcuts",
+            "g4-4-problem-solving"
+          ]
+        },
+        {
+          "chapter": "五、几何小实践",
+          "knowledge_ids": [
+            "g4-5-circle-intro",
+            "g4-5-segment-ray-line",
+            "g4-5-angle",
+            "g4-5-angle-measurement",
+            "g4-5-angle-calculation"
+          ]
+        },
+        {
+          "chapter": "六、整理与提高",
+          "knowledge_ids": [
+            "g4-6-large-numbers-rounding",
+            "g4-6-fractions-number-line",
+            "g4-6-circle-angle-review",
+            "g4-6-equal-angles",
+            "g4-6-grid-estimation"
+          ]
+        }
+      ]
+    }
+  ]
+}
