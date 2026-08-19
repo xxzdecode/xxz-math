@@ -9,7 +9,7 @@ const requiredEnv = name => {
 
 const SUPABASE_URL = requiredEnv('SUPABASE_URL').replace(/\/+$/, '');
 const SERVICE_ROLE_KEY = requiredEnv('SUPABASE_SERVICE_ROLE_KEY');
-const PIN_VERIFIER = requiredEnv('MATH_TEACHER_PIN_VERIFIER');
+const SETUP_TOKEN = requiredEnv('MATH_SETUP_TOKEN');
 const PIN_PEPPER = requiredEnv('MATH_PIN_PEPPER');
 const SESSION_SECRET = requiredEnv('MATH_SESSION_SECRET');
 const ALLOWED_ORIGINS = new Set(
@@ -17,7 +17,7 @@ const ALLOWED_ORIGINS = new Set(
     .split(',').map(value => value.trim()).filter(Boolean)
 );
 
-if (encoder.encode(PIN_PEPPER).length < 32 || encoder.encode(SESSION_SECRET).length < 32) {
+if (encoder.encode(SETUP_TOKEN).length < 32 || encoder.encode(PIN_PEPPER).length < 32 || encoder.encode(SESSION_SECRET).length < 32) {
   throw new Error('Math teacher secrets must contain at least 32 bytes');
 }
 if (!ALLOWED_ORIGINS.size) throw new Error('MATH_ALLOWED_ORIGINS is not configured');
@@ -46,17 +46,34 @@ function constantEqual(left, right) {
   return difference === 0;
 }
 
-async function verifyPin(pin) {
-  if (!/^\d{4}$/.test(String(pin))) return false;
-  const [prefix, rawIterations, rawSalt, rawHash, ...extra] = PIN_VERIFIER.split('$');
+function parseVerifier(verifier) {
+  const [prefix, rawIterations, rawSalt, rawHash, ...extra] = String(verifier || '').split('$');
   const iterations = Number(rawIterations);
   const salt = fromBase64Url(rawSalt || '');
   const expected = fromBase64Url(rawHash || '');
   if (prefix !== 'pbkdf2-sha256' || extra.length || !Number.isInteger(iterations) || iterations < 210_000 || salt.length < 16 || expected.length !== 32) {
     throw new Error('PIN verifier is invalid');
   }
+  return { iterations, salt, expected };
+}
+
+async function pinHash(pin, salt, iterations) {
   const material = await crypto.subtle.importKey('raw', encoder.encode(`${String(pin)}\0${PIN_PEPPER}`), 'PBKDF2', false, ['deriveBits']);
-  const candidate = new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations }, material, 256));
+  return new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations }, material, 256));
+}
+
+async function createPinVerifier(pin) {
+  if (!/^\d{4}$/.test(String(pin))) throw new Error('PIN must contain exactly four digits');
+  const iterations = 310_000;
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const hash = await pinHash(pin, salt, iterations);
+  return `pbkdf2-sha256$${iterations}$${base64Url(salt)}$${base64Url(hash)}`;
+}
+
+async function verifyPin(pin, verifier) {
+  if (!/^\d{4}$/.test(String(pin))) return false;
+  const { iterations, salt, expected } = parseVerifier(verifier);
+  const candidate = await pinHash(pin, salt, iterations);
   return constantEqual(candidate, expected);
 }
 
@@ -131,6 +148,24 @@ async function rateLimit(request, event) {
   });
 }
 
+async function loadPinVerifier() {
+  const rows = await supabase('/rest/v1/math_private_state_v1?key=eq.math_teacher_auth_v1&select=value');
+  if (!Array.isArray(rows) || rows.length === 0) return '';
+  if (rows.length !== 1) throw new Error('Math teacher auth state is invalid');
+  const verifier = String(rows[0]?.value?.pin_verifier || '');
+  parseVerifier(verifier);
+  return verifier;
+}
+
+async function savePinVerifier(verifier) {
+  parseVerifier(verifier);
+  await supabase('/rest/v1/math_private_state_v1?on_conflict=key', {
+    method: 'POST',
+    headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+    body: JSON.stringify({ key: 'math_teacher_auth_v1', value: { schema_version: 1, pin_verifier: verifier } })
+  });
+}
+
 function safeProgress(value) {
   const records = Array.isArray(value?.records) ? value.records : [];
   return {
@@ -151,13 +186,32 @@ function safeProgress(value) {
 }
 
 async function handleAuth(request, origin) {
+  const verifier = await loadPinVerifier();
+  if (!verifier) return json(origin, 409, { message: '请先完成首次密码设置' });
   const state = await rateLimit(request, 'check');
   if (!state.allowed) return json(origin, 429, { message: '密码尝试过多，请稍后再试' }, { 'Retry-After': String(state.retry_after_seconds || 900) });
   const body = await request.json().catch(() => ({}));
-  if (!await verifyPin(body.pin)) {
+  if (!await verifyPin(body.pin, verifier)) {
     const failed = await rateLimit(request, 'failure');
     return json(origin, failed.allowed ? 401 : 429, { message: '密码错误或暂时不可用' }, failed.allowed ? {} : { 'Retry-After': String(failed.retry_after_seconds || 900) });
   }
+  await rateLimit(request, 'success');
+  const session = await createSession();
+  return json(origin, 200, { token: session.token, expires_at: session.expiresAt });
+}
+
+async function handleSetup(request, origin) {
+  if (await loadPinVerifier()) return json(origin, 409, { message: '老师密码已经设置' });
+  const state = await rateLimit(request, 'check');
+  if (!state.allowed) return json(origin, 429, { message: '尝试过多，请稍后再试' }, { 'Retry-After': String(state.retry_after_seconds || 900) });
+  const body = await request.json().catch(() => ({}));
+  const suppliedToken = encoder.encode(String(body.setup_token || ''));
+  const validToken = constantEqual(suppliedToken, encoder.encode(SETUP_TOKEN));
+  if (!validToken || !/^\d{4}$/.test(String(body.pin || ''))) {
+    const failed = await rateLimit(request, 'failure');
+    return json(origin, failed.allowed ? 401 : 429, { message: '首次设置链接无效或密码格式不正确' }, failed.allowed ? {} : { 'Retry-After': String(failed.retry_after_seconds || 900) });
+  }
+  await savePinVerifier(await createPinVerifier(String(body.pin)));
   await rateLimit(request, 'success');
   const session = await createSession();
   return json(origin, 200, { token: session.token, expires_at: session.expiresAt });
@@ -169,6 +223,8 @@ Deno.serve(async request => {
   if (request.method === 'OPTIONS') return json(origin, 204, null);
   try {
     const path = new URL(request.url).pathname.replace(/^.*\/math-teacher-api/, '') || '/';
+    if (request.method === 'GET' && path === '/status') return json(origin, 200, { setup_required: !(await loadPinVerifier()) });
+    if (request.method === 'POST' && path === '/setup') return await handleSetup(request, origin);
     if (request.method === 'POST' && path === '/auth') return await handleAuth(request, origin);
     if (!await verifySession(request)) return json(origin, 401, { message: '教师会话无效或已过期' });
 

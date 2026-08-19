@@ -20,7 +20,8 @@
 
 - 使用一个 4 位数字 PIN，无用户名。
 - PIN 不进入 Git、静态配置、数据库明文、日志、错误信息或分析事件。
-- verifier 与高熵 pepper 分开保存为部署 secret；本地参考实现使用 PBKDF2-SHA256、随机 salt 和常量时间比较。
+- 首次启用使用高熵一次性激活 token；老师只需在网站输入两次 4 位 PIN。激活 token 不进入静态站点或 Git，设置成功后不能再次初始化。
+- verifier 保存在仅 service-role 可读的 `math_teacher_auth_v1` 私有 key，高熵 pepper 作为部署 secret；实现使用 PBKDF2-SHA256、随机 salt 和常量时间比较。
 - 按来源和时间窗限制连续错误尝试。成功后签发 `aud=math-teacher-api`、最长 15 分钟、不可刷新的签名会话。
 - 前端只在 `sessionStorage` 保存会话令牌；私有响应使用 `Cache-Control: no-store`。
 - CORS 只允许确认后的正式 origin 与明确的本地开发 origin，不使用 `*`。
@@ -42,9 +43,10 @@
 1. 只读审计现有 Supabase 项目与 RLS；
 2. 执行 `supabase/migrations/202608190001_math_teacher_private_state.sql`；
 3. 部署 `supabase/functions/math-teacher-api`，其 `verify_jwt=false`，改用本服务自己的 15 分钟会话；
-4. 设置 `MATH_ALLOWED_ORIGINS`、`MATH_TEACHER_PIN_VERIFIER`、`MATH_PIN_PEPPER` 与 `MATH_SESSION_SECRET` secrets；
-5. 先运行 `npm run seed:progress -- <Material Hub 数学目录>` dry-run，再经批准增加 `--apply`；
-6. 把公开 `config.js` 的 `apiBase` 指向 Edge Function URL，重新测试并发布。
+4. 设置 `MATH_ALLOWED_ORIGINS`、`MATH_SETUP_TOKEN`、`MATH_PIN_PEPPER` 与 `MATH_SESSION_SECRET` secrets；
+5. 用只交付给 Stella 的一次性激活链接打开网站，在页面中输入并确认 4 位 PIN；
+6. 先运行 `npm run seed:progress -- <Material Hub 数学目录>` dry-run，再经批准增加 `--apply`；
+7. 把公开 `config.js` 的 `apiBase` 指向 Edge Function URL，重新测试并发布。
 
 ## 状态语义
 
@@ -57,6 +59,14 @@
 - `stable` 与 `reinforce` 必须由 Material Hub 中可追溯的照片、诊断题或课堂证据流程更新，网页不能直接写入。
 
 ## 接口
+
+### `GET /status`
+
+只返回是否仍需首次设置，不返回 verifier 或任何学生状态。
+
+### `POST /setup`
+
+仅在 `math_teacher_auth_v1` 尚不存在时接受一次性激活 token 与两次确认后的 4 位 PIN；服务端生成随机 salt 和不可逆 verifier，成功后立即签发短期教师会话。
 
 ### `POST /auth`
 

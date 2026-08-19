@@ -6,14 +6,16 @@ const read = relative => readFile(new URL(`../${relative}`, import.meta.url), 'u
 
 test('edge teacher API reads all secrets from environment and keeps math namespace', async () => {
   const edge = await read('supabase/functions/math-teacher-api/index.ts');
-  assert.match(edge, /requiredEnv\('MATH_TEACHER_PIN_VERIFIER'\)/);
+  assert.match(edge, /requiredEnv\('MATH_SETUP_TOKEN'\)/);
   assert.match(edge, /requiredEnv\('MATH_PIN_PEPPER'\)/);
   assert.match(edge, /requiredEnv\('MATH_SESSION_SECRET'\)/);
+  assert.match(edge, /math_teacher_auth_v1/);
   assert.match(edge, /math_private_state_v1/);
   assert.match(edge, /math_teacher_rate_limit_v1/);
   assert.match(edge, /math_set_teaching_status_v1/);
   assert.doesNotMatch(edge, /https:\/\/[a-z0-9-]+\.supabase\.co/i);
   assert.doesNotMatch(edge, /service_role\W+[A-Za-z0-9._-]{20,}/i);
+  assert.doesNotMatch(edge, /requiredEnv\('MATH_TEACHER_PIN_VERIFIER'\)/);
 });
 
 test('migration denies browser roles and grants only service role', async () => {
