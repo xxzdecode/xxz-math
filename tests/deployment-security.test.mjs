@@ -27,6 +27,15 @@ test('migration denies browser roles and grants only service role', async () => 
   assert.doesNotMatch(migration, /create policy/i);
 });
 
+test('persistent teacher rate limit uses a timestamp variable that cannot resolve to SQL current_time', async () => {
+  const initial = await read('supabase/migrations/202608190001_math_teacher_private_state.sql');
+  const fix = await read('supabase/migrations/202608200001_fix_math_teacher_rate_limit.sql');
+  for (const migration of [initial, fix]) {
+    assert.match(migration, /current_at timestamptz := now\(\)/i);
+    assert.doesNotMatch(migration, /current_time timestamptz/i);
+  }
+});
+
 test('private seed stays dry-run unless apply is explicit and strips evidence fields', async () => {
   const seed = await read('scripts/seed-private-progress.mjs');
   assert.match(seed, /process\.argv\.includes\('--apply'\)/);
