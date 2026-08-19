@@ -60,12 +60,23 @@ export function buildPublicCatalog(source, sequenceSource, generatedAt = new Dat
     const knowledgeId = requiredText(point?.knowledge_id, `knowledge_points[${index}].knowledge_id`);
     if (seen.has(knowledgeId)) throw new Error(`公共知识点存在重复 ID：${knowledgeId}`);
     seen.add(knowledgeId);
-    return {
+    const safePoint = {
       knowledge_id: knowledgeId,
       stage: requiredText(point?.stage, `knowledge_points[${index}].stage`),
       domain: requiredText(point?.domain, `knowledge_points[${index}].domain`),
       title: requiredText(point?.title, `knowledge_points[${index}].title`)
     };
+    if (typeof point?.curriculum_domain === 'string' && point.curriculum_domain.trim()) {
+      safePoint.curriculum_domain = point.curriculum_domain.trim();
+    }
+    if (Array.isArray(point?.objective_tags)) {
+      const tags = [...new Set(point.objective_tags.filter(value => typeof value === 'string').map(value => value.trim()).filter(Boolean))];
+      if (tags.length) safePoint.objective_tags = tags;
+    }
+    if (typeof point?.textbook_ref === 'string' && point.textbook_ref.trim()) {
+      safePoint.textbook_ref = point.textbook_ref.trim();
+    }
+    return safePoint;
   });
   const textbookSequences = buildPublicSequences(sequenceSource, seen);
   return {

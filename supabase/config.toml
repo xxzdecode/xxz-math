@@ -1,0 +1,2 @@
+[functions.math-teacher-api]
+verify_jwt = false

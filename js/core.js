@@ -55,6 +55,42 @@ export function triangleMetrics(base, height) {
   return { area: base * height / 2 };
 }
 
+export function parallelogramMetrics(base, side, height) {
+  return { area: base * height, perimeter: 2 * (base + side) };
+}
+
+export function trapezoidMetrics(topBase, bottomBase, height) {
+  return { area: (topBase + bottomBase) * height / 2 };
+}
+
+export function regularPolygonMetrics(sides, sideLength) {
+  return {
+    perimeter: sides * sideLength,
+    interiorAngleSum: (sides - 2) * 180,
+    interiorAngle: (sides - 2) * 180 / sides
+  };
+}
+
+export function translatePoint(x, y, deltaX, deltaY) {
+  return { x: x + deltaX, y: y + deltaY };
+}
+
+export function cuboidMetrics(length, width, height) {
+  return {
+    volume: length * width * height,
+    surfaceArea: 2 * (length * width + length * height + width * height)
+  };
+}
+
+export function angleKind(angle) {
+  if (angle === 0) return '零角';
+  if (angle < 90) return '锐角';
+  if (angle === 90) return '直角';
+  if (angle < 180) return '钝角';
+  if (angle === 180) return '平角';
+  return '优角';
+}
+
 export function circleMetrics(radius, angle = 360) {
   return {
     circumference: 2 * Math.PI * radius,
@@ -86,7 +122,10 @@ export function normalizeCatalog(value) {
     knowledgeId: text(point.knowledge_id),
     stage: text(point.stage),
     domain: text(point.domain) || '其他',
-    title: text(point.title) || text(point.knowledge_id)
+    title: text(point.title) || text(point.knowledge_id),
+    curriculumDomain: text(point.curriculum_domain),
+    objectiveTags: Array.isArray(point.objective_tags) ? point.objective_tags.map(text).filter(Boolean) : [],
+    textbookRef: text(point.textbook_ref)
   }));
 }
 

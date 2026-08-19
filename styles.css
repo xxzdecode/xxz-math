@@ -173,7 +173,35 @@ main {
 }
 
 .controls label { color: var(--muted); font-size: 13px; font-weight: 750; }
-.controls input { width: 100%; accent-color: var(--mint-dark); }
+.controls input[type="range"] { width: 100%; accent-color: var(--mint-dark); }
+
+.number-control { display: grid; grid-template-columns: minmax(0, 1fr) 76px; align-items: center; gap: 10px; margin-top: 6px; }
+.number-control input[type="number"],
+.shape-picker select,
+.knowledge-toolbar input,
+.knowledge-toolbar select {
+  width: 100%;
+  padding: 9px 10px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.one-control { grid-template-columns: 1fr; }
+.three-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.shape-picker { margin: 0 0 14px; }
+.shape-picker label { display: grid; grid-template-columns: auto minmax(160px, 240px); align-items: center; gap: 10px; color: var(--muted); font-size: 13px; font-weight: 750; }
+
+.diagram-label { fill: var(--ink); font-size: 17px; font-weight: 800; }
+.measure-label { fill: var(--purple); font-size: 15px; font-weight: 750; }
+.concept-mark { fill: none; stroke: var(--sun); stroke-width: 4; }
+.concept-dot { fill: var(--red); }
+.shape-line { stroke: var(--mint-dark); stroke-width: 6; stroke-linecap: round; }
+.thin-line { fill: none; stroke-width: 3; }
+.angle-arc { fill: none; stroke: var(--purple); stroke-width: 5; }
+.axis-line { stroke: var(--ink); stroke-width: 3; marker-end: none; }
+.coordinate-grid line { stroke: var(--line); stroke-width: 1; }
+.four-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
 .formula {
   margin: 18px 0 8px;
@@ -207,6 +235,22 @@ main {
 
 .student-switch button.active { color: white; background: var(--ink); }
 .inline-status { min-height: 1.4em; color: var(--muted); }
+.knowledge-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 22px 0 14px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.knowledge-toolbar label { color: var(--muted); font-size: 13px; font-weight: 750; }
+.knowledge-toolbar input, .knowledge-toolbar select { margin-top: 6px; }
+.knowledge-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 24px; }
+.knowledge-summary > div { padding: 15px 18px; background: #e8f2f1; border-radius: 14px; }
+.knowledge-summary strong { display: block; font-size: 25px; }
+.knowledge-summary span { color: var(--muted); font-size: 13px; }
 .textbook-map,
 .supplement-map {
   margin: 28px 0;
@@ -242,6 +286,16 @@ main {
 .knowledge-item strong,
 .knowledge-item small { display: block; }
 .knowledge-item small { margin-top: 4px; color: var(--muted); }
+.knowledge-open {
+  min-width: 0;
+  padding: 0;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+.knowledge-open:hover strong { color: var(--mint-dark); text-decoration: underline; text-underline-offset: 3px; }
 .status-stack { max-width: 58%; text-align: right; }
 
 .teacher-summary {
@@ -258,6 +312,31 @@ main {
 .teacher-summary-item strong { display: block; font-size: 26px; }
 .teacher-summary-item span { display: block; margin-top: 3px; font-size: 13px; line-height: 1.4; }
 .teacher-summary-note { margin: 14px 0 0; color: #d7e4eb; line-height: 1.6; }
+
+.knowledge-dialog {
+  width: min(720px, calc(100vw - 32px));
+  max-height: min(82vh, 760px);
+  padding: 30px;
+  color: var(--ink);
+  background: white;
+  border: 0;
+  border-radius: 22px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, .25);
+}
+.knowledge-dialog::backdrop { background: rgba(15, 35, 50, .52); }
+.knowledge-dialog h2 { margin: 0 42px 10px 0; font-size: 34px; }
+.knowledge-dialog h3 { margin: 24px 0 8px; font-size: 18px; }
+.knowledge-dialog ul { margin: 0; padding-left: 22px; color: var(--muted); line-height: 1.8; }
+.knowledge-detail-summary { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.knowledge-detail-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.knowledge-detail-meta span { padding: 6px 9px; color: var(--mint-dark); font-size: 12px; font-weight: 750; background: #e8f5f2; border-radius: 999px; }
+.knowledge-private-detail { margin-top: 24px; padding: 16px 18px; background: #fff9e7; border-radius: 14px; }
+.knowledge-private-detail h3 { margin-top: 0; }
+.teaching-status-editor { display: grid; grid-template-columns: minmax(180px, 1fr) auto; align-items: end; gap: 10px; margin-top: 16px; }
+.teaching-status-editor label { color: var(--muted); font-size: 13px; font-weight: 750; }
+.teaching-status-editor select { display: block; width: 100%; margin-top: 6px; padding: 10px; color: var(--ink); background: white; border: 1px solid var(--line); border-radius: 10px; }
+.teaching-status-editor .inline-status { grid-column: 1 / -1; margin: 0; }
+.empty-state { padding: 28px; color: var(--muted); text-align: center; background: white; border-radius: 16px; }
 
 .status {
   display: inline-block;
@@ -328,6 +407,7 @@ main {
   .site-header nav { order: 3; width: 100%; overflow: auto; }
   .site-header nav a { white-space: nowrap; }
   .lab-grid, .knowledge-list { grid-template-columns: 1fr; }
+  .knowledge-toolbar { grid-template-columns: 1fr 1fr; }
   .hero { padding-top: 48px; }
 }
 
@@ -336,10 +416,16 @@ main {
   .teacher-button { margin-left: auto; }
   .lab-card { padding: 16px; border-radius: 20px; }
   .controls { grid-template-columns: 1fr; }
+  .three-controls { grid-template-columns: 1fr; }
   .textbook-map, .supplement-map { padding: 18px 14px; border-radius: 18px; }
   .knowledge-item { flex-direction: column; align-items: stretch; gap: 10px; }
   .status-stack { width: 100%; max-width: none; text-align: left; }
   .student-switch { flex-wrap: wrap; }
   .teacher-summary-grid { grid-template-columns: 1fr; }
+  .knowledge-toolbar, .knowledge-summary { grid-template-columns: 1fr; }
+  .knowledge-dialog { padding: 24px 18px; }
+  .knowledge-dialog h2 { font-size: 28px; }
+  .teaching-status-editor { grid-template-columns: 1fr; }
+  .teaching-status-editor .inline-status { grid-column: auto; }
   .hero h1 { font-size: 44px; }
 }

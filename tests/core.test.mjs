@@ -1,16 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  angleKind,
   circleMetrics,
+  cuboidMetrics,
   describeProgressState,
   normalizeCatalog,
   normalizeProgress,
   organizeCatalog,
   rectangleMetrics,
+  regularPolygonMetrics,
   solidMetrics,
   summarizeProgress,
+  trapezoidMetrics,
+  translatePoint,
   triangleMetrics
 } from '../js/core.js';
+import { knowledgeContent } from '../js/knowledge-content.js';
 
 test('rectangle and triangle formulas', () => {
   assert.deepEqual(rectangleMetrics(8, 5), { area: 40, perimeter: 26 });
@@ -22,6 +28,33 @@ test('circle sector and same-base same-height solids', () => {
   assert.ok(Math.abs(circle.sectorArea - Math.PI * 9 / 4) < 1e-10);
   const solid = solidMetrics(3, 8);
   assert.ok(Math.abs(solid.cylinderVolume / solid.coneVolume - 3) < 1e-10);
+});
+
+test('angle classification and trapezoid area follow geometry definitions', () => {
+  assert.equal(angleKind(35), '锐角');
+  assert.equal(angleKind(90), '直角');
+  assert.equal(angleKind(120), '钝角');
+  assert.equal(angleKind(180), '平角');
+  assert.deepEqual(trapezoidMetrics(5, 9, 4), { area: 28 });
+});
+
+test('polygon, translation and cuboid calculations stay exact', () => {
+  assert.deepEqual(regularPolygonMetrics(5, 4), { perimeter: 20, interiorAngleSum: 540, interiorAngle: 108 });
+  assert.deepEqual(translatePoint(-2, 1, 3, 2), { x: 1, y: 3 });
+  assert.deepEqual(cuboidMetrics(7, 4, 5), { volume: 140, surfaceArea: 166 });
+});
+
+test('every knowledge point receives useful public detail content', async () => {
+  const catalog = JSON.parse(await (await import('node:fs/promises')).readFile(
+    new URL('../data/knowledge-catalog.json', import.meta.url), 'utf8'
+  ));
+  for (const point of normalizeCatalog(catalog)) {
+    const content = knowledgeContent(point);
+    assert.ok(content.summary.length >= 15, `${point.knowledgeId} needs a summary`);
+    assert.ok(content.rules.length >= 3, `${point.knowledgeId} needs rules`);
+    assert.ok(content.example, `${point.knowledgeId} needs an example`);
+    assert.ok(content.pitfall, `${point.knowledgeId} needs a pitfall`);
+  }
 });
 
 test('catalog removes duplicate ids and progress stays student-specific', () => {

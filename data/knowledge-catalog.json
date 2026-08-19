@@ -1,480 +1,955 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-19T14:20:38.042Z",
+  "generated_at": "2026-08-19T14:56:38.847Z",
   "knowledge_points": [
     {
       "knowledge_id": "g6-integer-mixed-operations",
       "stage": "g6-transition",
       "domain": "数与运算",
-      "title": "整数四则混合运算"
+      "title": "整数四则混合运算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ]
     },
     {
       "knowledge_id": "g6-integer-efficient-calculation",
       "stage": "g6-transition",
       "domain": "数与运算",
-      "title": "整数简便运算"
+      "title": "整数简便运算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ]
     },
     {
       "knowledge_id": "g6-decimal-four-operations",
       "stage": "g6-transition",
       "domain": "数与运算",
-      "title": "小数四则计算"
+      "title": "小数四则计算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ]
     },
     {
       "knowledge_id": "g6-decimal-point-shift",
       "stage": "g6-transition",
       "domain": "数与运算",
-      "title": "小数点移动"
+      "title": "小数点移动",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-concept",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "分数概念"
+      "title": "分数概念",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-common-denominator",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "通分"
+      "title": "通分",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-reduction",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "约分"
+      "title": "约分",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-add-subtract",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "分数加减法"
+      "title": "分数加减法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-multiply-divide",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "分数乘除法"
+      "title": "分数乘除法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-reciprocal",
       "stage": "g6-transition",
       "domain": "分数",
-      "title": "倒数"
+      "title": "倒数",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-fraction-decimal-mixed-operations",
       "stage": "g6-transition",
       "domain": "数与运算",
-      "title": "分数与小数混合四则运算"
+      "title": "分数与小数混合四则运算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g6-percent",
       "stage": "g6-transition",
       "domain": "比与比例",
-      "title": "百分数基础、换算与计算"
+      "title": "百分数基础、换算与计算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "模型意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-ratio-proportion",
       "stage": "g6-transition",
       "domain": "比与比例",
-      "title": "比与比例基础"
+      "title": "比与比例基础",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "模型意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-solve-proportion",
       "stage": "g6-transition",
       "domain": "比与比例",
-      "title": "解比例方程"
+      "title": "解比例方程",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "模型意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-linear-equation-basic",
       "stage": "g6-transition",
       "domain": "方程",
-      "title": "简单一元一次方程"
+      "title": "简单一元一次方程",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "符号意识",
+        "运算能力",
+        "模型意识"
+      ]
     },
     {
       "knowledge_id": "g6-linear-equation-rational-coefficients",
       "stage": "g6-transition",
       "domain": "方程",
-      "title": "含分数或小数系数的一元一次方程"
+      "title": "含分数或小数系数的一元一次方程",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "符号意识",
+        "运算能力",
+        "模型意识"
+      ]
     },
     {
       "knowledge_id": "g6-circle-sector",
       "stage": "g6-transition",
       "domain": "图形与几何",
-      "title": "圆与扇形"
+      "title": "圆与扇形",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-probability-statistics",
       "stage": "g6-transition",
       "domain": "统计与概率",
-      "title": "可能性与统计图表"
+      "title": "可能性与统计图表",
+      "curriculum_domain": "统计与概率",
+      "objective_tags": [
+        "数据意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-cylinder-surface-area",
       "stage": "g6-transition",
       "domain": "图形与几何",
-      "title": "圆柱表面积"
+      "title": "圆柱表面积",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-cylinder-volume",
       "stage": "g6-transition",
       "domain": "图形与几何",
-      "title": "圆柱体积"
+      "title": "圆柱体积",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-cone-volume",
       "stage": "g6-transition",
       "domain": "图形与几何",
-      "title": "圆锥体积"
+      "title": "圆锥体积",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-cylinder-cone-applications",
       "stage": "g6-transition",
       "domain": "图形与几何",
-      "title": "圆柱与圆锥综合应用"
+      "title": "圆柱与圆锥综合应用",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g6-system-two-linear-equations",
       "stage": "g6-transition",
       "domain": "方程",
-      "title": "二元一次方程组基础"
+      "title": "二元一次方程组基础",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "符号意识",
+        "运算能力",
+        "模型意识"
+      ]
     },
     {
       "knowledge_id": "g6-substitution-elimination",
       "stage": "g6-transition",
       "domain": "方程",
-      "title": "代入消元"
+      "title": "代入消元",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "符号意识",
+        "运算能力",
+        "模型意识"
+      ]
     },
     {
       "knowledge_id": "g4-two-digit-multiply-divide",
       "stage": "g4",
       "domain": "数与运算",
-      "title": "两位数乘除法与速算"
+      "title": "两位数乘除法与速算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-two-step-mixed-operations",
       "stage": "g4",
       "domain": "数与运算",
-      "title": "两步四则混合运算"
+      "title": "两步四则混合运算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-perimeter-area-applications",
       "stage": "g4",
       "domain": "图形与几何",
-      "title": "周长与面积综合应用"
+      "title": "周长与面积综合应用",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念"
+      ]
     },
     {
       "knowledge_id": "g4-triangle-quadrilateral-classification",
       "stage": "g4",
       "domain": "图形与几何",
-      "title": "三角形与四边形分类"
+      "title": "三角形与四边形分类",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观",
+        "空间观念"
+      ]
     },
     {
       "knowledge_id": "g4-unitary-totalization-problems",
       "stage": "g4",
       "domain": "解决问题",
-      "title": "归一归总问题"
+      "title": "归一归总问题",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "模型意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g4-travel-work-problems-intro",
       "stage": "g4",
       "domain": "解决问题",
-      "title": "行程与工程问题入门"
+      "title": "行程与工程问题入门",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "模型意识",
+        "应用意识"
+      ]
     },
     {
       "knowledge_id": "g4-fraction-introduction",
       "stage": "g4",
       "domain": "分数",
-      "title": "分数初步认识"
+      "title": "分数初步认识",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "几何直观"
+      ]
     },
     {
       "knowledge_id": "g4-statistics-calendar",
       "stage": "g4",
       "domain": "统计与时间",
-      "title": "统计与年月日综合"
+      "title": "统计与年月日综合",
+      "curriculum_domain": "统计与概率",
+      "objective_tags": [
+        "量感",
+        "数据意识"
+      ]
     },
     {
       "knowledge_id": "g4-grade3-comprehensive-review",
       "stage": "g4",
       "domain": "综合",
-      "title": "三年级综合检测与讲评"
+      "title": "三年级综合检测与讲评",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "应用意识",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-add-subtract-relations-laws",
       "stage": "g4",
       "domain": "运算律",
-      "title": "加减法的关系与运算律"
+      "title": "加减法的关系与运算律",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-multiply-divide-relations-laws",
       "stage": "g4",
       "domain": "运算律",
-      "title": "乘除法的关系与运算律"
+      "title": "乘除法的关系与运算律",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-distributive-law",
       "stage": "g4",
       "domain": "运算律",
-      "title": "乘法分配律"
+      "title": "乘法分配律",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-operation-laws-shortcuts",
       "stage": "g4",
       "domain": "运算律",
-      "title": "运算律综合运用与简算技巧"
+      "title": "运算律综合运用与简算技巧",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力",
+        "推理意识"
+      ]
     },
     {
       "knowledge_id": "g4-position-direction-1",
       "stage": "g4",
       "domain": "图形与位置",
-      "title": "位置与方向（一）"
+      "title": "位置与方向（一）",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ]
     },
     {
       "knowledge_id": "g4-position-direction-2",
       "stage": "g4",
       "domain": "图形与位置",
-      "title": "位置与方向（二）"
+      "title": "位置与方向（二）",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ]
     },
     {
       "knowledge_id": "g7-10-1-polynomials",
       "stage": "g7",
       "domain": "整式",
-      "title": "整式"
+      "title": "整式",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教7上:10.1:p2"
     },
     {
       "knowledge_id": "g7-10-2-like-terms",
       "stage": "g7",
       "domain": "整式",
-      "title": "合并同类项"
+      "title": "合并同类项",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教7上:10.2:p5"
     },
     {
       "knowledge_id": "g7-10-3-polynomial-add-subtract",
       "stage": "g7",
       "domain": "整式",
-      "title": "整式的加法和减法"
+      "title": "整式的加法和减法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:10.3:p10"
     },
     {
       "knowledge_id": "g7-11-1-polynomial-multiplication",
       "stage": "g7",
       "domain": "整式",
-      "title": "整式的乘法"
+      "title": "整式的乘法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教7上:11.1:p18"
     },
     {
       "knowledge_id": "g7-11-2-multiplication-formulas",
       "stage": "g7",
       "domain": "整式",
-      "title": "乘法公式"
+      "title": "乘法公式",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:11.2:p33"
     },
     {
       "knowledge_id": "g7-11-3-polynomial-division",
       "stage": "g7",
       "domain": "整式",
-      "title": "整式的除法"
+      "title": "整式的除法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教7上:11.3:p42"
     },
     {
       "knowledge_id": "g7-12-1-factorization-meaning",
       "stage": "g7",
       "domain": "因式分解",
-      "title": "因式分解的意义"
+      "title": "因式分解的意义",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:12.1:p55"
     },
     {
       "knowledge_id": "g7-12-2-factorization-methods",
       "stage": "g7",
       "domain": "因式分解",
-      "title": "因式分解的方法"
+      "title": "因式分解的方法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:12.2:p58"
     },
     {
       "knowledge_id": "g7-13-1-algebraic-fractions-properties",
       "stage": "g7",
       "domain": "分式",
-      "title": "分式以及性质"
+      "title": "分式以及性质",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "抽象能力",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教7上:13.1:p76"
     },
     {
       "knowledge_id": "g7-13-2-algebraic-fraction-operations",
       "stage": "g7",
       "domain": "分式",
-      "title": "分式的运算"
+      "title": "分式的运算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:13.2:p82"
     },
     {
       "knowledge_id": "g7-13-3-algebraic-fraction-equations",
       "stage": "g7",
       "domain": "分式",
-      "title": "分式方程"
+      "title": "分式方程",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "模型观念",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教7上:13.3:p93"
     },
     {
       "knowledge_id": "g7-14-1-translation",
       "stage": "g7",
       "domain": "图形运动",
-      "title": "平移"
+      "title": "平移",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教7上:14.1:p106"
     },
     {
       "knowledge_id": "g7-14-2-rotation",
       "stage": "g7",
       "domain": "图形运动",
-      "title": "旋转"
+      "title": "旋转",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教7上:14.2:p114"
     },
     {
       "knowledge_id": "g7-14-3-axial-symmetry",
       "stage": "g7",
       "domain": "图形运动",
-      "title": "轴对称"
+      "title": "轴对称",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:14.3:p119"
     },
     {
       "knowledge_id": "g7-14-4-central-symmetry",
       "stage": "g7",
       "domain": "图形运动",
-      "title": "中心对称"
+      "title": "中心对称",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念",
+        "推理能力"
+      ],
+      "textbook_ref": "沪教7上:14.4:p126"
     },
     {
       "knowledge_id": "g7-practice-frieze-patterns",
       "stage": "g7",
       "domain": "综合与实践",
-      "title": "从传统连续纹样到现代镶嵌图案"
+      "title": "从传统连续纹样到现代镶嵌图案",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "模型观念",
+        "应用意识",
+        "创新意识"
+      ],
+      "textbook_ref": "沪教7上:综合与实践:p136"
     },
     {
       "knowledge_id": "g7-practice-reading-star",
       "stage": "g7",
       "domain": "综合与实践",
-      "title": "制订“阅读之星”评选方案"
+      "title": "制订“阅读之星”评选方案",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "数据观念",
+        "模型观念",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教7上:综合与实践:p141"
     },
     {
       "knowledge_id": "g4-2-large-numbers",
       "stage": "g4",
       "domain": "数与量",
-      "title": "大数的认识"
+      "title": "大数的认识",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "符号意识"
+      ],
+      "textbook_ref": "沪教四上:二:p11"
     },
     {
       "knowledge_id": "g4-2-rounding",
       "stage": "g4",
       "domain": "数与量",
-      "title": "四舍五入法"
+      "title": "四舍五入法",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教四上:二:p18"
     },
     {
       "knowledge_id": "g4-2-square-kilometre",
       "stage": "g4",
       "domain": "数与量",
-      "title": "平方千米"
+      "title": "平方千米",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "量感",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教四上:二:p20"
     },
     {
       "knowledge_id": "g4-2-ton",
       "stage": "g4",
       "domain": "数与量",
-      "title": "吨的认识"
+      "title": "吨的认识",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "量感",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教四上:二:p24"
     },
     {
       "knowledge_id": "g4-2-millilitre-litre",
       "stage": "g4",
       "domain": "数与量",
-      "title": "毫升与升的认识"
+      "title": "毫升与升的认识",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "量感",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教四上:二:p26"
     },
     {
       "knowledge_id": "g4-3-fraction-comparison",
       "stage": "g4",
       "domain": "分数初步认识（二）",
-      "title": "分数的大小比较"
+      "title": "分数的大小比较",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "推理意识"
+      ],
+      "textbook_ref": "沪教四上:三:p31"
     },
     {
       "knowledge_id": "g4-3-fraction-add-subtract",
       "stage": "g4",
       "domain": "分数初步认识（二）",
-      "title": "分数的加减计算"
+      "title": "分数的加减计算",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教四上:三:p35"
     },
     {
       "knowledge_id": "g4-3-fraction-wall",
       "stage": "g4",
       "domain": "分数初步认识（二）",
-      "title": "小探究——“分数墙”"
+      "title": "小探究——“分数墙”",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "数感",
+        "几何直观",
+        "推理意识"
+      ],
+      "textbook_ref": "沪教四上:三:p40"
     },
     {
       "knowledge_id": "g4-4-three-step-calculations",
       "stage": "g4",
       "domain": "整数四则运算",
-      "title": "三步计算式题"
+      "title": "三步计算式题",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "运算能力",
+        "推理意识"
+      ],
+      "textbook_ref": "沪教四上:四:p47"
     },
     {
       "knowledge_id": "g4-4-forward-reasoning",
       "stage": "g4",
       "domain": "整数四则运算",
-      "title": "正推"
+      "title": "正推",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "推理意识",
+        "模型意识"
+      ],
+      "textbook_ref": "沪教四上:四:p53"
     },
     {
       "knowledge_id": "g4-4-backward-reasoning",
       "stage": "g4",
       "domain": "整数四则运算",
-      "title": "逆推"
+      "title": "逆推",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "推理意识",
+        "模型意识"
+      ],
+      "textbook_ref": "沪教四上:四:p55"
     },
     {
       "knowledge_id": "g4-4-verbal-arithmetic-problems",
       "stage": "g4",
       "domain": "整数四则运算",
-      "title": "文字计算题"
+      "title": "文字计算题",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "符号意识",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教四上:四:p58"
     },
     {
       "knowledge_id": "g4-4-problem-solving",
       "stage": "g4",
       "domain": "整数四则运算",
-      "title": "解决问题"
+      "title": "解决问题",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "模型意识",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教四上:四:p68"
     },
     {
       "knowledge_id": "g4-5-circle-intro",
       "stage": "g4",
       "domain": "几何小实践",
-      "title": "圆的初步认识"
+      "title": "圆的初步认识",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教四上:五:p74"
     },
     {
       "knowledge_id": "g4-5-segment-ray-line",
       "stage": "g4",
       "domain": "几何小实践",
-      "title": "线段、射线、直线"
+      "title": "线段、射线、直线",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教四上:五:p79"
     },
     {
       "knowledge_id": "g4-5-angle",
       "stage": "g4",
       "domain": "几何小实践",
-      "title": "角"
+      "title": "角",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教四上:五:p81"
     },
     {
       "knowledge_id": "g4-5-angle-measurement",
       "stage": "g4",
       "domain": "几何小实践",
-      "title": "角的度量"
+      "title": "角的度量",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "几何直观"
+      ],
+      "textbook_ref": "沪教四上:五:p82"
     },
     {
       "knowledge_id": "g4-5-angle-calculation",
       "stage": "g4",
       "domain": "几何小实践",
-      "title": "角的计算"
+      "title": "角的计算",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "量感",
+        "运算能力",
+        "推理意识"
+      ],
+      "textbook_ref": "沪教四上:五:p87"
     },
     {
       "knowledge_id": "g4-6-large-numbers-rounding",
       "stage": "g4",
       "domain": "整理与提高",
-      "title": "大数与凑整"
+      "title": "大数与凑整",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "运算能力"
+      ],
+      "textbook_ref": "沪教四上:六:p89"
     },
     {
       "knowledge_id": "g4-6-fractions-number-line",
       "stage": "g4",
       "domain": "整理与提高",
-      "title": "数射线上的分数"
+      "title": "数射线上的分数",
+      "curriculum_domain": "数与代数",
+      "objective_tags": [
+        "数感",
+        "几何直观"
+      ],
+      "textbook_ref": "沪教四上:六:p92"
     },
     {
       "knowledge_id": "g4-6-circle-angle-review",
       "stage": "g4",
       "domain": "整理与提高",
-      "title": "圆与角的复习"
+      "title": "圆与角的复习",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "空间观念"
+      ],
+      "textbook_ref": "沪教四上:六:p93"
     },
     {
       "knowledge_id": "g4-6-equal-angles",
       "stage": "g4",
       "domain": "整理与提高",
-      "title": "数学广场——相等的角"
+      "title": "数学广场——相等的角",
+      "curriculum_domain": "图形与几何",
+      "objective_tags": [
+        "几何直观",
+        "推理意识"
+      ],
+      "textbook_ref": "沪教四上:六:p95"
     },
     {
       "knowledge_id": "g4-6-grid-estimation",
       "stage": "g4",
       "domain": "整理与提高",
-      "title": "数学广场——通过网格来估测"
+      "title": "数学广场——通过网格来估测",
+      "curriculum_domain": "综合与实践",
+      "objective_tags": [
+        "量感",
+        "模型意识",
+        "应用意识"
+      ],
+      "textbook_ref": "沪教四上:六:p97"
     }
   ],
   "textbook_sequences": [

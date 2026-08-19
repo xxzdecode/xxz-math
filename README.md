@@ -1,9 +1,9 @@
 # xxz-math
 
-数学教学辅助网站首版：
+数学教学辅助网站：
 
-- 图形实验室：可调整长方形、三角形、圆与扇形、圆柱与圆锥；
-- 知识点库：公共知识树；老师登录后切换姐姐 / Crystal 与弟弟 / Gavin，分别查看交接教学基线、下一动作和我们的实测掌握状态。
+- 图形实验室：滑杆与数字输入联动，图中标注边、角、顶点、高、半径等概念；覆盖长方形、三角形、圆与扇形、圆柱与圆锥、角、平行四边形和梯形；
+- 知识点库：支持搜索、年级/领域/教材位置筛选和详情阅读；老师登录后切换姐姐 / Crystal 与弟弟 / Gavin，分别查看交接教学基线、下一动作、我们的教学状态和实测掌握状态。
 
 数学错题不进入网站。Stella 拍照并说明错题后，由 Codex 在 Material Hub 中归档、分析，并按需要制作错题集或举一反三。
 
@@ -30,7 +30,9 @@ node scripts/import-material-hub-data.mjs D:\xxz-work\projects\xxz-material-hub\
 
 `server/` 保存本地可测试的教师 API 参考实现：单一 4 位 PIN 由服务端使用不可逆 verifier 校验，错误尝试受限，成功后签发最长 15 分钟的会话。私有状态使用 `math_student_progress_v1`，教学状态写入走独立 `math_*` RPC。
 
-当前没有 Supabase 迁移、真实 PIN 或生产配置；生产审计、迁移、密钥设置、写入和部署均为独立审批门禁。详见 `docs/teacher-api.md`。
+当前仓库已有 Supabase 迁移与 Edge Function 源码，但尚无真实 PIN 或生产配置，也不代表迁移已经执行。详见 `docs/teacher-api.md`。
+
+`supabase/` 中提供独立 `math_*` 迁移与 Edge Function 源码；它们只有在正式执行迁移、设置 secrets、初始化私有进度并配置 `apiBase` 后才会生效。真实 PIN、verifier、pepper、会话密钥和 service-role key 不进入 Git。
 
 ## 本地检查
 

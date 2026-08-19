@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test --test-isolation=none",
     "serve": "node scripts/serve-static.mjs",
-    "serve:teacher": "node server/teacher-api.mjs"
+    "serve:teacher": "node server/teacher-api.mjs",
+    "seed:progress": "node scripts/seed-private-progress.mjs"
   }
 }

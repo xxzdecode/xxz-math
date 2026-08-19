@@ -1,6 +1,6 @@
 # 知识点教师 API 契约与安全接入方案
 
-本文件是尚未部署的本地设计，不代表 Supabase 已创建表、RPC、数据或密码。
+本文件描述可部署实现。仓库中的迁移与 Edge Function 源码不代表生产 Supabase 已执行迁移、创建数据或设置密码。
 
 ## 边界
 
@@ -29,13 +29,22 @@
 
 ## `math_*` 隔离
 
-首版只需要：
+实现使用：
 
-- `math_student_progress_v1`：双学生交接、教学和实测状态；
+- `math_private_state_v1`：仅 service-role 可访问的私有 JSON 状态表，其中 key `math_student_progress_v1` 保存双学生交接、教学和实测状态；
 - `math_set_teaching_status_v1`：只更新 `teaching_status` 的服务端 RPC；
-- `math_teacher_rate_limit_v1`：仅在生产限流需要落库时使用。
+- `math_teacher_rate_limit_v1`：持久化错误次数和阻断时间的私有表与原子 RPC。
 
-生产实施前必须只读审计现有 Supabase 表、RLS、策略和函数权限。不要直接把数学私有 key 放进存在宽松 anon 策略的英语 `kv_store`。仓库当前不保存或执行迁移草案。
+生产实施前必须只读审计现有 Supabase 表、RLS、策略和函数权限。不要直接把数学私有 key 放进存在宽松 anon 策略的英语 `kv_store`。迁移必须通过独立审批后执行。
+
+## 部署顺序
+
+1. 只读审计现有 Supabase 项目与 RLS；
+2. 执行 `supabase/migrations/202608190001_math_teacher_private_state.sql`；
+3. 部署 `supabase/functions/math-teacher-api`，其 `verify_jwt=false`，改用本服务自己的 15 分钟会话；
+4. 设置 `MATH_ALLOWED_ORIGINS`、`MATH_TEACHER_PIN_VERIFIER`、`MATH_PIN_PEPPER` 与 `MATH_SESSION_SECRET` secrets；
+5. 先运行 `npm run seed:progress -- <Material Hub 数学目录>` dry-run，再经批准增加 `--apply`；
+6. 把公开 `config.js` 的 `apiBase` 指向 Edge Function URL，重新测试并发布。
 
 ## 状态语义
 
