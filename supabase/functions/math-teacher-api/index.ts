@@ -9,7 +9,6 @@ const requiredEnv = name => {
 
 const SUPABASE_URL = requiredEnv('SUPABASE_URL').replace(/\/+$/, '');
 const SERVICE_ROLE_KEY = requiredEnv('SUPABASE_SERVICE_ROLE_KEY');
-const SETUP_TOKEN = requiredEnv('MATH_SETUP_TOKEN');
 const PIN_PEPPER = requiredEnv('MATH_PIN_PEPPER');
 const SESSION_SECRET = requiredEnv('MATH_SESSION_SECRET');
 const ALLOWED_ORIGINS = new Set(
@@ -17,7 +16,7 @@ const ALLOWED_ORIGINS = new Set(
     .split(',').map(value => value.trim()).filter(Boolean)
 );
 
-if (encoder.encode(SETUP_TOKEN).length < 32 || encoder.encode(PIN_PEPPER).length < 32 || encoder.encode(SESSION_SECRET).length < 32) {
+if (encoder.encode(PIN_PEPPER).length < 32 || encoder.encode(SESSION_SECRET).length < 32) {
   throw new Error('Math teacher secrets must contain at least 32 bytes');
 }
 if (!ALLOWED_ORIGINS.size) throw new Error('MATH_ALLOWED_ORIGINS is not configured');
@@ -205,11 +204,9 @@ async function handleSetup(request, origin) {
   const state = await rateLimit(request, 'check');
   if (!state.allowed) return json(origin, 429, { message: '尝试过多，请稍后再试' }, { 'Retry-After': String(state.retry_after_seconds || 900) });
   const body = await request.json().catch(() => ({}));
-  const suppliedToken = encoder.encode(String(body.setup_token || ''));
-  const validToken = constantEqual(suppliedToken, encoder.encode(SETUP_TOKEN));
-  if (!validToken || !/^\d{4}$/.test(String(body.pin || ''))) {
+  if (!/^\d{4}$/.test(String(body.pin || ''))) {
     const failed = await rateLimit(request, 'failure');
-    return json(origin, failed.allowed ? 401 : 429, { message: '首次设置链接无效或密码格式不正确' }, failed.allowed ? {} : { 'Retry-After': String(failed.retry_after_seconds || 900) });
+    return json(origin, failed.allowed ? 400 : 429, { message: '请输入 4 位数字密码' }, failed.allowed ? {} : { 'Retry-After': String(failed.retry_after_seconds || 900) });
   }
   await savePinVerifier(await createPinVerifier(String(body.pin)));
   await rateLimit(request, 'success');

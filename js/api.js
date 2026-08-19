@@ -1,17 +1,5 @@
 const config = () => window.MATH_SITE_CONFIG || {};
 const TOKEN_KEY = 'xxzcard_math_teacher_session';
-let setupToken = '';
-
-try {
-  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
-  const candidate = String(hash.get('setup') || '');
-  if (/^[A-Za-z0-9_-]{32,200}$/.test(candidate)) setupToken = candidate;
-  if (hash.has('setup')) {
-    hash.delete('setup');
-    const cleanHash = hash.toString();
-    history.replaceState(null, '', `${location.pathname}${location.search}${cleanHash ? `#${cleanHash}` : ''}`);
-  }
-} catch { /* Setup links are optional. */ }
 
 function readToken() {
   try { return sessionStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; }
@@ -74,24 +62,18 @@ export function hasTeacherSession() {
   return isTeacherApiConfigured() && Boolean(readToken());
 }
 
-export function hasTeacherSetupToken() {
-  return Boolean(setupToken);
-}
-
 export function loadTeacherStatus() {
   return request('/status', { authenticated: false });
 }
 
 export async function setupTeacherPin(pin) {
   if (!/^\d{4}$/.test(String(pin))) throw new Error('请输入 4 位数字密码');
-  if (!setupToken) throw new Error('首次设置链接无效，请重新打开激活链接');
   const result = await request('/setup', {
     authenticated: false,
     method: 'POST',
-    body: JSON.stringify({ pin: String(pin), setup_token: setupToken })
+    body: JSON.stringify({ pin: String(pin) })
   });
   if (typeof result?.token !== 'string' || !result.token) throw new Error('教师服务没有返回有效会话');
-  setupToken = '';
   writeToken(result.token);
   return result;
 }

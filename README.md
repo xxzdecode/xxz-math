@@ -14,7 +14,7 @@ npm test
 npm run serve
 ```
 
-后端未部署时保持 `config.js` 的 `apiBase: ""`。页面会显示“只读 · 未连接”，不会读取或写入学生状态。API 地址可以公开，但教师 PIN、首次激活 token、verifier、pepper、会话密钥和 Supabase service-role key 都不得进入前端或 Git。首次启用通过一次性激活链接在网站中输入并确认 4 位 PIN；以后直接用该 PIN 登录，后台只保存不可逆 verifier。
+后端未部署时保持 `config.js` 的 `apiBase: ""`。页面会显示“只读 · 未连接”，不会读取或写入学生状态。API 地址可以公开，但教师 PIN、verifier、pepper、会话密钥和 Supabase service-role key 都不得进入前端或 Git。首次点击老师入口时在网站中输入并确认 4 位 PIN；以后直接用该 PIN 登录，后台只保存不可逆 verifier。
 
 ## 数据来源
 
@@ -32,7 +32,7 @@ node scripts/import-material-hub-data.mjs D:\xxz-work\projects\xxz-material-hub\
 
 当前仓库已有 Supabase 迁移与 Edge Function 源码，但尚无真实 PIN 或生产配置，也不代表迁移已经执行。详见 `docs/teacher-api.md`。
 
-`supabase/` 中提供独立 `math_*` 迁移与 Edge Function 源码；它们只有在正式执行迁移、设置 secrets、完成一次性网页设密、初始化私有进度并配置 `apiBase` 后才会生效。真实 PIN、首次激活 token、verifier、pepper、会话密钥和 service-role key 不进入 Git。
+`supabase/` 中提供独立 `math_*` 迁移与 Edge Function 源码；它们只有在正式执行迁移、设置 secrets、完成首次网页设密、初始化私有进度并配置 `apiBase` 后才会生效。真实 PIN、verifier、pepper、会话密钥和 service-role key 不进入 Git。
 
 ## 本地检查
 

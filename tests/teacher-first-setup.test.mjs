@@ -7,9 +7,8 @@ const read = relative => readFile(new URL(`../${relative}`, import.meta.url), 'u
 test('first teacher PIN is set in the website without entering static configuration', async () => {
   const api = await read('js/api.js');
   const common = await read('js/common.js');
-  assert.match(api, /history\.replaceState/);
   assert.match(api, /request\('\/setup'/);
-  assert.match(api, /setup_token: setupToken/);
+  assert.doesNotMatch(api, /setup_token|location\.hash|MATH_SETUP_TOKEN/);
   assert.doesNotMatch(api, /localStorage/);
   assert.match(common, /首次设置老师密码/);
   assert.match(common, /teacherPinConfirm/);

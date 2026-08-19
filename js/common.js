@@ -1,6 +1,5 @@
 import {
   hasTeacherSession,
-  hasTeacherSetupToken,
   isTeacherApiConfigured,
   loadTeacherStatus,
   login,
@@ -61,7 +60,6 @@ function ensureModal() {
 }
 
 function configureModal(modal, setupRequired) {
-  const hasSetupLink = hasTeacherSetupToken();
   modal.dataset.mode = setupRequired ? 'setup' : 'login';
   modal.querySelector('h2').textContent = setupRequired ? '首次设置老师密码' : '输入 4 位密码';
   modal.querySelector('.muted').textContent = setupRequired
@@ -70,10 +68,8 @@ function configureModal(modal, setupRequired) {
   modal.querySelector('#teacherPin').autocomplete = setupRequired ? 'new-password' : 'current-password';
   modal.querySelector('#teacherPinConfirm').hidden = !setupRequired;
   modal.querySelector('#teacherLoginSubmit').textContent = setupRequired ? '设置并进入' : '进入老师模式';
-  modal.querySelector('#teacherLoginSubmit').disabled = setupRequired && !hasSetupLink;
-  modal.querySelector('#teacherLoginError').textContent = setupRequired && !hasSetupLink
-    ? '请使用一次性首次设置链接打开本页。'
-    : '';
+  modal.querySelector('#teacherLoginSubmit').disabled = false;
+  modal.querySelector('#teacherLoginError').textContent = '';
 }
 
 function updateTeacherButton() {
