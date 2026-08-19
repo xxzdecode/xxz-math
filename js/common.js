@@ -5,7 +5,7 @@ import {
   login,
   logout,
   setupTeacherPin
-} from './api.js';
+} from './api.js?v=20260820-1';
 
 function ensureModal() {
   let modal = document.querySelector('#teacherLoginModal');
