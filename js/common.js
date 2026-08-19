@@ -5,7 +5,7 @@ import {
   login,
   logout,
   setupTeacherPin
-} from './api.js?v=20260820-1';
+} from './api.js?v=20260820-2';
 
 function ensureModal() {
   let modal = document.querySelector('#teacherLoginModal');
@@ -97,9 +97,8 @@ document.querySelector('[data-teacher-login]')?.addEventListener('click', async 
       configureModal(modal, Boolean(status?.setup_required));
       modal.showModal();
       modal.querySelector('#teacherPin').focus();
-    } catch (error) {
-      configureModal(modal, false);
-      modal.querySelector('#teacherLoginError').textContent = error?.message || '教师服务暂时不可用';
+    } catch {
+      configureModal(modal, true);
       modal.showModal();
     } finally {
       updateTeacherButton();

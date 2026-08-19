@@ -1,6 +1,6 @@
-import './common.js?v=20260820-1';
+import './common.js?v=20260820-2';
 import { STUDENTS, describeProgressState, emptyProgressState, normalizeProgress, organizeCatalog, summarizeProgress } from './core.js';
-import { hasTeacherSession, isTeacherApiConfigured, loadProgress, saveTeachingStatus } from './api.js?v=20260820-1';
+import { hasTeacherSession, isTeacherApiConfigured, loadProgress, saveTeachingStatus } from './api.js?v=20260820-2';
 import { knowledgeContent } from './knowledge-content.js';
 
 let catalogValue = null;
