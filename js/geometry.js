@@ -38,7 +38,7 @@ function renderRectangle() {
   q('#rectWidthLabel').setAttribute('y', y2 + 28);
   q('#rectHeightLabel').setAttribute('x', 65);
   q('#rectHeightLabel').setAttribute('y', (55 + y2) / 2);
-  setText('#rectFormula', `面积 ${fmt(metrics.area)}，周长 ${fmt(metrics.perimeter)}`);
+  setText('#rectFormula', `面积 = 长 × 宽 = ${width} × ${height} = ${fmt(metrics.area)}；周长 = 2 ×（长 + 宽）= 2 ×（${width} + ${height}）= ${fmt(metrics.perimeter)}`);
   setText('#rectValues', `长 ${width} · 宽 ${height}`);
 }
 
@@ -54,7 +54,7 @@ function renderTriangle() {
   q('#triVertexC').setAttribute('x', 300 + half + 10); q('#triVertexC').setAttribute('y', 322);
   q('#triBaseLabel').setAttribute('x', 300); q('#triBaseLabel').setAttribute('y', 342);
   q('#triHeightLabel').setAttribute('x', 312); q('#triHeightLabel').setAttribute('y', (300 + y) / 2);
-  setText('#triFormula', `面积 ${fmt(triangleMetrics(base, height).area)}`);
+  setText('#triFormula', `面积 = 底 × 高 ÷ 2 = ${base} × ${height} ÷ 2 = ${fmt(triangleMetrics(base, height).area)}`);
   setText('#triValues', `底 ${base} · 高 ${height}`);
 }
 
@@ -76,7 +76,7 @@ function renderCircle() {
   q('#circleRadiusLine').setAttribute('x2', 300 + r);
   q('#circleRadiusLabel').setAttribute('x', 300 + r / 2); q('#circleRadiusLabel').setAttribute('y', 170);
   q('#circleArcLabel').setAttribute('x', 300 + r * .75); q('#circleArcLabel').setAttribute('y', 180 - r * .55);
-  setText('#circleFormula', `圆面积 ${fmt(metrics.area)} · 扇形面积 ${fmt(metrics.sectorArea)} · 弧长 ${fmt(metrics.arcLength)}`);
+  setText('#circleFormula', `圆面积 = π × ${radius}² ≈ ${fmt(metrics.area)}；扇形面积 = ${angle} ÷ 360 × π × ${radius}² ≈ ${fmt(metrics.sectorArea)}；弧长 = ${angle} ÷ 360 × 2π × ${radius} ≈ ${fmt(metrics.arcLength)}`);
   setText('#circleValues', `半径 ${radius} · 圆心角 ${angle}°`);
 }
 
@@ -98,7 +98,7 @@ function renderSolid() {
   q('#coneRadiusGuide').setAttribute('x2', 430 + rx); q('#coneRadiusGuide').setAttribute('y1', 95 + h); q('#coneRadiusGuide').setAttribute('y2', 95 + h);
   q('#solidHeightLabel').setAttribute('x', 178); q('#solidHeightLabel').setAttribute('y', 100 + h / 2);
   q('#solidRadiusLabel').setAttribute('x', 430); q('#solidRadiusLabel').setAttribute('y', 132 + h);
-  setText('#solidFormula', `圆柱体积 ${fmt(metrics.cylinderVolume)} · 圆锥体积 ${fmt(metrics.coneVolume)}（正好是 1/3）`);
+  setText('#solidFormula', `圆柱体积 = π × ${radius}² × ${height} ≈ ${fmt(metrics.cylinderVolume)}；圆锥体积 = π × ${radius}² × ${height} ÷ 3 ≈ ${fmt(metrics.coneVolume)}`);
   setText('#solidValues', `半径 ${radius} · 高 ${height}`);
 }
 
@@ -160,13 +160,13 @@ function renderQuadrilateral() {
     const metrics = parallelogramMetrics(base, side, height);
     setText('#quadTopLabel', '对边平行且相等');
     setText('#quadValues', `底 ${base} · 高 ${height}`);
-    setText('#quadFormula', `面积 = 底 × 高 = ${fmt(metrics.area)}；周长约 ${fmt(metrics.perimeter)}`);
+    setText('#quadFormula', `面积 = 底 × 高 = ${base} × ${height} = ${fmt(metrics.area)}；斜边 ≈ ${fmt(side)}，周长 = 2 ×（底 + 斜边）≈ ${fmt(metrics.perimeter)}`);
     setText('#quadHint', '高必须垂直于底；斜边不是高。平行四边形的两组对边分别平行。');
   } else {
     const metrics = trapezoidMetrics(top, base, height);
     setText('#quadTopLabel', `上底 ${top}`);
     setText('#quadValues', `上底 ${top} · 下底 ${base} · 高 ${height}`);
-    setText('#quadFormula', `面积 =（上底 + 下底）× 高 ÷ 2 = ${fmt(metrics.area)}`);
+    setText('#quadFormula', `面积 =（上底 + 下底）× 高 ÷ 2 =（${top} + ${base}）× ${height} ÷ 2 = ${fmt(metrics.area)}`);
     setText('#quadHint', '梯形只有一组对边平行；两条平行边叫上底和下底，它们之间的垂直距离叫高。');
   }
 }
@@ -257,7 +257,7 @@ function renderCuboid() {
   q('#cuboidEdgeLabel').setAttribute('x', x + w / 2); q('#cuboidEdgeLabel').setAttribute('y', y - 10);
   q('#cuboidFaceLabel').setAttribute('x', x + w / 2); q('#cuboidFaceLabel').setAttribute('y', y + h / 2);
   setText('#cuboidValues', `长 ${length} · 宽 ${width} · 高 ${height}`);
-  setText('#cuboidFormula', `体积 = 长 × 宽 × 高 = ${fmt(metrics.volume)}；表面积 = ${fmt(metrics.surfaceArea)}`);
+  setText('#cuboidFormula', `体积 = 长 × 宽 × 高 = ${length} × ${width} × ${height} = ${fmt(metrics.volume)}；表面积 = 2 ×（长×宽 + 长×高 + 宽×高）= ${fmt(metrics.surfaceArea)}`);
 }
 
 function bindNumberPair(rangeSelector, numberSelector, render) {

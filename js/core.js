@@ -1,6 +1,6 @@
 export const STUDENTS = Object.freeze([
-  { id: 'sister', label: '姐姐', name: 'Crystal' },
-  { id: 'brother', label: '弟弟', name: 'Gavin' }
+  { id: 'sister', label: '姐姐', name: 'Crystal', currentGrade: 7 },
+  { id: 'brother', label: '弟弟', name: 'Gavin', currentGrade: 4 }
 ]);
 
 export const STATUS_LABELS = Object.freeze({
@@ -8,6 +8,12 @@ export const STATUS_LABELS = Object.freeze({
   learning: '学习中',
   stable: '实测稳定',
   reinforce: '需要巩固'
+});
+
+export const DISPLAY_STATUS_LABELS = Object.freeze({
+  red: '未掌握或尚未教授',
+  yellow: '已教授，掌握待确认',
+  green: '确认已经掌握'
 });
 
 export const HANDOFF_LABELS = Object.freeze({
@@ -44,8 +50,23 @@ const STUDENT_IDS = new Set(STUDENTS.map(student => student.id));
 const HANDOFF_STATUSES = new Set(Object.keys(HANDOFF_LABELS));
 const TEACHING_STATUSES = new Set(Object.keys(TEACHING_LABELS));
 const MASTERY_STATUSES = new Set(Object.keys(STATUS_LABELS));
+const STUDENT_CURRENT_GRADES = new Map(STUDENTS.map(student => [student.id, student.currentGrade]));
 
 const text = value => typeof value === 'string' ? value.trim() : '';
+
+export function deriveDisplayStatus({
+  studentId,
+  pointGrade,
+  handoffStatus = 'not_reported',
+  teachingStatus = 'not_recorded',
+  masteryStatus = 'unverified'
+} = {}) {
+  if (masteryStatus === 'stable') return 'green';
+  if (masteryStatus === 'reinforce' || handoffStatus === 'reported_needs_reinforcement') return 'red';
+  if (teachingStatus === 'learning' || teachingStatus === 'taught_by_us' || handoffStatus === 'reported_taught') return 'yellow';
+  const currentGrade = STUDENT_CURRENT_GRADES.get(studentId);
+  return currentGrade && Number(pointGrade) >= currentGrade ? 'red' : 'yellow';
+}
 
 export function rectangleMetrics(width, height) {
   return { area: width * height, perimeter: 2 * (width + height) };
@@ -125,7 +146,10 @@ export function normalizeCatalog(value) {
     title: text(point.title) || text(point.knowledge_id),
     curriculumDomain: text(point.curriculum_domain),
     objectiveTags: Array.isArray(point.objective_tags) ? point.objective_tags.map(text).filter(Boolean) : [],
-    textbookRef: text(point.textbook_ref)
+    textbookRef: text(point.textbook_ref),
+    grade: Number(point.grade) || Number(String(point.stage || '').replace(/^g/, '')) || 0,
+    summary: text(point.summary),
+    sortOrder: Number(point.sort_order) || 0
   }));
 }
 
@@ -171,15 +195,29 @@ export function normalizeProgress(value, studentId) {
     .map(record => [text(record.knowledge_id), {
       handoffStatus: HANDOFF_STATUSES.has(record.handoff_status) ? record.handoff_status : 'not_reported',
       teachingStatus: TEACHING_STATUSES.has(record.teaching_status) ? record.teaching_status : 'not_recorded',
-      masteryStatus: MASTERY_STATUSES.has(record.mastery_status) ? record.mastery_status : 'unverified'
+      masteryStatus: MASTERY_STATUSES.has(record.mastery_status) ? record.mastery_status : 'unverified',
+      displayStatus: ['red', 'yellow', 'green'].includes(record.display_status)
+        ? record.display_status
+        : deriveDisplayStatus({
+          studentId,
+          pointGrade: Number(record.grade) || Number(text(record.knowledge_id).match(/^g(\d+)-/)?.[1]) || 0,
+          handoffStatus: record.handoff_status,
+          teachingStatus: record.teaching_status,
+          masteryStatus: record.mastery_status
+        }),
+      statusSource: text(record.status_source) || 'legacy_mapping',
+      statusUpdatedAt: text(record.status_updated_at)
     }]));
 }
 
-export function emptyProgressState() {
+export function emptyProgressState(studentId, pointGrade) {
   return {
     handoffStatus: 'not_reported',
     teachingStatus: 'not_recorded',
-    masteryStatus: 'unverified'
+    masteryStatus: 'unverified',
+    displayStatus: deriveDisplayStatus({ studentId, pointGrade }),
+    statusSource: 'initial_assumption',
+    statusUpdatedAt: ''
   };
 }
 
@@ -194,7 +232,11 @@ export function describeProgressState(state = emptyProgressState()) {
     nextTeachingAction: HANDOFF_ACTION_CODES[handoffStatus],
     teachingLabel: TEACHING_LABELS[teachingStatus],
     masteryLabel: STATUS_LABELS[masteryStatus],
-    masteryStatus
+    masteryStatus,
+    displayStatus: ['red', 'yellow', 'green'].includes(state.displayStatus) ? state.displayStatus : 'yellow',
+    displayLabel: DISPLAY_STATUS_LABELS[state.displayStatus] || DISPLAY_STATUS_LABELS.yellow,
+    statusSource: state.statusSource || 'initial_assumption',
+    statusUpdatedAt: state.statusUpdatedAt || ''
   };
 }
 

@@ -1,6 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildPublicCatalog } from '../scripts/import-material-hub-data.mjs';
+import { buildGradeCatalog, buildPublicCatalog } from '../scripts/import-material-hub-data.mjs';
+
+test('grade catalog publishes grades one through seven in order without private fields', () => {
+  const grades = Array.from({ length: 7 }, (_, index) => ({
+    grade: index + 1,
+    title: `${index + 1} 年级`,
+    groups: [{ domain: '数与运算', items: [[`g${index + 1}-numbers`, '数的认识', '理解数的意义。']] }]
+  }));
+  const result = buildGradeCatalog({ schema_version: 1, grades }, '2026-08-20T00:00:00.000Z');
+  assert.deepEqual(result.grades.map(value => value.grade), [1, 2, 3, 4, 5, 6, 7]);
+  assert.equal(result.knowledge_points.length, 7);
+  assert.doesNotMatch(JSON.stringify(result), /student_id|mastery_status|evidence/i);
+});
 
 const emptySequences = { schema_version: 1, sequences: [] };
 

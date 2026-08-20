@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { PinRateLimiter, createSessionToken, validatePinVerifier, verifyPin, verifySessionToken } from './security.mjs';
-import { teacherProgressResponse, validateTeachingStatusUpdate } from './math-data.mjs';
+import { teacherProgressResponse, validateDisplayStatusUpdate, validateTeachingStatusUpdate } from './math-data.mjs';
 import { SupabaseMathStore } from './supabase-store.mjs';
 
 const PORT = Number(process.env.MATH_TEACHER_API_PORT || 8787);
@@ -117,8 +117,11 @@ async function handleRequest(request, response) {
     const studentId = decodeURIComponent(progressMatch[1]);
     const knowledgeId = decodeURIComponent(progressMatch[2]);
     const body = await readJson(request);
-    const update = validateTeachingStatusUpdate(studentId, knowledgeId, String(body.teaching_status || ''));
-    const result = await store.saveTeachingStatus(update);
+    const displayStatus = String(body.display_status || '');
+    const update = displayStatus
+      ? validateDisplayStatusUpdate(studentId, knowledgeId, displayStatus)
+      : validateTeachingStatusUpdate(studentId, knowledgeId, String(body.teaching_status || ''));
+    const result = displayStatus ? await store.saveDisplayStatus(update) : await store.saveTeachingStatus(update);
     send(response, 200, result);
     return;
   }

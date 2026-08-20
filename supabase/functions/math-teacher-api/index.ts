@@ -168,7 +168,7 @@ async function savePinVerifier(verifier) {
 function safeProgress(value) {
   const records = Array.isArray(value?.records) ? value.records : [];
   return {
-    schema_version: 1,
+    schema_version: 2,
     records: records.flatMap(record => {
       const studentId = String(record?.student_id || '');
       const knowledgeId = String(record?.knowledge_id || '');
@@ -178,7 +178,10 @@ function safeProgress(value) {
         knowledge_id: knowledgeId,
         handoff_status: ['not_reported', 'reported_taught', 'reported_needs_reinforcement'].includes(String(record.handoff_status)) ? record.handoff_status : 'not_reported',
         teaching_status: ['not_recorded', 'learning', 'taught_by_us'].includes(String(record.teaching_status)) ? record.teaching_status : 'not_recorded',
-        mastery_status: ['unverified', 'learning', 'stable', 'reinforce'].includes(String(record.mastery_status)) ? record.mastery_status : 'unverified'
+        mastery_status: ['unverified', 'learning', 'stable', 'reinforce'].includes(String(record.mastery_status)) ? record.mastery_status : 'unverified',
+        display_status: ['red', 'yellow', 'green'].includes(String(record.display_status)) ? record.display_status : undefined,
+        status_source: ['manual', 'initial_assumption', 'legacy_mapping', 'analysis'].includes(String(record.status_source)) ? record.status_source : undefined,
+        status_updated_at: typeof record.status_updated_at === 'string' ? record.status_updated_at : undefined
       }];
     })
   };
@@ -227,18 +230,20 @@ Deno.serve(async request => {
 
     if (request.method === 'GET' && path === '/teacher/progress') {
       const rows = await supabase('/rest/v1/math_private_state_v1?key=eq.math_student_progress_v1&select=value');
-      if (!Array.isArray(rows) || rows.length !== 1) throw new Error('Math progress is not initialized');
-      return json(origin, 200, safeProgress(rows[0].value));
+      if (!Array.isArray(rows) || rows.length > 1) throw new Error('Math progress state is invalid');
+      return json(origin, 200, safeProgress(rows[0]?.value || { records: [] }));
     }
     const match = /^\/teacher\/progress\/([^/]+)\/([^/]+)$/.exec(path);
     if (request.method === 'PUT' && match) {
       const body = await request.json().catch(() => ({}));
-      const result = await supabase('/rest/v1/rpc/math_set_teaching_status_v1', {
+      const displayStatus = String(body.display_status || '');
+      if (displayStatus && !['red', 'yellow', 'green'].includes(displayStatus)) return json(origin, 400, { message: '掌握状态无效' });
+      const result = await supabase(displayStatus ? '/rest/v1/rpc/math_set_display_status_v1' : '/rest/v1/rpc/math_set_teaching_status_v1', {
         method: 'POST',
-        body: JSON.stringify({
-          p_student_id: decodeURIComponent(match[1]),
-          p_knowledge_id: decodeURIComponent(match[2]),
-          p_teaching_status: String(body.teaching_status || '')
+        body: JSON.stringify(displayStatus ? {
+          p_student_id: decodeURIComponent(match[1]), p_knowledge_id: decodeURIComponent(match[2]), p_display_status: displayStatus
+        } : {
+          p_student_id: decodeURIComponent(match[1]), p_knowledge_id: decodeURIComponent(match[2]), p_teaching_status: String(body.teaching_status || '')
         })
       });
       return json(origin, 200, result);

@@ -182,13 +182,13 @@ const DOMAIN_FALLBACK = {
 export function knowledgeContent(point) {
   const title = String(point?.title || '这个知识点');
   const matched = CONTENT_RULES.find(rule => includes(title, rule.words));
-  if (matched) return matched;
+  if (matched) return { ...matched, summary: point?.summary || matched.summary };
   const fallback = DOMAIN_FALLBACK[point?.domain] || [
     `理解“${title}”的核心概念、表示方法和典型应用。`,
     ['先说清概念和条件', '用例子验证理解', '完成后检查单位、符号和结论']
   ];
   return {
-    summary: fallback[0],
+    summary: point?.summary || fallback[0],
     rules: fallback[1],
     example: `学习“${title}”时，先从教材例题中找出已知条件、方法和结论。`,
     pitfall: '不要只记结论；需要能说明使用条件，并用一道新题独立验证。'

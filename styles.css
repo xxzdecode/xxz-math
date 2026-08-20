@@ -156,8 +156,15 @@ main {
   max-height: 350px;
   margin: 16px 0;
   touch-action: none;
-  background: linear-gradient(#f9fcfc, #f3f8f8);
-  border-radius: 20px;
+  background-color: #fbfdff;
+  background-image:
+    linear-gradient(rgba(71, 127, 174, .12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(71, 127, 174, .12) 1px, transparent 1px),
+    linear-gradient(rgba(71, 127, 174, .2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(71, 127, 174, .2) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+  border: 1px solid #d7e4ee;
+  border-radius: 8px;
 }
 
 .shape-fill { fill: rgba(104, 185, 170, .28); stroke: var(--mint-dark); stroke-width: 4; }
@@ -210,6 +217,7 @@ main {
   font-weight: 800;
   background: #edf7f4;
   border-radius: 14px;
+  line-height: 1.65;
 }
 
 .hint { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -237,7 +245,7 @@ main {
 .inline-status { min-height: 1.4em; color: var(--muted); }
 .knowledge-toolbar {
   display: grid;
-  grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(140px, 1fr));
+  grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(140px, 1fr));
   gap: 12px;
   margin: 22px 0 14px;
   padding: 18px;
@@ -251,8 +259,7 @@ main {
 .knowledge-summary > div { padding: 15px 18px; background: #e8f2f1; border-radius: 14px; }
 .knowledge-summary strong { display: block; font-size: 25px; }
 .knowledge-summary span { color: var(--muted); font-size: 13px; }
-.textbook-map,
-.supplement-map {
+.grade-map {
   margin: 28px 0;
   padding: 26px;
   background: rgba(255, 255, 255, .55);
@@ -260,9 +267,7 @@ main {
   border-radius: 22px;
 }
 
-.textbook-map > h2,
-.supplement-map > h2 { margin: 0; font-size: 28px; }
-.supplement-map > p { margin: 8px 0 0; color: var(--muted); line-height: 1.6; }
+.grade-map > h2 { margin: 0; font-size: 30px; }
 .knowledge-group { margin: 26px 0 0; }
 .knowledge-group h3 { margin: 0 0 10px; font-size: 18px; }
 
@@ -286,6 +291,7 @@ main {
 .knowledge-item strong,
 .knowledge-item small { display: block; }
 .knowledge-item small { margin-top: 4px; color: var(--muted); }
+.knowledge-item small { max-width: 54ch; line-height: 1.5; }
 .knowledge-open {
   min-width: 0;
   padding: 0;
@@ -332,6 +338,19 @@ main {
 .knowledge-detail-meta span { padding: 6px 9px; color: var(--mint-dark); font-size: 12px; font-weight: 750; background: #e8f5f2; border-radius: 999px; }
 .knowledge-private-detail { margin-top: 24px; padding: 16px 18px; background: #fff9e7; border-radius: 14px; }
 .knowledge-private-detail h3 { margin-top: 0; }
+.knowledge-private-detail details { margin-top: 16px; }
+.knowledge-private-detail summary { cursor: pointer; font-weight: 750; }
+.status-source { color: var(--muted); font-size: 13px; }
+.status-selector { display: grid; gap: 8px; margin: 12px 0; }
+.status-choice { display: flex; align-items: center; gap: 10px; padding: 11px 13px; color: var(--ink); text-align: left; cursor: pointer; background: white; border: 1px solid var(--line); border-radius: 12px; }
+.status-choice[data-selected="true"] { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(25, 50, 74, .12); }
+.mastery-dot { display: inline-block; flex: 0 0 auto; width: 15px; height: 15px; padding: 0; cursor: pointer; border: 2px solid white; border-radius: 50%; box-shadow: 0 0 0 1px rgba(25, 50, 74, .28); }
+.mastery-dot.red { background: #d94b56; }
+.mastery-dot.yellow { background: #e9b93f; }
+.mastery-dot.green { background: #3ca477; }
+button.mastery-dot { width: 20px; height: 20px; border-width: 3px; }
+button.mastery-dot:disabled { cursor: wait; opacity: .5; }
+.teacher-summary-item .mastery-dot { margin-bottom: 6px; cursor: default; }
 .teaching-status-editor { display: grid; grid-template-columns: minmax(180px, 1fr) auto; align-items: end; gap: 10px; margin-top: 16px; }
 .teaching-status-editor label { color: var(--muted); font-size: 13px; font-weight: 750; }
 .teaching-status-editor select { display: block; width: 100%; margin-top: 6px; padding: 10px; color: var(--ink); background: white; border: 1px solid var(--line); border-radius: 10px; }
@@ -417,7 +436,7 @@ main {
   .lab-card { padding: 16px; border-radius: 20px; }
   .controls { grid-template-columns: 1fr; }
   .three-controls { grid-template-columns: 1fr; }
-  .textbook-map, .supplement-map { padding: 18px 14px; border-radius: 18px; }
+  .grade-map { padding: 18px 14px; border-radius: 18px; }
   .knowledge-item { flex-direction: column; align-items: stretch; gap: 10px; }
   .status-stack { width: 100%; max-width: none; text-align: left; }
   .student-switch { flex-wrap: wrap; }

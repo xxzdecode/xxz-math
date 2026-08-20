@@ -98,3 +98,11 @@ export const saveTeachingStatus = (studentId, knowledgeId, teachingStatus) => re
   body: JSON.stringify({ teaching_status: teachingStatus })
   }
 );
+
+export const saveDisplayStatus = (studentId, knowledgeId, displayStatus) => request(
+  `/teacher/progress/${encodeURIComponent(studentId)}/${encodeURIComponent(knowledgeId)}`,
+  {
+    method: 'PUT',
+    body: JSON.stringify({ display_status: displayStatus })
+  }
+);

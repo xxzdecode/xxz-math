@@ -87,13 +87,45 @@ export function buildPublicCatalog(source, sequenceSource, generatedAt = new Dat
   };
 }
 
+export function buildGradeCatalog(source, generatedAt = new Date().toISOString()) {
+  if (source?.schema_version !== 1 || !Array.isArray(source.grades)) {
+    throw new Error('site-knowledge-map.json 不是支持的 schema_version 1');
+  }
+  const seen = new Set();
+  const knowledgePoints = [];
+  const grades = source.grades.map((grade, gradeIndex) => {
+    const gradeNumber = Number(grade?.grade);
+    if (!Number.isInteger(gradeNumber) || gradeNumber !== gradeIndex + 1) throw new Error('网站年级必须按 1—7 升序排列');
+    const groups = (grade.groups || []).map((group, groupIndex) => {
+      const domain = requiredText(group?.domain, `grades[${gradeIndex}].groups[${groupIndex}].domain`);
+      const knowledgeIds = (group.items || []).map((item, itemIndex) => {
+        if (!Array.isArray(item) || item.length < 3) throw new Error(`网站知识点格式无效：${gradeNumber}/${domain}/${itemIndex}`);
+        const knowledgeId = requiredText(item[0], 'knowledge_id');
+        if (seen.has(knowledgeId)) throw new Error(`公共知识点存在重复 ID：${knowledgeId}`);
+        seen.add(knowledgeId);
+        knowledgePoints.push({
+          knowledge_id: knowledgeId,
+          grade: gradeNumber,
+          stage: `g${gradeNumber}`,
+          domain,
+          title: requiredText(item[1], 'title'),
+          summary: requiredText(item[2], 'summary'),
+          sort_order: knowledgePoints.length + 1
+        });
+        return knowledgeId;
+      });
+      return { domain, knowledge_ids: knowledgeIds };
+    });
+    return { grade: gradeNumber, title: requiredText(grade.title, 'grade title'), groups };
+  });
+  if (grades.length !== 7) throw new Error('网站知识地图必须包含 1—7 年级');
+  return { schema_version: 3, generated_at: generatedAt, grades, knowledge_points: knowledgePoints };
+}
+
 export async function importMaterialHubData(materialRoot) {
   const stateRoot = path.join(path.resolve(materialRoot), 'state');
-  const [source, sequenceSource] = await Promise.all([
-    readFile(path.join(stateRoot, 'knowledge-catalog.json'), 'utf8').then(JSON.parse),
-    readFile(path.join(stateRoot, 'textbook-sequences.json'), 'utf8').then(JSON.parse)
-  ]);
-  const safe = buildPublicCatalog(source, sequenceSource);
+  const source = await readFile(path.join(stateRoot, 'site-knowledge-map.json'), 'utf8').then(JSON.parse);
+  const safe = buildGradeCatalog(source);
   const outputDir = path.join(siteRoot, 'data');
   const outputPath = path.join(outputDir, 'knowledge-catalog.json');
   const temporaryPath = `${outputPath}.tmp`;
@@ -112,8 +144,5 @@ if (invokedPath === fileURLToPath(import.meta.url)) {
   const materialRoot = process.argv[2] ? path.resolve(process.argv[2]) : null;
   if (!materialRoot) throw new Error('请传入 Material Hub 数学模块路径');
   const safe = await importMaterialHubData(materialRoot);
-  const sequenceNodes = safe.textbook_sequences.reduce((count, sequence) => (
-    count + sequence.chapters.reduce((chapterCount, chapter) => chapterCount + chapter.knowledge_ids.length, 0)
-  ), 0);
-  console.log(`已生成 ${safe.knowledge_points.length} 个公共知识点、${sequenceNodes} 个教材主序节点：data/knowledge-catalog.json`);
+  console.log(`已生成 ${safe.knowledge_points.length} 个公共知识点、${safe.grades.length} 个年级：data/knowledge-catalog.json`);
 }

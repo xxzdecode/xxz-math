@@ -42,4 +42,14 @@ test('private seed stays dry-run unless apply is explicit and strips evidence fi
   assert.match(seed, /if \(!apply\)/);
   assert.doesNotMatch(seed, /evidence_ids|teacher_note|source_ref|item_locator/);
   assert.match(seed, /math_student_progress_v1/);
+  assert.match(seed, /--audit/);
+});
+
+test('display-status migration supports insert and update without browser access', async () => {
+  const migration = await read('supabase/migrations/202608200002_math_display_status.sql');
+  assert.match(migration, /insert into public\.math_private_state_v1/i);
+  assert.match(migration, /if record_exists then/i);
+  assert.match(migration, /current_records \|\| jsonb_build_array/i);
+  assert.match(migration, /revoke all on function public\.math_set_display_status_v1[^;]+from public, anon, authenticated/is);
+  assert.match(migration, /grant execute on function public\.math_set_display_status_v1[^;]+to service_role/is);
 });
