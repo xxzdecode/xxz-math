@@ -4,6 +4,7 @@ import {
   angleKind,
   circleMetrics,
   cuboidMetrics,
+  deriveDisplayStatus,
   describeProgressState,
   normalizeCatalog,
   normalizeProgress,
@@ -68,6 +69,16 @@ test('catalog removes duplicate ids and progress stays student-specific', () => 
   ] }, 'sister');
   assert.equal(progress.get('a').handoffStatus, 'reported_taught');
   assert.equal(progress.get('a').masteryStatus, 'unverified');
+});
+
+test('initial display colors use evidence first and current grade second', () => {
+  assert.equal(deriveDisplayStatus({ studentId: 'sister', pointGrade: 6 }), 'yellow');
+  assert.equal(deriveDisplayStatus({ studentId: 'sister', pointGrade: 7 }), 'red');
+  assert.equal(deriveDisplayStatus({ studentId: 'brother', pointGrade: 3 }), 'yellow');
+  assert.equal(deriveDisplayStatus({ studentId: 'brother', pointGrade: 4 }), 'red');
+  assert.equal(deriveDisplayStatus({ studentId: 'brother', pointGrade: 4, teachingStatus: 'taught_by_us' }), 'yellow');
+  assert.equal(deriveDisplayStatus({ studentId: 'sister', pointGrade: 7, masteryStatus: 'stable' }), 'green');
+  assert.equal(deriveDisplayStatus({ studentId: 'sister', pointGrade: 6, handoffStatus: 'reported_needs_reinforcement' }), 'red');
 });
 
 test('handoff baseline determines next action without promoting mastery', () => {

@@ -1,1075 +1,1015 @@
 {
-  "schema_version": 2,
-  "generated_at": "2026-08-19T14:56:38.847Z",
+  "schema_version": 3,
+  "generated_at": "2026-08-20T14:36:04.812Z",
+  "grades": [
+    {
+      "grade": 1,
+      "title": "一年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g1-numbers-0-10",
+            "g1-number-comparison",
+            "g1-number-composition",
+            "g1-addition-within-10",
+            "g1-subtraction-within-10",
+            "g1-numbers-11-20",
+            "g1-carry-addition",
+            "g1-borrow-subtraction",
+            "g1-numbers-100",
+            "g1-add-subtract-100"
+          ]
+        },
+        {
+          "domain": "解决问题",
+          "knowledge_ids": [
+            "g1-one-step-problems",
+            "g1-rmb-time"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 2,
+      "title": "二年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g2-numbers-1000",
+            "g2-two-digit-addition",
+            "g2-two-digit-subtraction",
+            "g2-multiplication-meaning",
+            "g2-multiplication-table",
+            "g2-division-meaning",
+            "g2-table-division",
+            "g2-mixed-operations",
+            "g2-remainder-intro"
+          ]
+        },
+        {
+          "domain": "解决问题",
+          "knowledge_ids": [
+            "g2-two-step-problems",
+            "g2-units-life",
+            "g2-data-classification"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "title": "三年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g3-large-numbers",
+            "g3-multi-digit-add-subtract",
+            "g3-multiplication",
+            "g3-division",
+            "g3-mixed-operations",
+            "g3-fraction-intro",
+            "g3-fraction-simple-calculation",
+            "g3-decimal-intro"
+          ]
+        },
+        {
+          "domain": "解决问题",
+          "knowledge_ids": [
+            "g3-multiple-problems",
+            "g3-unitary-problems",
+            "g3-time-calendar",
+            "g3-data-average-intro"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 4,
+      "title": "四年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g4-large-numbers",
+            "g4-rounding",
+            "g4-two-digit-multiply-divide",
+            "g4-three-step-calculation",
+            "g4-operation-relations",
+            "g4-operation-laws",
+            "g4-fraction-comparison",
+            "g4-fraction-add-subtract",
+            "g4-units"
+          ]
+        },
+        {
+          "domain": "解决问题",
+          "knowledge_ids": [
+            "g4-forward-backward",
+            "g4-verbal-arithmetic",
+            "g4-unitary-totalization",
+            "g4-travel-work-intro",
+            "g4-statistics-calendar"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 5,
+      "title": "五年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g5-decimal-multiplication",
+            "g5-decimal-division",
+            "g5-factors-multiples",
+            "g5-gcd-lcm",
+            "g5-fraction-properties",
+            "g5-fraction-add-subtract",
+            "g5-fraction-decimal-conversion"
+          ]
+        },
+        {
+          "domain": "方程与应用",
+          "knowledge_ids": [
+            "g5-letter-expressions",
+            "g5-simple-equations",
+            "g5-equation-problems",
+            "g5-average",
+            "g5-patterns"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 6,
+      "title": "六年级",
+      "groups": [
+        {
+          "domain": "数与运算",
+          "knowledge_ids": [
+            "g6-integer-mixed-operations",
+            "g6-decimal-four-operations",
+            "g6-fraction-concept",
+            "g6-fraction-add-subtract",
+            "g6-fraction-multiply-divide",
+            "g6-fraction-decimal-mixed",
+            "g6-percent",
+            "g6-percent-applications"
+          ]
+        },
+        {
+          "domain": "比、方程与统计",
+          "knowledge_ids": [
+            "g6-ratio",
+            "g6-proportion",
+            "g6-direct-inverse-proportion",
+            "g6-linear-equation",
+            "g6-equation-system",
+            "g6-probability-statistics",
+            "g6-comprehensive-problems"
+          ]
+        }
+      ]
+    },
+    {
+      "grade": 7,
+      "title": "七年级",
+      "groups": [
+        {
+          "domain": "数与代数",
+          "knowledge_ids": [
+            "g7-rational-numbers",
+            "g7-rational-operations",
+            "g7-algebraic-expressions",
+            "g7-like-terms",
+            "g7-polynomial-add-subtract",
+            "g7-polynomial-multiplication",
+            "g7-multiplication-formulas",
+            "g7-polynomial-division",
+            "g7-factorization",
+            "g7-algebraic-fractions",
+            "g7-fraction-operations",
+            "g7-fraction-equations",
+            "g7-data-analysis"
+          ]
+        }
+      ]
+    }
+  ],
   "knowledge_points": [
     {
-      "knowledge_id": "g6-integer-mixed-operations",
-      "stage": "g6-transition",
+      "knowledge_id": "g1-numbers-0-10",
+      "grade": 1,
+      "stage": "g1",
       "domain": "数与运算",
-      "title": "整数四则混合运算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ]
+      "title": "0—10 的认识",
+      "summary": "会数、读、写 0—10，理解每个数表示的数量。",
+      "sort_order": 1
     },
     {
-      "knowledge_id": "g6-integer-efficient-calculation",
-      "stage": "g6-transition",
+      "knowledge_id": "g1-number-comparison",
+      "grade": 1,
+      "stage": "g1",
       "domain": "数与运算",
-      "title": "整数简便运算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ]
+      "title": "数的大小比较",
+      "summary": "用一一对应和数序比较两个数的大小，正确使用 >、<、=。",
+      "sort_order": 2
     },
     {
-      "knowledge_id": "g6-decimal-four-operations",
-      "stage": "g6-transition",
+      "knowledge_id": "g1-number-composition",
+      "grade": 1,
+      "stage": "g1",
       "domain": "数与运算",
-      "title": "小数四则计算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ]
+      "title": "数的分与合",
+      "summary": "理解 10 以内各数可以怎样分成两部分，为加减法打基础。",
+      "sort_order": 3
     },
     {
-      "knowledge_id": "g6-decimal-point-shift",
-      "stage": "g6-transition",
+      "knowledge_id": "g1-addition-within-10",
+      "grade": 1,
+      "stage": "g1",
       "domain": "数与运算",
-      "title": "小数点移动",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ]
+      "title": "10 以内加法",
+      "summary": "理解合并与增加的意义，熟练计算 10 以内加法。",
+      "sort_order": 4
     },
     {
-      "knowledge_id": "g6-fraction-concept",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "分数概念",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-fraction-common-denominator",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "通分",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-fraction-reduction",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "约分",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-fraction-add-subtract",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "分数加减法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-fraction-multiply-divide",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "分数乘除法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-reciprocal",
-      "stage": "g6-transition",
-      "domain": "分数",
-      "title": "倒数",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
-    },
-    {
-      "knowledge_id": "g6-fraction-decimal-mixed-operations",
-      "stage": "g6-transition",
+      "knowledge_id": "g1-subtraction-within-10",
+      "grade": 1,
+      "stage": "g1",
       "domain": "数与运算",
-      "title": "分数与小数混合四则运算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "title": "10 以内减法",
+      "summary": "理解去掉、比较和求剩余的意义，熟练计算 10 以内减法。",
+      "sort_order": 5
     },
     {
-      "knowledge_id": "g6-percent",
-      "stage": "g6-transition",
-      "domain": "比与比例",
-      "title": "百分数基础、换算与计算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "模型意识",
-        "应用意识"
-      ]
+      "knowledge_id": "g1-numbers-11-20",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "数与运算",
+      "title": "11—20 的认识",
+      "summary": "理解十和个位，认识 11—20 的组成与顺序。",
+      "sort_order": 6
     },
     {
-      "knowledge_id": "g6-ratio-proportion",
-      "stage": "g6-transition",
-      "domain": "比与比例",
-      "title": "比与比例基础",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "模型意识",
-        "应用意识"
-      ]
+      "knowledge_id": "g1-carry-addition",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "数与运算",
+      "title": "20 以内进位加法",
+      "summary": "用凑十法理解并计算一位数进位加法。",
+      "sort_order": 7
     },
     {
-      "knowledge_id": "g6-solve-proportion",
-      "stage": "g6-transition",
-      "domain": "比与比例",
-      "title": "解比例方程",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "模型意识",
-        "应用意识"
-      ]
+      "knowledge_id": "g1-borrow-subtraction",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "数与运算",
+      "title": "20 以内退位减法",
+      "summary": "用破十法或想加算减理解退位减法。",
+      "sort_order": 8
     },
     {
-      "knowledge_id": "g6-linear-equation-basic",
-      "stage": "g6-transition",
-      "domain": "方程",
-      "title": "简单一元一次方程",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "符号意识",
-        "运算能力",
-        "模型意识"
-      ]
+      "knowledge_id": "g1-numbers-100",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "数与运算",
+      "title": "100 以内数的认识",
+      "summary": "理解十进制计数和数位，能读写、比较 100 以内的数。",
+      "sort_order": 9
     },
     {
-      "knowledge_id": "g6-linear-equation-rational-coefficients",
-      "stage": "g6-transition",
-      "domain": "方程",
-      "title": "含分数或小数系数的一元一次方程",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "符号意识",
-        "运算能力",
-        "模型意识"
-      ]
+      "knowledge_id": "g1-add-subtract-100",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "数与运算",
+      "title": "100 以内加减法初步",
+      "summary": "能口算整十数及简单两位数加减，理解计算过程。",
+      "sort_order": 10
     },
     {
-      "knowledge_id": "g6-circle-sector",
-      "stage": "g6-transition",
-      "domain": "图形与几何",
-      "title": "圆与扇形",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念",
-        "应用意识"
-      ]
+      "knowledge_id": "g1-one-step-problems",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "解决问题",
+      "title": "一步加减应用题",
+      "summary": "从情境中找出已知量和问题，判断使用加法还是减法。",
+      "sort_order": 11
     },
     {
-      "knowledge_id": "g6-probability-statistics",
-      "stage": "g6-transition",
-      "domain": "统计与概率",
-      "title": "可能性与统计图表",
-      "curriculum_domain": "统计与概率",
-      "objective_tags": [
-        "数据意识",
-        "应用意识"
-      ]
+      "knowledge_id": "g1-rmb-time",
+      "grade": 1,
+      "stage": "g1",
+      "domain": "解决问题",
+      "title": "人民币与整时、半时",
+      "summary": "认识常用人民币单位，能读整时和半时并解决简单生活问题。",
+      "sort_order": 12
     },
     {
-      "knowledge_id": "g6-cylinder-surface-area",
-      "stage": "g6-transition",
-      "domain": "图形与几何",
-      "title": "圆柱表面积",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念",
-        "应用意识"
-      ]
+      "knowledge_id": "g2-numbers-1000",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "千以内数的认识",
+      "summary": "理解个、十、百、千的十进关系，能读写和比较千以内的数。",
+      "sort_order": 13
     },
     {
-      "knowledge_id": "g6-cylinder-volume",
-      "stage": "g6-transition",
-      "domain": "图形与几何",
-      "title": "圆柱体积",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念",
-        "应用意识"
-      ]
+      "knowledge_id": "g2-two-digit-addition",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "两位数加法",
+      "summary": "理解相同数位对齐和满十进一，能进行笔算与验算。",
+      "sort_order": 14
     },
     {
-      "knowledge_id": "g6-cone-volume",
-      "stage": "g6-transition",
-      "domain": "图形与几何",
-      "title": "圆锥体积",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念",
-        "应用意识"
-      ]
+      "knowledge_id": "g2-two-digit-subtraction",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "两位数减法",
+      "summary": "理解相同数位对齐和退一当十，能进行笔算与验算。",
+      "sort_order": 15
     },
     {
-      "knowledge_id": "g6-cylinder-cone-applications",
-      "stage": "g6-transition",
-      "domain": "图形与几何",
-      "title": "圆柱与圆锥综合应用",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念",
-        "应用意识"
-      ]
+      "knowledge_id": "g2-multiplication-meaning",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "乘法的意义",
+      "summary": "理解相同加数连加可以写成乘法，认识乘数和积。",
+      "sort_order": 16
     },
     {
-      "knowledge_id": "g6-system-two-linear-equations",
-      "stage": "g6-transition",
-      "domain": "方程",
-      "title": "二元一次方程组基础",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "符号意识",
-        "运算能力",
-        "模型意识"
-      ]
+      "knowledge_id": "g2-multiplication-table",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "表内乘法",
+      "summary": "理解乘法口诀的来源并能熟练使用口诀计算。",
+      "sort_order": 17
     },
     {
-      "knowledge_id": "g6-substitution-elimination",
-      "stage": "g6-transition",
-      "domain": "方程",
-      "title": "代入消元",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "符号意识",
-        "运算能力",
-        "模型意识"
-      ]
+      "knowledge_id": "g2-division-meaning",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "除法的意义",
+      "summary": "理解平均分和包含分，认识被除数、除数和商。",
+      "sort_order": 18
+    },
+    {
+      "knowledge_id": "g2-table-division",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "表内除法",
+      "summary": "利用乘法口诀求商，并能解释乘除法之间的关系。",
+      "sort_order": 19
+    },
+    {
+      "knowledge_id": "g2-mixed-operations",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "乘加、乘减与两步计算",
+      "summary": "按先乘除后加减的顺序完成简单两步计算。",
+      "sort_order": 20
+    },
+    {
+      "knowledge_id": "g2-remainder-intro",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "数与运算",
+      "title": "有余数除法初步",
+      "summary": "理解平均分后剩余的数量，知道余数必须小于除数。",
+      "sort_order": 21
+    },
+    {
+      "knowledge_id": "g2-two-step-problems",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "解决问题",
+      "title": "两步应用题",
+      "summary": "用分步算式或综合算式表达两个连续数量关系。",
+      "sort_order": 22
+    },
+    {
+      "knowledge_id": "g2-units-life",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "解决问题",
+      "title": "长度、质量与时间单位",
+      "summary": "根据实际对象选择合适单位，完成常见单位间的简单换算。",
+      "sort_order": 23
+    },
+    {
+      "knowledge_id": "g2-data-classification",
+      "grade": 2,
+      "stage": "g2",
+      "domain": "解决问题",
+      "title": "分类计数与简单统计",
+      "summary": "按明确标准分类、计数，并从统计结果中作出比较。",
+      "sort_order": 24
+    },
+    {
+      "knowledge_id": "g3-large-numbers",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "万以内数的认识",
+      "summary": "理解万以内数的组成、读写、比较和近似表达。",
+      "sort_order": 25
+    },
+    {
+      "knowledge_id": "g3-multi-digit-add-subtract",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "多位数加减法",
+      "summary": "掌握连续进位和退位的笔算方法，并能验算。",
+      "sort_order": 26
+    },
+    {
+      "knowledge_id": "g3-multiplication",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "两、三位数乘一位数",
+      "summary": "理解竖式中每一步的数位意义，处理连续进位。",
+      "sort_order": 27
+    },
+    {
+      "knowledge_id": "g3-division",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "两、三位数除以一位数",
+      "summary": "理解商的数位、试商和有余数除法，结果能验算。",
+      "sort_order": 28
+    },
+    {
+      "knowledge_id": "g3-mixed-operations",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "三步以内混合运算",
+      "summary": "正确处理括号和四则运算顺序，写清每一步。",
+      "sort_order": 29
+    },
+    {
+      "knowledge_id": "g3-fraction-intro",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "分数的初步认识",
+      "summary": "理解平均分、分数单位和简单分数的大小。",
+      "sort_order": 30
+    },
+    {
+      "knowledge_id": "g3-fraction-simple-calculation",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "同分母分数简单加减",
+      "summary": "分数单位相同时，只把分数单位的个数相加减。",
+      "sort_order": 31
+    },
+    {
+      "knowledge_id": "g3-decimal-intro",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "数与运算",
+      "title": "小数的初步认识",
+      "summary": "联系元、角、分和长度认识一位小数，能比较和简单加减。",
+      "sort_order": 32
+    },
+    {
+      "knowledge_id": "g3-multiple-problems",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "解决问题",
+      "title": "倍的认识与倍数问题",
+      "summary": "分清一倍量、几倍量和倍数，选择乘法或除法。",
+      "sort_order": 33
+    },
+    {
+      "knowledge_id": "g3-unitary-problems",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "解决问题",
+      "title": "归一问题初步",
+      "summary": "先求一个单位的数量，再求若干单位的数量。",
+      "sort_order": 34
+    },
+    {
+      "knowledge_id": "g3-time-calendar",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "解决问题",
+      "title": "年月日与经过时间",
+      "summary": "理解年月日关系和平闰年，能计算简单经过时间。",
+      "sort_order": 35
+    },
+    {
+      "knowledge_id": "g3-data-average-intro",
+      "grade": 3,
+      "stage": "g3",
+      "domain": "解决问题",
+      "title": "条形统计图与平均思想",
+      "summary": "读取统计图，用总量平均分的思想理解平均水平。",
+      "sort_order": 36
+    },
+    {
+      "knowledge_id": "g4-large-numbers",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "大数的认识与读写",
+      "summary": "掌握亿以内数位顺序、分级读写和大小比较。",
+      "sort_order": 37
+    },
+    {
+      "knowledge_id": "g4-rounding",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "四舍五入与凑整",
+      "summary": "根据保留数位求近似数，并用约等号规范表达。",
+      "sort_order": 38
     },
     {
       "knowledge_id": "g4-two-digit-multiply-divide",
+      "grade": 4,
       "stage": "g4",
       "domain": "数与运算",
       "title": "两位数乘除法与速算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "summary": "理解多位数乘除两位数的笔算、试商和验算。",
+      "sort_order": 39
     },
     {
-      "knowledge_id": "g4-two-step-mixed-operations",
+      "knowledge_id": "g4-three-step-calculation",
+      "grade": 4,
       "stage": "g4",
       "domain": "数与运算",
-      "title": "两步四则混合运算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "title": "三步计算与括号",
+      "summary": "掌握三步四则混合运算顺序，正确使用小括号。",
+      "sort_order": 40
     },
     {
-      "knowledge_id": "g4-perimeter-area-applications",
+      "knowledge_id": "g4-operation-relations",
+      "grade": 4,
       "stage": "g4",
-      "domain": "图形与几何",
-      "title": "周长与面积综合应用",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念"
-      ]
+      "domain": "数与运算",
+      "title": "加减、乘除关系",
+      "summary": "理解加减法和乘除法互为逆运算，并用于验算和求未知数。",
+      "sort_order": 41
     },
     {
-      "knowledge_id": "g4-triangle-quadrilateral-classification",
+      "knowledge_id": "g4-operation-laws",
+      "grade": 4,
       "stage": "g4",
-      "domain": "图形与几何",
-      "title": "三角形与四边形分类",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观",
-        "空间观念"
-      ]
+      "domain": "数与运算",
+      "title": "运算律与简便运算",
+      "summary": "掌握交换律、结合律和乘法分配律，能根据数字特点简算。",
+      "sort_order": 42
     },
     {
-      "knowledge_id": "g4-unitary-totalization-problems",
+      "knowledge_id": "g4-fraction-comparison",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "分数大小比较",
+      "summary": "借助分数单位、同分母或同分子关系比较简单分数。",
+      "sort_order": 43
+    },
+    {
+      "knowledge_id": "g4-fraction-add-subtract",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "简单分数加减",
+      "summary": "理解同分母分数加减的依据，并能结合分数墙验证。",
+      "sort_order": 44
+    },
+    {
+      "knowledge_id": "g4-units",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "数与运算",
+      "title": "大单位与容量单位",
+      "summary": "认识吨、平方千米、升和毫升并完成常见换算。",
+      "sort_order": 45
+    },
+    {
+      "knowledge_id": "g4-forward-backward",
+      "grade": 4,
       "stage": "g4",
       "domain": "解决问题",
-      "title": "归一归总问题",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "模型意识",
-        "应用意识"
-      ]
+      "title": "正推与逆推",
+      "summary": "能按条件顺序正推，也能从结果按逆运算倒推。",
+      "sort_order": 46
     },
     {
-      "knowledge_id": "g4-travel-work-problems-intro",
+      "knowledge_id": "g4-verbal-arithmetic",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "解决问题",
+      "title": "文字计算题",
+      "summary": "把和、差、积、商等数学语言准确翻译成带括号的算式。",
+      "sort_order": 47
+    },
+    {
+      "knowledge_id": "g4-unitary-totalization",
+      "grade": 4,
+      "stage": "g4",
+      "domain": "解决问题",
+      "title": "归一与归总问题",
+      "summary": "识别单位量、总量和份数，选择先归一或先归总。",
+      "sort_order": 48
+    },
+    {
+      "knowledge_id": "g4-travel-work-intro",
+      "grade": 4,
       "stage": "g4",
       "domain": "解决问题",
       "title": "行程与工程问题入门",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "模型意识",
-        "应用意识"
-      ]
-    },
-    {
-      "knowledge_id": "g4-fraction-introduction",
-      "stage": "g4",
-      "domain": "分数",
-      "title": "分数初步认识",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "几何直观"
-      ]
+      "summary": "理解路程、速度、时间以及工作总量、效率、时间的基本关系。",
+      "sort_order": 49
     },
     {
       "knowledge_id": "g4-statistics-calendar",
+      "grade": 4,
       "stage": "g4",
-      "domain": "统计与时间",
+      "domain": "解决问题",
       "title": "统计与年月日综合",
-      "curriculum_domain": "统计与概率",
-      "objective_tags": [
-        "量感",
-        "数据意识"
-      ]
+      "summary": "从统计表和条形图提取信息，结合日期与时间解决问题。",
+      "sort_order": 50
     },
     {
-      "knowledge_id": "g4-grade3-comprehensive-review",
-      "stage": "g4",
-      "domain": "综合",
-      "title": "三年级综合检测与讲评",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "应用意识",
-        "推理意识"
-      ]
+      "knowledge_id": "g5-decimal-multiplication",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "小数乘法",
+      "summary": "理解小数乘法与整数乘法的联系，能根据因数小数位数确定积。",
+      "sort_order": 51
     },
     {
-      "knowledge_id": "g4-add-subtract-relations-laws",
-      "stage": "g4",
-      "domain": "运算律",
-      "title": "加减法的关系与运算律",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "knowledge_id": "g5-decimal-division",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "小数除法",
+      "summary": "理解商不变性质和小数点移动，能求有限小数和循环小数近似值。",
+      "sort_order": 52
     },
     {
-      "knowledge_id": "g4-multiply-divide-relations-laws",
-      "stage": "g4",
-      "domain": "运算律",
-      "title": "乘除法的关系与运算律",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "knowledge_id": "g5-factors-multiples",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "因数与倍数",
+      "summary": "理解因数、倍数、质数、合数以及 2、3、5 的倍数特征。",
+      "sort_order": 53
     },
     {
-      "knowledge_id": "g4-distributive-law",
-      "stage": "g4",
-      "domain": "运算律",
-      "title": "乘法分配律",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "knowledge_id": "g5-gcd-lcm",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "最大公因数与最小公倍数",
+      "summary": "用列举或分解方法求最大公因数和最小公倍数。",
+      "sort_order": 54
     },
     {
-      "knowledge_id": "g4-operation-laws-shortcuts",
-      "stage": "g4",
-      "domain": "运算律",
-      "title": "运算律综合运用与简算技巧",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力",
-        "推理意识"
-      ]
+      "knowledge_id": "g5-fraction-properties",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "分数基本性质与约分通分",
+      "summary": "理解分数值不变的条件，并用于约分、通分和比较。",
+      "sort_order": 55
     },
     {
-      "knowledge_id": "g4-position-direction-1",
-      "stage": "g4",
-      "domain": "图形与位置",
-      "title": "位置与方向（一）",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ]
+      "knowledge_id": "g5-fraction-add-subtract",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "异分母分数加减",
+      "summary": "先通分统一分数单位，再进行加减并约成最简分数。",
+      "sort_order": 56
     },
     {
-      "knowledge_id": "g4-position-direction-2",
-      "stage": "g4",
-      "domain": "图形与位置",
-      "title": "位置与方向（二）",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ]
+      "knowledge_id": "g5-fraction-decimal-conversion",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "数与运算",
+      "title": "分数与小数互化",
+      "summary": "根据分数与除法的关系进行互化，并判断有限小数。",
+      "sort_order": 57
     },
     {
-      "knowledge_id": "g7-10-1-polynomials",
+      "knowledge_id": "g5-letter-expressions",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "方程与应用",
+      "title": "用字母表示数",
+      "summary": "用字母表达数量关系、运算律和公式，理解字母取值。",
+      "sort_order": 58
+    },
+    {
+      "knowledge_id": "g5-simple-equations",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "方程与应用",
+      "title": "简易方程",
+      "summary": "根据等式性质解一步、两步方程并代回检验。",
+      "sort_order": 59
+    },
+    {
+      "knowledge_id": "g5-equation-problems",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "方程与应用",
+      "title": "列方程解决问题",
+      "summary": "设未知数、找等量关系、列方程并解释答案。",
+      "sort_order": 60
+    },
+    {
+      "knowledge_id": "g5-average",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "方程与应用",
+      "title": "平均数与统计",
+      "summary": "理解平均数反映整体水平，能结合统计图分析数据变化。",
+      "sort_order": 61
+    },
+    {
+      "knowledge_id": "g5-patterns",
+      "grade": 5,
+      "stage": "g5",
+      "domain": "方程与应用",
+      "title": "数列规律与周期问题",
+      "summary": "从相邻项、重复周期或位置关系中寻找规律并表达。",
+      "sort_order": 62
+    },
+    {
+      "knowledge_id": "g6-integer-mixed-operations",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "整数四则混合运算",
+      "summary": "熟练处理多步整数运算，正确使用括号和运算律。",
+      "sort_order": 63
+    },
+    {
+      "knowledge_id": "g6-decimal-four-operations",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "小数四则运算",
+      "summary": "掌握小数加减乘除及小数点移动，能估算检查。",
+      "sort_order": 64
+    },
+    {
+      "knowledge_id": "g6-fraction-concept",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "分数意义与基本性质",
+      "summary": "理解分数、除法和比之间的联系，熟练约分与通分。",
+      "sort_order": 65
+    },
+    {
+      "knowledge_id": "g6-fraction-add-subtract",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "分数加减法",
+      "summary": "统一分数单位后计算，能处理带分数和复杂分数。",
+      "sort_order": 66
+    },
+    {
+      "knowledge_id": "g6-fraction-multiply-divide",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "分数乘除法",
+      "summary": "理解分数乘法和除以一个数等于乘其倒数。",
+      "sort_order": 67
+    },
+    {
+      "knowledge_id": "g6-fraction-decimal-mixed",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "分数、小数混合运算",
+      "summary": "根据数字特点选择统一为分数或小数并写清过程。",
+      "sort_order": 68
+    },
+    {
+      "knowledge_id": "g6-percent",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "百分数与百分率",
+      "summary": "理解百分数意义，完成分数、小数、百分数互化及百分率计算。",
+      "sort_order": 69
+    },
+    {
+      "knowledge_id": "g6-percent-applications",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "数与运算",
+      "title": "百分数应用题",
+      "summary": "解决增加率、减少率、折扣、利率等实际问题。",
+      "sort_order": 70
+    },
+    {
+      "knowledge_id": "g6-ratio",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "比的意义与化简",
+      "summary": "理解比、除法和分数的联系，能求比值和化简比。",
+      "sort_order": 71
+    },
+    {
+      "knowledge_id": "g6-proportion",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "比例与解比例",
+      "summary": "理解比例基本性质，能判断比例并求未知项。",
+      "sort_order": 72
+    },
+    {
+      "knowledge_id": "g6-direct-inverse-proportion",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "正比例与反比例",
+      "summary": "从两个量的变化规律判断正比例或反比例并解决问题。",
+      "sort_order": 73
+    },
+    {
+      "knowledge_id": "g6-linear-equation",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "一元一次方程基础",
+      "summary": "根据等式性质解含整数、分数或小数系数的方程。",
+      "sort_order": 74
+    },
+    {
+      "knowledge_id": "g6-equation-system",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "二元一次方程组基础",
+      "summary": "理解两个未知数和两个等量关系，使用代入法消元。",
+      "sort_order": 75
+    },
+    {
+      "knowledge_id": "g6-probability-statistics",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "可能性与统计图表",
+      "summary": "选择合适统计图描述数据，并判断简单随机事件的可能性。",
+      "sort_order": 76
+    },
+    {
+      "knowledge_id": "g6-comprehensive-problems",
+      "grade": 6,
+      "stage": "g6",
+      "domain": "比、方程与统计",
+      "title": "综合应用与数量关系",
+      "summary": "综合使用比、百分数、方程和单位分析多步问题。",
+      "sort_order": 77
+    },
+    {
+      "knowledge_id": "g7-rational-numbers",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
-      "title": "整式",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教7上:10.1:p2"
+      "domain": "数与代数",
+      "title": "有理数及数轴",
+      "summary": "理解正负数、相反数、绝对值和数轴上的大小关系。",
+      "sort_order": 78
     },
     {
-      "knowledge_id": "g7-10-2-like-terms",
+      "knowledge_id": "g7-rational-operations",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
+      "domain": "数与代数",
+      "title": "有理数运算",
+      "summary": "掌握符号规则、乘方和混合运算顺序。",
+      "sort_order": 79
+    },
+    {
+      "knowledge_id": "g7-algebraic-expressions",
+      "grade": 7,
+      "stage": "g7",
+      "domain": "数与代数",
+      "title": "代数式与整式",
+      "summary": "理解代数式的值、单项式、多项式、系数和次数。",
+      "sort_order": 80
+    },
+    {
+      "knowledge_id": "g7-like-terms",
+      "grade": 7,
+      "stage": "g7",
+      "domain": "数与代数",
       "title": "合并同类项",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教7上:10.2:p5"
+      "summary": "识别同类项，只把系数相加减并保持字母部分不变。",
+      "sort_order": 81
     },
     {
-      "knowledge_id": "g7-10-3-polynomial-add-subtract",
+      "knowledge_id": "g7-polynomial-add-subtract",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
-      "title": "整式的加法和减法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:10.3:p10"
+      "domain": "数与代数",
+      "title": "整式的加减",
+      "summary": "正确去括号、合并同类项并按规范顺序整理。",
+      "sort_order": 82
     },
     {
-      "knowledge_id": "g7-11-1-polynomial-multiplication",
+      "knowledge_id": "g7-polynomial-multiplication",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
+      "domain": "数与代数",
       "title": "整式的乘法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教7上:11.1:p18"
+      "summary": "掌握幂的运算、单项式与多项式乘法及多项式相乘。",
+      "sort_order": 83
     },
     {
-      "knowledge_id": "g7-11-2-multiplication-formulas",
+      "knowledge_id": "g7-multiplication-formulas",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
+      "domain": "数与代数",
       "title": "乘法公式",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:11.2:p33"
+      "summary": "理解平方差与完全平方公式，能正用、逆用并辨认结构。",
+      "sort_order": 84
     },
     {
-      "knowledge_id": "g7-11-3-polynomial-division",
+      "knowledge_id": "g7-polynomial-division",
+      "grade": 7,
       "stage": "g7",
-      "domain": "整式",
+      "domain": "数与代数",
       "title": "整式的除法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教7上:11.3:p42"
+      "summary": "掌握单项式除法及多项式除以单项式的运算规则。",
+      "sort_order": 85
     },
     {
-      "knowledge_id": "g7-12-1-factorization-meaning",
+      "knowledge_id": "g7-factorization",
+      "grade": 7,
       "stage": "g7",
-      "domain": "因式分解",
-      "title": "因式分解的意义",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:12.1:p55"
+      "domain": "数与代数",
+      "title": "因式分解",
+      "summary": "把多项式化为整式乘积，能使用提公因式法和公式法。",
+      "sort_order": 86
     },
     {
-      "knowledge_id": "g7-12-2-factorization-methods",
+      "knowledge_id": "g7-algebraic-fractions",
+      "grade": 7,
       "stage": "g7",
-      "domain": "因式分解",
-      "title": "因式分解的方法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:12.2:p58"
+      "domain": "数与代数",
+      "title": "分式及基本性质",
+      "summary": "明确分母不为零，能约分、通分和判断最简分式。",
+      "sort_order": 87
     },
     {
-      "knowledge_id": "g7-13-1-algebraic-fractions-properties",
+      "knowledge_id": "g7-fraction-operations",
+      "grade": 7,
       "stage": "g7",
-      "domain": "分式",
-      "title": "分式以及性质",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "抽象能力",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教7上:13.1:p76"
-    },
-    {
-      "knowledge_id": "g7-13-2-algebraic-fraction-operations",
-      "stage": "g7",
-      "domain": "分式",
+      "domain": "数与代数",
       "title": "分式的运算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:13.2:p82"
+      "summary": "掌握分式乘除、乘方和异分母加减，结果化为最简。",
+      "sort_order": 88
     },
     {
-      "knowledge_id": "g7-13-3-algebraic-fraction-equations",
+      "knowledge_id": "g7-fraction-equations",
+      "grade": 7,
       "stage": "g7",
-      "domain": "分式",
+      "domain": "数与代数",
       "title": "分式方程",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "模型观念",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教7上:13.3:p93"
+      "summary": "先写取值限制，去分母求解并检验是否产生增根。",
+      "sort_order": 89
     },
     {
-      "knowledge_id": "g7-14-1-translation",
+      "knowledge_id": "g7-data-analysis",
+      "grade": 7,
       "stage": "g7",
-      "domain": "图形运动",
-      "title": "平移",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教7上:14.1:p106"
-    },
-    {
-      "knowledge_id": "g7-14-2-rotation",
-      "stage": "g7",
-      "domain": "图形运动",
-      "title": "旋转",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教7上:14.2:p114"
-    },
-    {
-      "knowledge_id": "g7-14-3-axial-symmetry",
-      "stage": "g7",
-      "domain": "图形运动",
-      "title": "轴对称",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:14.3:p119"
-    },
-    {
-      "knowledge_id": "g7-14-4-central-symmetry",
-      "stage": "g7",
-      "domain": "图形运动",
-      "title": "中心对称",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念",
-        "推理能力"
-      ],
-      "textbook_ref": "沪教7上:14.4:p126"
-    },
-    {
-      "knowledge_id": "g7-practice-frieze-patterns",
-      "stage": "g7",
-      "domain": "综合与实践",
-      "title": "从传统连续纹样到现代镶嵌图案",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "模型观念",
-        "应用意识",
-        "创新意识"
-      ],
-      "textbook_ref": "沪教7上:综合与实践:p136"
-    },
-    {
-      "knowledge_id": "g7-practice-reading-star",
-      "stage": "g7",
-      "domain": "综合与实践",
-      "title": "制订“阅读之星”评选方案",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "数据观念",
-        "模型观念",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教7上:综合与实践:p141"
-    },
-    {
-      "knowledge_id": "g4-2-large-numbers",
-      "stage": "g4",
-      "domain": "数与量",
-      "title": "大数的认识",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "符号意识"
-      ],
-      "textbook_ref": "沪教四上:二:p11"
-    },
-    {
-      "knowledge_id": "g4-2-rounding",
-      "stage": "g4",
-      "domain": "数与量",
-      "title": "四舍五入法",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教四上:二:p18"
-    },
-    {
-      "knowledge_id": "g4-2-square-kilometre",
-      "stage": "g4",
-      "domain": "数与量",
-      "title": "平方千米",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "量感",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教四上:二:p20"
-    },
-    {
-      "knowledge_id": "g4-2-ton",
-      "stage": "g4",
-      "domain": "数与量",
-      "title": "吨的认识",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "量感",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教四上:二:p24"
-    },
-    {
-      "knowledge_id": "g4-2-millilitre-litre",
-      "stage": "g4",
-      "domain": "数与量",
-      "title": "毫升与升的认识",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "量感",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教四上:二:p26"
-    },
-    {
-      "knowledge_id": "g4-3-fraction-comparison",
-      "stage": "g4",
-      "domain": "分数初步认识（二）",
-      "title": "分数的大小比较",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "推理意识"
-      ],
-      "textbook_ref": "沪教四上:三:p31"
-    },
-    {
-      "knowledge_id": "g4-3-fraction-add-subtract",
-      "stage": "g4",
-      "domain": "分数初步认识（二）",
-      "title": "分数的加减计算",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教四上:三:p35"
-    },
-    {
-      "knowledge_id": "g4-3-fraction-wall",
-      "stage": "g4",
-      "domain": "分数初步认识（二）",
-      "title": "小探究——“分数墙”",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "数感",
-        "几何直观",
-        "推理意识"
-      ],
-      "textbook_ref": "沪教四上:三:p40"
-    },
-    {
-      "knowledge_id": "g4-4-three-step-calculations",
-      "stage": "g4",
-      "domain": "整数四则运算",
-      "title": "三步计算式题",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "运算能力",
-        "推理意识"
-      ],
-      "textbook_ref": "沪教四上:四:p47"
-    },
-    {
-      "knowledge_id": "g4-4-forward-reasoning",
-      "stage": "g4",
-      "domain": "整数四则运算",
-      "title": "正推",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "推理意识",
-        "模型意识"
-      ],
-      "textbook_ref": "沪教四上:四:p53"
-    },
-    {
-      "knowledge_id": "g4-4-backward-reasoning",
-      "stage": "g4",
-      "domain": "整数四则运算",
-      "title": "逆推",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "推理意识",
-        "模型意识"
-      ],
-      "textbook_ref": "沪教四上:四:p55"
-    },
-    {
-      "knowledge_id": "g4-4-verbal-arithmetic-problems",
-      "stage": "g4",
-      "domain": "整数四则运算",
-      "title": "文字计算题",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "符号意识",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教四上:四:p58"
-    },
-    {
-      "knowledge_id": "g4-4-problem-solving",
-      "stage": "g4",
-      "domain": "整数四则运算",
-      "title": "解决问题",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "模型意识",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教四上:四:p68"
-    },
-    {
-      "knowledge_id": "g4-5-circle-intro",
-      "stage": "g4",
-      "domain": "几何小实践",
-      "title": "圆的初步认识",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教四上:五:p74"
-    },
-    {
-      "knowledge_id": "g4-5-segment-ray-line",
-      "stage": "g4",
-      "domain": "几何小实践",
-      "title": "线段、射线、直线",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教四上:五:p79"
-    },
-    {
-      "knowledge_id": "g4-5-angle",
-      "stage": "g4",
-      "domain": "几何小实践",
-      "title": "角",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教四上:五:p81"
-    },
-    {
-      "knowledge_id": "g4-5-angle-measurement",
-      "stage": "g4",
-      "domain": "几何小实践",
-      "title": "角的度量",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "几何直观"
-      ],
-      "textbook_ref": "沪教四上:五:p82"
-    },
-    {
-      "knowledge_id": "g4-5-angle-calculation",
-      "stage": "g4",
-      "domain": "几何小实践",
-      "title": "角的计算",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "量感",
-        "运算能力",
-        "推理意识"
-      ],
-      "textbook_ref": "沪教四上:五:p87"
-    },
-    {
-      "knowledge_id": "g4-6-large-numbers-rounding",
-      "stage": "g4",
-      "domain": "整理与提高",
-      "title": "大数与凑整",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "运算能力"
-      ],
-      "textbook_ref": "沪教四上:六:p89"
-    },
-    {
-      "knowledge_id": "g4-6-fractions-number-line",
-      "stage": "g4",
-      "domain": "整理与提高",
-      "title": "数射线上的分数",
-      "curriculum_domain": "数与代数",
-      "objective_tags": [
-        "数感",
-        "几何直观"
-      ],
-      "textbook_ref": "沪教四上:六:p92"
-    },
-    {
-      "knowledge_id": "g4-6-circle-angle-review",
-      "stage": "g4",
-      "domain": "整理与提高",
-      "title": "圆与角的复习",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "空间观念"
-      ],
-      "textbook_ref": "沪教四上:六:p93"
-    },
-    {
-      "knowledge_id": "g4-6-equal-angles",
-      "stage": "g4",
-      "domain": "整理与提高",
-      "title": "数学广场——相等的角",
-      "curriculum_domain": "图形与几何",
-      "objective_tags": [
-        "几何直观",
-        "推理意识"
-      ],
-      "textbook_ref": "沪教四上:六:p95"
-    },
-    {
-      "knowledge_id": "g4-6-grid-estimation",
-      "stage": "g4",
-      "domain": "整理与提高",
-      "title": "数学广场——通过网格来估测",
-      "curriculum_domain": "综合与实践",
-      "objective_tags": [
-        "量感",
-        "模型意识",
-        "应用意识"
-      ],
-      "textbook_ref": "沪教四上:六:p97"
-    }
-  ],
-  "textbook_sequences": [
-    {
-      "sequence_id": "shanghai-g7-semester1-2024",
-      "textbook_title": "沪教7上",
-      "chapters": [
-        {
-          "chapter": "第10章 整式的加减",
-          "knowledge_ids": [
-            "g7-10-1-polynomials",
-            "g7-10-2-like-terms",
-            "g7-10-3-polynomial-add-subtract"
-          ]
-        },
-        {
-          "chapter": "第11章 整式的乘除",
-          "knowledge_ids": [
-            "g7-11-1-polynomial-multiplication",
-            "g7-11-2-multiplication-formulas",
-            "g7-11-3-polynomial-division"
-          ]
-        },
-        {
-          "chapter": "第12章 因式分解",
-          "knowledge_ids": [
-            "g7-12-1-factorization-meaning",
-            "g7-12-2-factorization-methods"
-          ]
-        },
-        {
-          "chapter": "第13章 分式",
-          "knowledge_ids": [
-            "g7-13-1-algebraic-fractions-properties",
-            "g7-13-2-algebraic-fraction-operations",
-            "g7-13-3-algebraic-fraction-equations"
-          ]
-        },
-        {
-          "chapter": "第14章 图形的运动",
-          "knowledge_ids": [
-            "g7-14-1-translation",
-            "g7-14-2-rotation",
-            "g7-14-3-axial-symmetry",
-            "g7-14-4-central-symmetry"
-          ]
-        },
-        {
-          "chapter": "综合与实践",
-          "knowledge_ids": [
-            "g7-practice-frieze-patterns",
-            "g7-practice-reading-star"
-          ]
-        }
-      ]
-    },
-    {
-      "sequence_id": "shanghai-g4-semester1",
-      "textbook_title": "四年级上册数学沪教版电子课本",
-      "chapters": [
-        {
-          "chapter": "一、复习与提高",
-          "knowledge_ids": [
-            "g4-add-subtract-relations-laws",
-            "g4-multiply-divide-relations-laws",
-            "g4-two-digit-multiply-divide",
-            "g4-fraction-introduction"
-          ]
-        },
-        {
-          "chapter": "二、数与量",
-          "knowledge_ids": [
-            "g4-2-large-numbers",
-            "g4-2-rounding",
-            "g4-2-square-kilometre",
-            "g4-2-ton",
-            "g4-2-millilitre-litre"
-          ]
-        },
-        {
-          "chapter": "三、分数的初步认识（二）",
-          "knowledge_ids": [
-            "g4-3-fraction-comparison",
-            "g4-3-fraction-add-subtract",
-            "g4-3-fraction-wall"
-          ]
-        },
-        {
-          "chapter": "四、整数的四则运算",
-          "knowledge_ids": [
-            "g4-travel-work-problems-intro",
-            "g4-4-three-step-calculations",
-            "g4-4-forward-reasoning",
-            "g4-4-backward-reasoning",
-            "g4-4-verbal-arithmetic-problems",
-            "g4-operation-laws-shortcuts",
-            "g4-4-problem-solving"
-          ]
-        },
-        {
-          "chapter": "五、几何小实践",
-          "knowledge_ids": [
-            "g4-5-circle-intro",
-            "g4-5-segment-ray-line",
-            "g4-5-angle",
-            "g4-5-angle-measurement",
-            "g4-5-angle-calculation"
-          ]
-        },
-        {
-          "chapter": "六、整理与提高",
-          "knowledge_ids": [
-            "g4-6-large-numbers-rounding",
-            "g4-6-fractions-number-line",
-            "g4-6-circle-angle-review",
-            "g4-6-equal-angles",
-            "g4-6-grid-estimation"
-          ]
-        }
-      ]
+      "domain": "数与代数",
+      "title": "数据整理与分析",
+      "summary": "用平均数、中位数、众数和统计图描述一组数据。",
+      "sort_order": 90
     }
   ]
 }

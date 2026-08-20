@@ -23,14 +23,14 @@
       <article class="lab-card">
         <div class="lab-heading"><div><small>平面图形 01</small><h2>长方形</h2></div><output id="rectValues"></output></div>
         <svg id="rectSvg" class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="可拖动长方形">
-          <rect id="rectShape" x="90" y="55" rx="10" class="shape-fill"></rect>
+          <rect id="rectShape" x="90" y="55" rx="0" class="shape-fill"></rect>
           <circle id="rectHandle" r="13" class="drag-handle"></circle>
           <path id="rectRightAngle" class="concept-mark" d="M 90 80 L 115 80 L 115 55"></path>
           <text id="rectVertexA" class="diagram-label">A</text><text id="rectVertexB" class="diagram-label">B</text><text id="rectVertexC" class="diagram-label">C</text><text id="rectVertexD" class="diagram-label">D</text>
           <text id="rectWidthLabel" class="measure-label" text-anchor="middle">长</text><text id="rectHeightLabel" class="measure-label" text-anchor="middle">宽</text>
         </svg>
         <div class="controls"><label>长<div class="number-control"><input id="rectWidth" type="range" min="2" max="12" step="0.5" value="8"><input id="rectWidthNumber" type="number" min="2" max="12" step="0.5" value="8" aria-label="输入长"></div></label><label>宽<div class="number-control"><input id="rectHeight" type="range" min="2" max="9" step="0.5" value="5"><input id="rectHeightNumber" type="number" min="2" max="9" step="0.5" value="5" aria-label="输入宽"></div></label></div>
-        <p class="formula" id="rectFormula"></p><p class="hint">拖动右下角圆点，也可以直接改变长和宽。</p>
+        <p class="formula" id="rectFormula"></p><p class="hint">周长看边：沿四条边绕一圈；面积看里面：网格中每行的方格数 × 行数。</p>
       </article>
       <article class="lab-card">
         <div class="lab-heading"><div><small>平面图形 02</small><h2>三角形</h2></div><output id="triValues"></output></div>
@@ -41,7 +41,7 @@
           <text id="triBaseLabel" class="measure-label" text-anchor="middle">底</text><text id="triHeightLabel" class="measure-label">高</text>
         </svg>
         <div class="controls"><label>底<div class="number-control"><input id="triBase" type="range" min="2" max="12" step="0.5" value="8"><input id="triBaseNumber" type="number" min="2" max="12" step="0.5" value="8" aria-label="输入三角形底"></div></label><label>高<div class="number-control"><input id="triHeight" type="range" min="2" max="9" step="0.5" value="6"><input id="triHeightNumber" type="number" min="2" max="9" step="0.5" value="6" aria-label="输入三角形高"></div></label></div>
-        <p class="formula" id="triFormula"></p><p class="hint">相同底和高的两个三角形，可以拼成一个平行四边形。</p>
+        <p class="formula" id="triFormula"></p><p class="hint">剪拼思路：两个相同的三角形可以拼成一个平行四边形，所以最后要 ÷ 2。</p>
       </article>
       <article class="lab-card">
         <div class="lab-heading"><div><small>圆与扇形 03</small><h2>圆和扇形</h2></div><output id="circleValues"></output></div>
@@ -50,7 +50,7 @@
           <circle cx="300" cy="180" r="5" class="concept-dot"></circle><text x="286" y="200" class="diagram-label">O 圆心</text><text id="circleRadiusLabel" class="measure-label" text-anchor="middle">半径 r</text><text id="circleArcLabel" class="measure-label">弧</text><text id="circleAngleLabel" x="315" y="145" class="measure-label">圆心角</text>
         </svg>
         <div class="controls"><label>半径<div class="number-control"><input id="circleRadius" type="range" min="1" max="8" step="0.5" value="5"><input id="circleRadiusNumber" type="number" min="1" max="8" step="0.5" value="5" aria-label="输入半径"></div></label><label>圆心角<div class="number-control"><input id="sectorAngle" type="range" min="15" max="360" step="5" value="120"><input id="sectorAngleNumber" type="number" min="15" max="360" step="5" value="120" aria-label="输入圆心角"></div></label></div>
-        <p class="formula" id="circleFormula"></p><p class="hint">扇形占整圆的几分之几，面积和弧长也占相同的比例。</p>
+        <p class="formula" id="circleFormula"></p><p class="hint">圆周可以想成“绕一圈再拉直”；扇形占整圆的几分之几，面积和弧长也占相同比例。</p>
       </article>
       <article class="lab-card">
         <div class="lab-heading"><div><small>立体图形 04</small><h2>圆柱和圆锥</h2></div><output id="solidValues"></output></div>
@@ -120,7 +120,7 @@
     </section>
   </main>
   <script src="config.js" onerror="this.remove()"></script>
-  <script type="module" src="js/common.js?v=20260820-2"></script>
-  <script type="module" src="js/geometry.js"></script>
+  <script type="module" src="js/common.js?v=20260820-3"></script>
+  <script type="module" src="js/geometry.js?v=20260820-3"></script>
 </body>
 </html>

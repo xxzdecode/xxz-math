@@ -3,12 +3,13 @@ const MATH_KEYS = Object.freeze({
 });
 
 export class SupabaseMathStore {
-  constructor({ url, serviceRoleKey, table, progressRpc }) {
+  constructor({ url, serviceRoleKey, table, progressRpc, displayStatusRpc = 'math_set_display_status_v1' }) {
     this.url = String(url || '').replace(/\/+$/, '');
     this.serviceRoleKey = String(serviceRoleKey || '');
     this.table = String(table || '');
     this.progressRpc = String(progressRpc || '');
-    if (!this.url || !this.serviceRoleKey || !/^math_[a-z0-9_]+$/.test(this.table) || !/^math_[a-z0-9_]+$/.test(this.progressRpc)) {
+    this.displayStatusRpc = String(displayStatusRpc || '');
+    if (!this.url || !this.serviceRoleKey || !/^math_[a-z0-9_]+$/.test(this.table) || !/^math_[a-z0-9_]+$/.test(this.progressRpc) || !/^math_[a-z0-9_]+$/.test(this.displayStatusRpc)) {
       throw new Error('Supabase math server configuration is incomplete');
     }
   }
@@ -49,6 +50,18 @@ export class SupabaseMathStore {
     });
     const body = await response.json().catch(() => null);
     if (!response.ok || !body || typeof body !== 'object') throw new Error(`Supabase math progress RPC failed (${response.status})`);
+    return body;
+  }
+
+  async saveDisplayStatus({ studentId, knowledgeId, displayStatus }) {
+    const endpoint = `${this.url}/rest/v1/rpc/${this.displayStatusRpc}`;
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: this.headers(),
+      body: JSON.stringify({ p_student_id: studentId, p_knowledge_id: knowledgeId, p_display_status: displayStatus })
+    });
+    const body = await response.json().catch(() => null);
+    if (!response.ok || !body || typeof body !== 'object') throw new Error(`Supabase math display-status RPC failed (${response.status})`);
     return body;
   }
 }
