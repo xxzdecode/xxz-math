@@ -38,7 +38,8 @@ function renderRectangle() {
   q('#rectWidthLabel').setAttribute('y', y2 + 28);
   q('#rectHeightLabel').setAttribute('x', 65);
   q('#rectHeightLabel').setAttribute('y', (55 + y2) / 2);
-  setText('#rectFormula', `面积 = 长 × 宽 = ${width} × ${height} = ${fmt(metrics.area)}；周长 = 2 ×（长 + 宽）= 2 ×（${width} + ${height}）= ${fmt(metrics.perimeter)}`);
+  setText('#rectAreaFormula', `S＝${width} × ${height}＝${fmt(metrics.area)}`);
+  setText('#rectPerimeterFormula', `C＝2 ×（${width}＋${height}）＝${fmt(metrics.perimeter)}`);
   setText('#rectValues', `长 ${width} · 宽 ${height}`);
 }
 
@@ -53,8 +54,8 @@ function renderTriangle() {
   q('#triVertexB').setAttribute('x', 300 - half - 24); q('#triVertexB').setAttribute('y', 322);
   q('#triVertexC').setAttribute('x', 300 + half + 10); q('#triVertexC').setAttribute('y', 322);
   q('#triBaseLabel').setAttribute('x', 300); q('#triBaseLabel').setAttribute('y', 342);
-  q('#triHeightLabel').setAttribute('x', 312); q('#triHeightLabel').setAttribute('y', (300 + y) / 2);
-  setText('#triFormula', `面积 = 底 × 高 ÷ 2 = ${base} × ${height} ÷ 2 = ${fmt(triangleMetrics(base, height).area)}`);
+  q('#triHeightLabel').setAttribute('x', 330); q('#triHeightLabel').setAttribute('y', (300 + y) / 2);
+  setText('#triAreaFormula', `S＝${base} × ${height} ÷ 2＝${fmt(triangleMetrics(base, height).area)}`);
   setText('#triValues', `底 ${base} · 高 ${height}`);
 }
 
@@ -74,9 +75,12 @@ function renderCircle() {
   q('#sectorShape').setAttribute('d', sectorPath(300, 180, r, angle));
   q('#circleHandle').setAttribute('cx', 300 + r);
   q('#circleRadiusLine').setAttribute('x2', 300 + r);
-  q('#circleRadiusLabel').setAttribute('x', 300 + r / 2); q('#circleRadiusLabel').setAttribute('y', 170);
-  q('#circleArcLabel').setAttribute('x', 300 + r * .75); q('#circleArcLabel').setAttribute('y', 180 - r * .55);
-  setText('#circleFormula', `圆面积 = π × ${radius}² ≈ ${fmt(metrics.area)}；扇形面积 = ${angle} ÷ 360 × π × ${radius}² ≈ ${fmt(metrics.sectorArea)}；弧长 = ${angle} ÷ 360 × 2π × ${radius} ≈ ${fmt(metrics.arcLength)}`);
+  q('#circleRadiusLabel').setAttribute('x', 300 + r / 2); q('#circleRadiusLabel').setAttribute('y', 158);
+  q('#circleArcLabel').setAttribute('x', 300 + r * .82); q('#circleArcLabel').setAttribute('y', 168 - r * .62);
+  setText('#circlePerimeterFormula', `C＝2π×${radius}≈${fmt(metrics.circumference)}`);
+  setText('#circleAreaFormula', `S＝π×${radius}²≈${fmt(metrics.area)}`);
+  setText('#arcLengthFormula', `L＝${angle}/360×2π×${radius}≈${fmt(metrics.arcLength)}`);
+  setText('#sectorAreaFormula', `S＝${angle}/360×π×${radius}²≈${fmt(metrics.sectorArea)}`);
   setText('#circleValues', `半径 ${radius} · 圆心角 ${angle}°`);
 }
 
@@ -96,9 +100,10 @@ function renderSolid() {
   q('#coneShape').setAttribute('points', `430,95 ${430-rx},${95+h} ${430+rx},${95+h}`);
   q('#cylHeightGuide').setAttribute('y1', 95); q('#cylHeightGuide').setAttribute('y2', 95 + h);
   q('#coneRadiusGuide').setAttribute('x2', 430 + rx); q('#coneRadiusGuide').setAttribute('y1', 95 + h); q('#coneRadiusGuide').setAttribute('y2', 95 + h);
-  q('#solidHeightLabel').setAttribute('x', 178); q('#solidHeightLabel').setAttribute('y', 100 + h / 2);
+  q('#solidHeightLabel').setAttribute('x', 198); q('#solidHeightLabel').setAttribute('y', 100 + h / 2);
   q('#solidRadiusLabel').setAttribute('x', 430); q('#solidRadiusLabel').setAttribute('y', 132 + h);
-  setText('#solidFormula', `圆柱体积 = π × ${radius}² × ${height} ≈ ${fmt(metrics.cylinderVolume)}；圆锥体积 = π × ${radius}² × ${height} ÷ 3 ≈ ${fmt(metrics.coneVolume)}`);
+  setText('#cylinderVolumeFormula', `V＝π×${radius}²×${height}≈${fmt(metrics.cylinderVolume)}`);
+  setText('#coneVolumeFormula', `V＝⅓×π×${radius}²×${height}≈${fmt(metrics.coneVolume)}`);
   setText('#solidValues', `半径 ${radius} · 高 ${height}`);
 }
 
@@ -153,20 +158,27 @@ function renderQuadrilateral() {
   });
   q('#quadTopLabel').setAttribute('x', (topLeft + topRight) / 2); q('#quadTopLabel').setAttribute('y', yTop - 18);
   q('#quadBottomLabel').setAttribute('x', (baseLeft + baseRight) / 2); q('#quadBottomLabel').setAttribute('y', yBottom + 30);
-  q('#quadHeightLabel').setAttribute('x', topLeft + 10); q('#quadHeightLabel').setAttribute('y', (yTop + yBottom) / 2);
+  q('#quadHeightLabel').setAttribute('x', topLeft + 30); q('#quadHeightLabel').setAttribute('y', (yTop + yBottom) / 2);
   q('#quadTopControl').hidden = type === 'parallelogram';
   if (type === 'parallelogram') {
     const side = Math.hypot(shift / scale, height);
     const metrics = parallelogramMetrics(base, side, height);
     setText('#quadTopLabel', '对边平行且相等');
     setText('#quadValues', `底 ${base} · 高 ${height}`);
-    setText('#quadFormula', `面积 = 底 × 高 = ${base} × ${height} = ${fmt(metrics.area)}；斜边 ≈ ${fmt(side)}，周长 = 2 ×（底 + 斜边）≈ ${fmt(metrics.perimeter)}`);
+    setText('#quadAreaFormula', `S＝${base}×${height}＝${fmt(metrics.area)}`);
+    setText('#quadAreaNote', '割补成长方形：底 × 高');
+    setText('#quadPerimeterFormula', `C＝2×（${base}＋${fmt(side)}）≈${fmt(metrics.perimeter)}`);
     setText('#quadHint', '高必须垂直于底；斜边不是高。平行四边形的两组对边分别平行。');
   } else {
     const metrics = trapezoidMetrics(top, base, height);
     setText('#quadTopLabel', `上底 ${top}`);
     setText('#quadValues', `上底 ${top} · 下底 ${base} · 高 ${height}`);
-    setText('#quadFormula', `面积 =（上底 + 下底）× 高 ÷ 2 =（${top} + ${base}）× ${height} ÷ 2 = ${fmt(metrics.area)}`);
+    const leftSide = Math.hypot(shift / scale, height);
+    const rightOffset = (base * scale - shift - top * scale) / scale;
+    const rightSide = Math.hypot(rightOffset, height);
+    setText('#quadAreaFormula', `S＝（${top}＋${base}）×${height}÷2＝${fmt(metrics.area)}`);
+    setText('#quadAreaNote', '两个相同梯形拼成平行四边形');
+    setText('#quadPerimeterFormula', `C≈${top}＋${base}＋${fmt(leftSide)}＋${fmt(rightSide)}＝${fmt(top + base + leftSide + rightSide)}`);
     setText('#quadHint', '梯形只有一组对边平行；两条平行边叫上底和下底，它们之间的垂直距离叫高。');
   }
 }
@@ -203,7 +215,8 @@ function renderPolygon() {
   q('#polygonAngleLabel').setAttribute('x', cx + 48); q('#polygonAngleLabel').setAttribute('y', cy - radius + 54);
   setText('#polygonAngleLabel', `内角 ${fmt(metrics.interiorAngle)}°`);
   setText('#polygonValues', `${sides} 边 · 边长 ${sideLength}`);
-  setText('#polygonFormula', `周长 = ${sides} × ${sideLength} = ${fmt(metrics.perimeter)}；内角和 = ${metrics.interiorAngleSum}°`);
+  setText('#polygonPerimeterFormula', `C＝${sides}×${sideLength}＝${fmt(metrics.perimeter)}`);
+  setText('#polygonAngleFormula', `内角和＝${metrics.interiorAngleSum}°；每个内角＝${fmt(metrics.interiorAngle)}°`);
 }
 
 function renderCoordinateGrid() {
@@ -257,7 +270,8 @@ function renderCuboid() {
   q('#cuboidEdgeLabel').setAttribute('x', x + w / 2); q('#cuboidEdgeLabel').setAttribute('y', y - 10);
   q('#cuboidFaceLabel').setAttribute('x', x + w / 2); q('#cuboidFaceLabel').setAttribute('y', y + h / 2);
   setText('#cuboidValues', `长 ${length} · 宽 ${width} · 高 ${height}`);
-  setText('#cuboidFormula', `体积 = 长 × 宽 × 高 = ${length} × ${width} × ${height} = ${fmt(metrics.volume)}；表面积 = 2 ×（长×宽 + 长×高 + 宽×高）= ${fmt(metrics.surfaceArea)}`);
+  setText('#cuboidVolumeFormula', `V＝${length}×${width}×${height}＝${fmt(metrics.volume)}`);
+  setText('#cuboidSurfaceFormula', `S＝2×（${length}×${width}＋${length}×${height}＋${width}×${height}）＝${fmt(metrics.surfaceArea)}`);
 }
 
 function bindNumberPair(rangeSelector, numberSelector, render) {
@@ -294,6 +308,16 @@ function bindRectangleDrag() {
   });
 }
 
+function setPrinciplesVisible(visible) {
+  document.querySelectorAll('[data-principle]').forEach(element => {
+    element.hidden = !visible;
+  });
+  const showButton = q('#showPrinciples');
+  const hideButton = q('#hidePrinciples');
+  showButton?.setAttribute('aria-pressed', String(visible));
+  hideButton?.setAttribute('aria-pressed', String(!visible));
+}
+
 [
   ['#rectWidth', '#rectWidthNumber', renderRectangle], ['#rectHeight', '#rectHeightNumber', renderRectangle],
   ['#triBase', '#triBaseNumber', renderTriangle], ['#triHeight', '#triHeightNumber', renderTriangle],
@@ -308,6 +332,9 @@ function bindRectangleDrag() {
   ['#cuboidHeight', '#cuboidHeightNumber', renderCuboid]
 ].forEach(args => bindNumberPair(...args));
 q('#quadType')?.addEventListener('change', renderQuadrilateral);
+q('#showPrinciples')?.addEventListener('click', () => setPrinciplesVisible(true));
+q('#hidePrinciples')?.addEventListener('click', () => setPrinciplesVisible(false));
+setPrinciplesVisible(true);
 bindRectangleDrag();
 renderRectangle();
 renderTriangle();

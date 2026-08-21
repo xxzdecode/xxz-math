@@ -4,7 +4,7 @@
 <body>
   <header class="site-header"><a class="brand" href="index.html"><span>∠</span> 数学图形实验室</a><nav><a href="index.html">图形实验室</a><a class="active" href="knowledge.html">知识点库</a></nav><button class="teacher-button" data-teacher-login>老师入口</button></header>
   <main class="page-shell">
-    <section class="page-title"><p class="eyebrow">一至七年级 · 由浅入深</p><h1>数学知识点库</h1><p>按年级从低到高整理具体知识点。点击知识点查看定义、规则、例子和易错点；本轮暂不把图形内容放入知识库。</p></section>
+    <section class="page-title"><p class="eyebrow">一至七年级 · 由浅入深</p><h1>数学知识点库</h1><p>按年级从低到高整理。点击知识点就在原位置展开定义、方法、算例和易错点；图形公式集中放在图形实验室。</p></section>
     <p class="notice" id="teacherProgressHint">当前为公共视图。学生状态需要进入老师模式。</p>
     <div class="student-switch" id="studentSwitch" hidden></div>
     <p class="inline-status" id="knowledgeStatus" aria-live="polite"></p>
@@ -12,6 +12,7 @@
       <label>搜索<input id="knowledgeSearch" type="search" placeholder="知识点、章节、公式或能力标签…" autocomplete="off"></label>
       <label>年级<select id="gradeFilter"><option value="all">全部年级</option><option value="1">一年级</option><option value="2">二年级</option><option value="3">三年级</option><option value="4">四年级</option><option value="5">五年级</option><option value="6">六年级</option><option value="7">七年级</option></select></label>
       <label>领域<select id="domainFilter"><option value="all">全部领域</option></select></label>
+      <div class="knowledge-expand-actions" aria-label="展开控制"><button id="expandAll" type="button">全部展开</button><button id="collapseAll" type="button">全部收起</button></div>
     </section>
     <section class="knowledge-summary" aria-label="知识点统计">
       <div><strong id="visibleKnowledgeCount">0</strong><span>当前显示</span></div>
@@ -22,7 +23,6 @@
     <div id="knowledgeGroups"></div>
     <p class="empty-state" id="knowledgeEmpty" hidden>没有符合当前条件的知识点，请调整搜索或筛选条件。</p>
   </main>
-  <dialog class="knowledge-dialog" id="knowledgeDialog"><button class="dialog-close" type="button" aria-label="关闭知识点详情">×</button><div id="knowledgeDialogContent"></div></dialog>
-  <script src="config.js" onerror="this.remove()"></script><script type="module" src="js/knowledge.js?v=20260820-3"></script>
+  <script src="config.js" onerror="this.remove()"></script><script type="module" src="js/knowledge.js?v=20260821-1"></script>
 </body>
 </html>
