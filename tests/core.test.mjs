@@ -45,17 +45,78 @@ test('polygon, translation and cuboid calculations stay exact', () => {
   assert.deepEqual(cuboidMetrics(7, 4, 5), { volume: 140, surfaceArea: 166 });
 });
 
-test('every knowledge point receives useful public detail content', async () => {
+test('every knowledge point contains specific public notes instead of generated filler', async () => {
   const catalog = JSON.parse(await (await import('node:fs/promises')).readFile(
     new URL('../data/knowledge-catalog.json', import.meta.url), 'utf8'
   ));
   for (const point of normalizeCatalog(catalog)) {
     const content = knowledgeContent(point);
-    assert.ok(content.summary.length >= 15, `${point.knowledgeId} needs a summary`);
-    assert.ok(content.rules.length >= 3, `${point.knowledgeId} needs rules`);
+    assert.ok(content.idea.length >= 15, `${point.knowledgeId} needs a specific idea`);
+    assert.ok(content.rules.length >= 2, `${point.knowledgeId} needs rules`);
     assert.ok(content.example, `${point.knowledgeId} needs an example`);
-    assert.ok(content.pitfall, `${point.knowledgeId} needs a pitfall`);
+    assert.match(content.example, /[\d＝=<>＜＞÷×＋－]/, `${point.knowledgeId} needs a worked example`);
+    assert.ok(content.caution, `${point.knowledgeId} needs a caution`);
+    assert.doesNotMatch(JSON.stringify(content), /教材例题中找出|用估算检查结果|先说清概念和条件/);
   }
+});
+
+test('knowledge page uses inline accordion notes and keeps mastery out of note bodies', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const [html, script] = await Promise.all([
+    readFile(new URL('../knowledge.html', import.meta.url), 'utf8'),
+    readFile(new URL('../js/knowledge.js', import.meta.url), 'utf8')
+  ]);
+  assert.match(html, /id="expandAll"/);
+  assert.match(html, /id="collapseAll"/);
+  assert.doesNotMatch(html, /knowledgeDialog|<dialog/);
+  assert.match(script, /createElement\('details'\)/);
+  assert.match(script, /核心理解/);
+  assert.match(script, /具体方法/);
+  assert.doesNotMatch(script, /查看原交接与证据层|statusSelector|进入详情可明确选择颜色/);
+});
+
+test('geometry course follows derivation order, expands principles by default, and keeps formulas visible', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const [html, css, script] = await Promise.all([
+    readFile(new URL('../index.html', import.meta.url), 'utf8'),
+    readFile(new URL('../styles.css', import.meta.url), 'utf8'),
+    readFile(new URL('../js/geometry.js', import.meta.url), 'utf8')
+  ]);
+  const chapters = ['chapter-boundary', 'chapter-rectangle', 'chapter-cut', 'chapter-circle', 'chapter-composite', 'chapter-solid', 'chapter-relation', 'chapter-motion'];
+  let previous = -1;
+  for (const chapter of chapters) {
+    const position = html.indexOf(`id="${chapter}"`);
+    assert.ok(position > previous, `${chapter} should follow the learning path`);
+    previous = position;
+  }
+  assert.ok((html.match(/data-derivation/g) || []).length >= 6);
+  assert.doesNotMatch(html, /data-prev|data-next|derivation-controls/);
+  assert.match(html, /方格理解：每行方格数 × 行数/);
+  assert.match(html, /扇形的弧围成圆锥底面一圈/);
+  assert.match(html, /class="circle-quick-formulas"/);
+  assert.match(html, /<h3>半圆<\/h3>/);
+  assert.match(html, /id="rectAreaFormula"/);
+  assert.match(html, /id="rectPerimeterFormula"/);
+  assert.match(html, /<rect id="rectShape"[^>]*rx="0"/);
+  assert.match(html, /id="showPrinciples"[^>]*aria-pressed="true"[^>]*>全部展开<\/button>/);
+  assert.match(html, /id="hidePrinciples"[^>]*aria-pressed="false"[^>]*>只看图形与公式<\/button>/);
+  assert.equal((html.match(/class="sector-piece/g) || []).length, 8);
+  assert.doesNotMatch(html, /class="sector-row"/);
+  assert.ok((html.match(/data-principle hidden/g) || []).length >= 10);
+  assert.doesNotMatch(html, /class="formula-card[^>]*data-principle/);
+  assert.doesNotMatch(html, /class="experiment-card[^>]*data-principle/);
+  assert.match(script, /function setPrinciplesVisible\(visible\)/);
+  assert.match(script, /setPrinciplesVisible\(true\)/);
+  assert.doesNotMatch(script, /\.disabled\s*=/);
+  assert.match(css, /--bg:\s*#eaf4ff/);
+  assert.match(css, /\.area-formula\s*\{[^}]*background:\s*#eaf4ff/s);
+  assert.match(css, /\.perimeter-formula\s*\{[^}]*background:\s*#fff1df/s);
+  assert.match(css, /\.volume-formula\s*\{[^}]*background:\s*#f2edff/s);
+  assert.match(css, /\.shape-fill\s*\{[^}]*var\(--shape-dark\)/s);
+  assert.match(css, /--shape:\s*#64b3cf/);
+  assert.doesNotMatch(css, /\.shape-fill\s*\{[^}]*207,\s*102,\s*117/s);
+  assert.match(css, /\.derivation-card\s*\{[^}]*grid-template-columns:\s*repeat\(3/s);
+  assert.match(css, /\.derive-step\s*\{[^}]*background-image:/s);
 });
 
 test('catalog removes duplicate ids and progress stays student-specific', () => {

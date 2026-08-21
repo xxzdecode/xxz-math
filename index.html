@@ -14,113 +14,189 @@
     <button class="teacher-button" data-teacher-login>老师入口</button>
   </header>
   <main>
-    <section class="hero">
-      <p class="eyebrow">拖一拖，看见公式为什么这样写</p>
-      <h1>让图形自己说明变化</h1>
-      <p>拖动滑杆或直接输入数字，观察边、角、高、半径、面积与体积怎样一起变化。图上的字母和引线会告诉你每个部分叫什么。</p>
+    <section class="hero geometry-hero">
+      <h1>在线图形与公式</h1>
     </section>
-    <section class="lab-grid" aria-label="图形实验">
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>平面图形 01</small><h2>长方形</h2></div><output id="rectValues"></output></div>
-        <svg id="rectSvg" class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="可拖动长方形">
-          <rect id="rectShape" x="90" y="55" rx="0" class="shape-fill"></rect>
-          <circle id="rectHandle" r="13" class="drag-handle"></circle>
-          <path id="rectRightAngle" class="concept-mark" d="M 90 80 L 115 80 L 115 55"></path>
-          <text id="rectVertexA" class="diagram-label">A</text><text id="rectVertexB" class="diagram-label">B</text><text id="rectVertexC" class="diagram-label">C</text><text id="rectVertexD" class="diagram-label">D</text>
-          <text id="rectWidthLabel" class="measure-label" text-anchor="middle">长</text><text id="rectHeightLabel" class="measure-label" text-anchor="middle">宽</text>
-        </svg>
-        <div class="controls"><label>长<div class="number-control"><input id="rectWidth" type="range" min="2" max="12" step="0.5" value="8"><input id="rectWidthNumber" type="number" min="2" max="12" step="0.5" value="8" aria-label="输入长"></div></label><label>宽<div class="number-control"><input id="rectHeight" type="range" min="2" max="9" step="0.5" value="5"><input id="rectHeightNumber" type="number" min="2" max="9" step="0.5" value="5" aria-label="输入宽"></div></label></div>
-        <p class="formula" id="rectFormula"></p><p class="hint">周长看边：沿四条边绕一圈；面积看里面：网格中每行的方格数 × 行数。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>平面图形 02</small><h2>三角形</h2></div><output id="triValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="三角形底和高">
-          <polygon id="triShape" class="shape-fill"></polygon><line id="triHeightLine" x1="300" y1="300" x2="300" y2="100" class="guide-line"></line>
-          <path class="concept-mark" d="M 300 275 L 325 275 L 325 300"></path>
-          <text id="triVertexA" class="diagram-label" text-anchor="middle">A（顶点）</text><text id="triVertexB" class="diagram-label">B</text><text id="triVertexC" class="diagram-label">C</text>
-          <text id="triBaseLabel" class="measure-label" text-anchor="middle">底</text><text id="triHeightLabel" class="measure-label">高</text>
-        </svg>
-        <div class="controls"><label>底<div class="number-control"><input id="triBase" type="range" min="2" max="12" step="0.5" value="8"><input id="triBaseNumber" type="number" min="2" max="12" step="0.5" value="8" aria-label="输入三角形底"></div></label><label>高<div class="number-control"><input id="triHeight" type="range" min="2" max="9" step="0.5" value="6"><input id="triHeightNumber" type="number" min="2" max="9" step="0.5" value="6" aria-label="输入三角形高"></div></label></div>
-        <p class="formula" id="triFormula"></p><p class="hint">剪拼思路：两个相同的三角形可以拼成一个平行四边形，所以最后要 ÷ 2。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>圆与扇形 03</small><h2>圆和扇形</h2></div><output id="circleValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="圆和扇形">
-          <path id="sectorShape" class="shape-fill"></path><line id="circleRadiusLine" x1="300" y1="180" x2="430" y2="180" class="guide-line"></line><circle id="circleHandle" cy="180" r="10" class="drag-handle"></circle>
-          <circle cx="300" cy="180" r="5" class="concept-dot"></circle><text x="286" y="200" class="diagram-label">O 圆心</text><text id="circleRadiusLabel" class="measure-label" text-anchor="middle">半径 r</text><text id="circleArcLabel" class="measure-label">弧</text><text id="circleAngleLabel" x="315" y="145" class="measure-label">圆心角</text>
-        </svg>
-        <div class="controls"><label>半径<div class="number-control"><input id="circleRadius" type="range" min="1" max="8" step="0.5" value="5"><input id="circleRadiusNumber" type="number" min="1" max="8" step="0.5" value="5" aria-label="输入半径"></div></label><label>圆心角<div class="number-control"><input id="sectorAngle" type="range" min="15" max="360" step="5" value="120"><input id="sectorAngleNumber" type="number" min="15" max="360" step="5" value="120" aria-label="输入圆心角"></div></label></div>
-        <p class="formula" id="circleFormula"></p><p class="hint">圆周可以想成“绕一圈再拉直”；扇形占整圆的几分之几，面积和弧长也占相同比例。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>立体图形 04</small><h2>圆柱和圆锥</h2></div><output id="solidValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="同底同高圆柱和圆锥">
-          <rect id="cylSide" y="95" class="solid-fill"></rect><ellipse id="cylTop" cx="170" cy="95" ry="18" class="solid-top"></ellipse><ellipse id="cylBottom" cx="170" ry="18" class="solid-top"></ellipse>
-          <polygon id="coneShape" class="solid-fill"></polygon><ellipse id="coneBase" cx="430" ry="18" class="solid-top"></ellipse>
-          <text x="170" y="350" text-anchor="middle">圆柱</text><text x="430" y="350" text-anchor="middle">圆锥</text>
-          <line id="cylHeightGuide" class="guide-line" x1="170" x2="170"></line><line id="coneRadiusGuide" class="guide-line" x1="430"></line>
-          <text id="solidHeightLabel" class="measure-label">高 h</text><text id="solidRadiusLabel" class="measure-label" text-anchor="middle">底面半径 r</text>
-        </svg>
-        <div class="controls"><label>半径<div class="number-control"><input id="solidRadius" type="range" min="1" max="7" step="0.5" value="4"><input id="solidRadiusNumber" type="number" min="1" max="7" step="0.5" value="4" aria-label="输入底面半径"></div></label><label>高<div class="number-control"><input id="solidHeight" type="range" min="2" max="10" step="0.5" value="7"><input id="solidHeightNumber" type="number" min="2" max="10" step="0.5" value="7" aria-label="输入高"></div></label></div>
-        <p class="formula" id="solidFormula"></p><p class="hint">同底同高时，圆锥体积是圆柱体积的三分之一。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>基础概念 05</small><h2>角</h2></div><output id="angleValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="角的顶点、边和角度">
-          <line id="angleRayA" x1="170" y1="250" x2="500" y2="250" class="shape-line"></line><line id="angleRayB" x1="170" y1="250" x2="360" y2="90" class="shape-line"></line>
-          <path id="angleArc" class="angle-arc"></path><circle id="angleVertex" cx="170" cy="250" r="6" class="concept-dot"></circle>
-          <text id="angleVertexLabel" class="diagram-label">O 顶点</text><text id="anglePointA" class="diagram-label">A</text><text id="anglePointB" class="diagram-label">B</text><text id="angleDegreeLabel" class="measure-label"></text>
-          <text id="angleRayALabel" class="measure-label">射线 OA（角的一条边）</text><text id="angleRayBLabel" class="measure-label">射线 OB（角的一条边）</text>
-        </svg>
-        <div class="controls one-control"><label>∠AOB<div class="number-control"><input id="angleDegree" type="range" min="10" max="180" step="1" value="55"><input id="angleDegreeNumber" type="number" min="10" max="180" step="1" value="55" aria-label="输入角度"></div></label></div>
-        <p class="formula" id="angleFormula"></p><p class="hint">角由一个顶点和两条射线组成。改变角度，观察锐角、直角、钝角和平角的分界。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>平面图形 06</small><h2>平行四边形和梯形</h2></div><output id="quadValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="平行四边形和梯形的底与高">
-          <polygon id="quadShape" class="shape-fill"></polygon><line id="quadHeightLine" class="guide-line"></line><path id="quadRightAngle" class="concept-mark"></path>
-          <text id="quadVertexA" class="diagram-label">A</text><text id="quadVertexB" class="diagram-label">B</text><text id="quadVertexC" class="diagram-label">C</text><text id="quadVertexD" class="diagram-label">D</text>
-          <text id="quadTopLabel" class="measure-label" text-anchor="middle"></text><text id="quadBottomLabel" class="measure-label" text-anchor="middle">下底</text><text id="quadHeightLabel" class="measure-label">高</text>
-        </svg>
-        <div class="shape-picker"><label>图形<select id="quadType"><option value="parallelogram">平行四边形</option><option value="trapezoid">梯形</option></select></label></div>
-        <div class="controls three-controls"><label id="quadTopControl">上底<div class="number-control"><input id="quadTop" type="range" min="2" max="10" step="0.5" value="5"><input id="quadTopNumber" type="number" min="2" max="10" step="0.5" value="5" aria-label="输入上底"></div></label><label>下底<div class="number-control"><input id="quadBase" type="range" min="3" max="12" step="0.5" value="8"><input id="quadBaseNumber" type="number" min="3" max="12" step="0.5" value="8" aria-label="输入下底"></div></label><label>高<div class="number-control"><input id="quadHeight" type="range" min="2" max="9" step="0.5" value="5"><input id="quadHeightNumber" type="number" min="2" max="9" step="0.5" value="5" aria-label="输入四边形高"></div></label></div>
-        <p class="formula" id="quadFormula"></p><p class="hint" id="quadHint"></p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>平面图形 07</small><h2>正多边形</h2></div><output id="polygonValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="正多边形的边、顶点和内角">
-          <polygon id="polygonShape" class="shape-fill"></polygon><g id="polygonLabels"></g>
-          <path id="polygonAngleArc" class="angle-arc"></path><text id="polygonAngleLabel" class="measure-label"></text><text x="300" y="330" text-anchor="middle" class="measure-label">相邻顶点连成边；每个转角都是内角</text>
-        </svg>
-        <div class="controls"><label>边数<div class="number-control"><input id="polygonSides" type="range" min="3" max="12" step="1" value="5"><input id="polygonSidesNumber" type="number" min="3" max="12" step="1" value="5" aria-label="输入多边形边数"></div></label><label>边长<div class="number-control"><input id="polygonSideLength" type="range" min="1" max="10" step="0.5" value="4"><input id="polygonSideLengthNumber" type="number" min="1" max="10" step="0.5" value="4" aria-label="输入多边形边长"></div></label></div>
-        <p class="formula" id="polygonFormula"></p><p class="hint">边数改变时，观察内角和与每个内角怎样变化。正多边形的边长相等、内角也相等。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>图形运动 08</small><h2>坐标与平移</h2></div><output id="coordinateValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="坐标平面中的点和平移向量">
-          <g id="coordinateGrid" class="coordinate-grid"></g>
-          <line x1="60" y1="180" x2="550" y2="180" class="axis-line"></line><line x1="300" y1="330" x2="300" y2="30" class="axis-line"></line>
-          <text x="555" y="175" class="diagram-label">x</text><text x="307" y="34" class="diagram-label">y</text><text x="307" y="198" class="measure-label">O 原点</text>
-          <line id="translationVector" class="guide-line"></line><circle id="pointOriginal" r="9" class="concept-dot"></circle><circle id="pointMoved" r="9" class="drag-handle"></circle>
-          <text id="pointOriginalLabel" class="diagram-label"></text><text id="pointMovedLabel" class="diagram-label"></text><text id="translationLabel" class="measure-label"></text>
-        </svg>
-        <div class="controls four-controls"><label>原点 x<div class="number-control"><input id="pointX" type="range" min="-4" max="4" step="1" value="-2"><input id="pointXNumber" type="number" min="-4" max="4" step="1" value="-2" aria-label="输入原点横坐标"></div></label><label>原点 y<div class="number-control"><input id="pointY" type="range" min="-3" max="3" step="1" value="1"><input id="pointYNumber" type="number" min="-3" max="3" step="1" value="1" aria-label="输入原点纵坐标"></div></label><label>横向移动<div class="number-control"><input id="deltaX" type="range" min="-4" max="4" step="1" value="3"><input id="deltaXNumber" type="number" min="-4" max="4" step="1" value="3" aria-label="输入横向移动量"></div></label><label>纵向移动<div class="number-control"><input id="deltaY" type="range" min="-3" max="3" step="1" value="2"><input id="deltaYNumber" type="number" min="-3" max="3" step="1" value="2" aria-label="输入纵向移动量"></div></label></div>
-        <p class="formula" id="coordinateFormula"></p><p class="hint">向右移动时横坐标增加，向上移动时纵坐标增加；平移只改变位置，不改变图形大小。</p>
-      </article>
-      <article class="lab-card">
-        <div class="lab-heading"><div><small>立体图形 09</small><h2>长方体</h2></div><output id="cuboidValues"></output></div>
-        <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="长方体的长、宽、高、顶点、棱和面">
-          <path id="cuboidBack" class="solid-fill"></path><path id="cuboidFront" class="solid-fill"></path><path id="cuboidEdges" class="shape-line thin-line"></path>
-          <text id="cuboidLengthLabel" class="measure-label" text-anchor="middle">长</text><text id="cuboidWidthLabel" class="measure-label">宽</text><text id="cuboidHeightLabel" class="measure-label">高</text>
-          <text id="cuboidVertexLabel" class="diagram-label">顶点</text><text id="cuboidEdgeLabel" class="measure-label">棱</text><text id="cuboidFaceLabel" class="measure-label">面</text>
-        </svg>
-        <div class="controls three-controls"><label>长<div class="number-control"><input id="cuboidLength" type="range" min="2" max="10" step="0.5" value="7"><input id="cuboidLengthNumber" type="number" min="2" max="10" step="0.5" value="7" aria-label="输入长方体长"></div></label><label>宽<div class="number-control"><input id="cuboidWidth" type="range" min="2" max="8" step="0.5" value="4"><input id="cuboidWidthNumber" type="number" min="2" max="8" step="0.5" value="4" aria-label="输入长方体宽"></div></label><label>高<div class="number-control"><input id="cuboidHeight" type="range" min="2" max="8" step="0.5" value="5"><input id="cuboidHeightNumber" type="number" min="2" max="8" step="0.5" value="5" aria-label="输入长方体高"></div></label></div>
-        <p class="formula" id="cuboidFormula"></p><p class="hint">长方体有 8 个顶点、12 条棱、6 个面；相对的面形状和大小相同。</p>
-      </article>
-    </section>
+
+    <nav class="learning-path" aria-label="图形实验室学习路线">
+      <a href="#chapter-boundary"><span>01</span>周长和面积</a>
+      <a href="#chapter-rectangle"><span>02</span>长方形与正方形</a>
+      <a href="#chapter-cut"><span>03</span>割补与拼接</a>
+      <a href="#chapter-circle"><span>04</span>圆与扇形</a>
+      <a href="#chapter-composite"><span>05</span>组合与阴影</a>
+      <a href="#chapter-solid"><span>06</span>展开与立体</a>
+      <a href="#chapter-relation"><span>07</span>角与多边形</a>
+      <a href="#chapter-motion"><span>08</span>坐标与运动</a>
+    </nav>
+
+    <div class="principle-controls" aria-label="原理显示设置">
+      <button id="showPrinciples" type="button" aria-pressed="true">全部展开</button>
+      <button id="hidePrinciples" type="button" aria-pressed="false">只看图形与公式</button>
+    </div>
+
+    <div class="geometry-course">
+      <section class="course-chapter" id="chapter-boundary">
+        <header class="chapter-heading"><p>第一章</p><h2>先分清：周长看边，面积看里面</h2><span>同一个图形，问法不同，计算的对象就不同。</span></header>
+        <div class="concept-compare" data-principle hidden>
+          <article class="concept-card perimeter-concept">
+            <div class="boundary-demo" aria-hidden="true"><span></span></div>
+            <div><h3>周长：沿边界绕一圈</h3><p>把所有外边的长度依次加起来。单位是厘米、米等长度单位。</p></div>
+          </article>
+          <article class="concept-card area-concept">
+            <div class="inside-demo" aria-hidden="true"></div>
+            <div><h3>面积：里面占了多少</h3><p>看图形内部能放多少个单位小方格。单位要写平方厘米、平方米等。</p></div>
+          </article>
+        </div>
+        <div class="question-check" data-principle hidden><strong>拿到题先问：</strong><span>描外边？求周长。</span><span>铺里面？求面积。</span><span>单位带“平方”？一定在求面积。</span></div>
+      </section>
+
+      <section class="course-chapter" id="chapter-rectangle">
+        <header class="chapter-heading"><p>第二章</p><h2>从数方格得到长方形和正方形公式</h2><span>公式不是规定出来的：每行方格数 × 行数，就是全部方格数。</span></header>
+        <div class="derivation-strip static-derivation" data-principle hidden>
+          <article><b>1</b><strong>先看一行</strong><span>每行有 a 个单位方格</span></article>
+          <i>→</i>
+          <article><b>2</b><strong>再看有几行</strong><span>一共有 b 行</span></article>
+          <i>→</i>
+          <article><b>3</b><strong>数出全部</strong><span>a × b 个方格</span></article>
+        </div>
+        <article class="experiment-card">
+          <div class="lab-heading"><div><small>互动验证</small><h3>改变长和宽，检查方格数与边长</h3></div><output id="rectValues"></output></div>
+          <svg id="rectSvg" class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="网格上的可拖动长方形">
+            <rect id="rectShape" x="90" y="55" rx="0" class="shape-fill"></rect>
+            <circle id="rectHandle" r="13" class="drag-handle"></circle>
+            <path id="rectRightAngle" class="concept-mark" d="M 90 80 L 115 80 L 115 55"></path>
+            <text id="rectVertexA" class="diagram-label">A</text><text id="rectVertexB" class="diagram-label">B</text><text id="rectVertexC" class="diagram-label">C</text><text id="rectVertexD" class="diagram-label">D</text>
+            <text id="rectWidthLabel" class="measure-label" text-anchor="middle">长</text><text id="rectHeightLabel" class="measure-label" text-anchor="middle">宽</text>
+          </svg>
+          <div class="controls"><label>长<div class="number-control"><input id="rectWidth" type="range" min="2" max="12" step="0.5" value="8"><input id="rectWidthNumber" type="number" min="2" max="12" step="0.5" value="8" aria-label="输入长"></div></label><label>宽<div class="number-control"><input id="rectHeight" type="range" min="2" max="9" step="0.5" value="5"><input id="rectHeightNumber" type="number" min="2" max="9" step="0.5" value="5" aria-label="输入宽"></div></label></div>
+          <div class="formula-grid two-formulas"><section class="formula-card area-formula"><span>面积</span><strong id="rectAreaFormula"></strong><small>方格理解：每行方格数 × 行数</small></section><section class="formula-card perimeter-formula"><span>周长</span><strong id="rectPerimeterFormula"></strong><small>边长理解：两条长 + 两条宽</small></section></div>
+        </article>
+        <figure class="shape-formula-row single-reference"><svg viewBox="0 0 220 170" role="img" aria-label="正方形"><rect x="45" y="20" width="125" height="125" class="shape-fill"></rect><text x="108" y="164" text-anchor="middle" class="measure-label">边长 a</text></svg><figcaption><h3>正方形</h3><p><b>面积：</b>S＝a×a＝a²</p><p><b>周长：</b>C＝4a</p><small>a² 表示 a×a，不是 a×2。</small></figcaption></figure>
+      </section>
+
+      <section class="course-chapter" id="chapter-cut">
+        <header class="chapter-heading"><p>第三章</p><h2>割一块、补过去、拼起来</h2><span>把陌生图形变成已经会算的图形，面积关系就能看见。</span></header>
+
+        <article class="derivation-card" data-derivation>
+          <div class="derivation-title" data-principle hidden><div><small>3.1 · 原理推导</small><h3>平行四边形：割补成长方形</h3></div></div>
+          <div class="derive-step" data-step data-principle hidden>
+            <svg viewBox="0 0 480 210" role="img" aria-label="平行四边形标出底和高"><polygon points="100,45 350,45 410,165 40,165" class="shape-fill"></polygon><line x1="100" y1="45" x2="100" y2="165" class="guide-line"></line><text x="225" y="195" class="measure-label">底 a</text><text x="112" y="112" class="measure-label">高 h</text></svg>
+            <p><b>第 1 步：</b>先找底和对应的高。高必须垂直于底，斜边不是高。</p>
+          </div>
+          <div class="derive-step" data-step data-principle hidden>
+            <svg viewBox="0 0 480 210" role="img" aria-label="从平行四边形左侧剪下三角形"><polygon points="100,45 350,45 410,165 40,165" class="shape-fill"></polygon><path d="M100 45 L100 165 L40 165 Z" class="cut-piece"></path><line x1="100" y1="45" x2="100" y2="165" class="cut-line"></line><text x="220" y="195" class="measure-label">剪下一块，平移到右边</text></svg>
+            <p><b>第 2 步：</b>沿高剪下左边的小三角形，把它平移到右边空缺处。</p>
+          </div>
+          <div class="derive-step" data-step data-principle hidden>
+            <svg viewBox="0 0 480 210" role="img" aria-label="拼成长方形"><rect x="70" y="45" width="340" height="120" class="shape-fill"></rect><text x="240" y="195" class="measure-label">长＝底 a　宽＝高 h</text></svg>
+            <p><b>第 3 步：</b>新图形是长方形，面积没有改变，所以平行四边形面积＝底×高。</p>
+          </div>
+          <section class="formula-card area-formula single-formula"><span>平行四边形面积</span><strong>S＝a×h</strong><small>割补只改变形状，不改变面积</small></section>
+        </article>
+
+        <article class="derivation-card" data-derivation>
+          <div class="derivation-title" data-principle hidden><div><small>3.2 · 原理推导</small><h3>三角形：复制一个，拼成平行四边形</h3></div></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="80,165 250,35 410,165" class="shape-fill"></polygon><line x1="250" y1="35" x2="250" y2="165" class="guide-line"></line><text x="245" y="195" class="measure-label">底 a</text><text x="262" y="105" class="measure-label">高 h</text></svg><p><b>第 1 步：</b>一个三角形的底是 a，对应的高是 h。</p></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="50,165 210,35 370,165" class="shape-fill"></polygon><polygon points="210,35 370,165 430,35" class="copy-piece"></polygon><text x="240" y="195" class="measure-label">两个完全相同的三角形</text></svg><p><b>第 2 步：</b>复制一个完全相同的三角形，旋转后与原图拼接。</p></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="50,165 210,35 430,35 270,165" class="shape-fill"></polygon><line x1="210" y1="35" x2="210" y2="165" class="guide-line"></line><text x="245" y="195" class="measure-label">平行四边形面积＝a×h</text></svg><p><b>第 3 步：</b>两个三角形组成一个底为 a、高为 h 的平行四边形，所以一个三角形要除以 2。</p></div>
+          <section class="formula-card area-formula single-formula"><span>三角形面积</span><strong>S＝a×h÷2</strong><small>两个相同三角形的面积才等于 a×h</small></section>
+        </article>
+
+        <article class="experiment-card compact-experiment">
+          <div class="lab-heading"><div><small>互动验证</small><h3>三角形的底和高</h3></div><output id="triValues"></output></div>
+          <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="三角形底和高"><polygon id="triShape" class="shape-fill"></polygon><line id="triHeightLine" x1="300" y1="300" x2="300" y2="100" class="guide-line"></line><path class="concept-mark" d="M 300 275 L 325 275 L 325 300"></path><text id="triVertexA" class="diagram-label" text-anchor="middle">A</text><text id="triVertexB" class="diagram-label">B</text><text id="triVertexC" class="diagram-label">C</text><text id="triBaseLabel" class="measure-label" text-anchor="middle">底</text><text id="triHeightLabel" class="measure-label">高</text></svg>
+          <div class="controls"><label>底<div class="number-control"><input id="triBase" type="range" min="2" max="12" step="0.5" value="8"><input id="triBaseNumber" type="number" min="2" max="12" step="0.5" value="8"></div></label><label>高<div class="number-control"><input id="triHeight" type="range" min="2" max="9" step="0.5" value="6"><input id="triHeightNumber" type="number" min="2" max="9" step="0.5" value="6"></div></label></div>
+          <section class="formula-card area-formula single-formula"><span>面积验证</span><strong id="triAreaFormula"></strong><small>底 × 高得到两个三角形的面积，所以再 ÷2</small></section>
+        </article>
+
+        <article class="derivation-card" data-derivation>
+          <div class="derivation-title" data-principle hidden><div><small>3.3 · 原理推导</small><h3>梯形：两个相同梯形拼成平行四边形</h3></div></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="140,45 300,45 390,165 70,165" class="shape-fill"></polygon><line x1="140" y1="45" x2="140" y2="165" class="guide-line"></line><text x="220" y="30" class="measure-label">上底 a</text><text x="230" y="195" class="measure-label">下底 b</text><text x="152" y="108" class="measure-label">高 h</text></svg><p><b>第 1 步：</b>标出两条平行边：上底 a、下底 b；两底之间的垂直距离是高 h。</p></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="35,45 195,45 285,165 5,165" class="shape-fill"></polygon><polygon points="195,45 475,45 285,165" class="copy-piece"></polygon><text x="240" y="195" class="measure-label">复制、旋转、拼接</text></svg><p><b>第 2 步：</b>复制一个完全相同的梯形，旋转后与原梯形拼起来。</p></div>
+          <div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 480 210"><polygon points="35,45 475,45 285,165 5,165" class="shape-fill"></polygon><line x1="35" y1="45" x2="35" y2="165" class="guide-line"></line><text x="240" y="30" class="measure-label">新底＝a＋b</text><text x="48" y="110" class="measure-label">h</text></svg><p><b>第 3 步：</b>拼成的平行四边形底是 a＋b，高仍是 h；它包含两个梯形，所以最后除以 2。</p></div>
+          <section class="formula-card area-formula single-formula"><span>梯形面积</span><strong>S＝（a＋b）×h÷2</strong><small>先算上底＋下底，再乘高，最后别忘了 ÷2</small></section>
+        </article>
+
+        <article class="experiment-card">
+          <div class="lab-heading"><div><small>互动验证</small><h3>平行四边形与梯形</h3></div><output id="quadValues"></output></div>
+          <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="平行四边形和梯形的底与高"><polygon id="quadShape" class="shape-fill"></polygon><line id="quadHeightLine" class="guide-line"></line><path id="quadRightAngle" class="concept-mark"></path><text id="quadVertexA" class="diagram-label">A</text><text id="quadVertexB" class="diagram-label">B</text><text id="quadVertexC" class="diagram-label">C</text><text id="quadVertexD" class="diagram-label">D</text><text id="quadTopLabel" class="measure-label" text-anchor="middle"></text><text id="quadBottomLabel" class="measure-label" text-anchor="middle">下底</text><text id="quadHeightLabel" class="measure-label">高</text></svg>
+          <div class="shape-picker"><label>图形<select id="quadType"><option value="parallelogram">平行四边形</option><option value="trapezoid">梯形</option></select></label></div>
+          <div class="controls three-controls"><label id="quadTopControl">上底<div class="number-control"><input id="quadTop" type="range" min="2" max="10" step="0.5" value="5"><input id="quadTopNumber" type="number" min="2" max="10" step="0.5" value="5"></div></label><label>下底<div class="number-control"><input id="quadBase" type="range" min="3" max="12" step="0.5" value="8"><input id="quadBaseNumber" type="number" min="3" max="12" step="0.5" value="8"></div></label><label>高<div class="number-control"><input id="quadHeight" type="range" min="2" max="9" step="0.5" value="5"><input id="quadHeightNumber" type="number" min="2" max="9" step="0.5" value="5"></div></label></div>
+          <div class="formula-grid two-formulas"><section class="formula-card area-formula"><span>面积</span><strong id="quadAreaFormula"></strong><small id="quadAreaNote"></small></section><section class="formula-card perimeter-formula"><span>周长</span><strong id="quadPerimeterFormula"></strong><small>周长必须把四条外边全部相加</small></section></div>
+          <p class="hint" id="quadHint"></p>
+        </article>
+      </section>
+
+      <section class="course-chapter" id="chapter-circle">
+        <header class="chapter-heading"><p>第四章</p><h2>圆周拉直、圆面剪拼、扇形按比例</h2><span>圆周长和圆面积来自两种不同的观察，不能混在同一个公式框里。</span></header>
+        <div class="circle-principles">
+          <article><div class="unroll-demo" data-principle hidden><span></span><i></i></div><h3 data-principle hidden>圆周长怎么来</h3><ol data-principle hidden><li>用绳子绕圆一圈</li><li>把绳子拉直量长度</li><li>圆周长÷直径总是约 3.14，这个数叫 π</li></ol><section class="formula-card perimeter-formula"><span>圆周长</span><strong>C＝πd＝2πr</strong><small>先看题目给的是半径还是直径</small></section></article>
+          <article class="derivation-card embedded" data-derivation><div class="derivation-title" data-principle hidden><div><small>原理推导</small><h3>圆面积怎么来</h3></div></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 200"><circle cx="210" cy="100" r="80" class="shape-fill"></circle><path d="M210 20V180M130 100H290M153 43L267 157M267 43L153 157" class="cut-line"></path></svg><p><b>第 1 步：</b>把圆平均分成许多小扇形。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 200" role="img" aria-label="八个小扇形上下交错排列"><path d="M34 62 Q54 45 74 62 L74 146 Z" class="sector-piece"></path><path d="M78 62 L78 146 Q98 163 118 146 Z" class="sector-piece alternate"></path><path d="M122 62 Q142 45 162 62 L162 146 Z" class="sector-piece"></path><path d="M166 62 L166 146 Q186 163 206 146 Z" class="sector-piece alternate"></path><path d="M210 62 Q230 45 250 62 L250 146 Z" class="sector-piece"></path><path d="M254 62 L254 146 Q274 163 294 146 Z" class="sector-piece alternate"></path><path d="M298 62 Q318 45 338 62 L338 146 Z" class="sector-piece"></path><path d="M342 62 L342 146 Q362 163 382 146 Z" class="sector-piece alternate"></path><text x="210" y="184" text-anchor="middle" class="measure-label">留小缝看清每一片，拼接时贴紧</text></svg><p><b>第 2 步：</b>把小扇形一个朝上、一个朝下交错排列，弧边分别排在上下两侧。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 200"><polygon points="55,145 85,55 355,55 385,145" class="shape-fill"></polygon><text x="220" y="184" text-anchor="middle" class="measure-label">底≈πr</text><text x="330" y="92" text-anchor="middle" class="measure-label">高＝r</text></svg><p><b>第 3 步：</b>分得越细，拼成的图形越接近长方形：底约是半个圆周 πr，高是 r。</p></div><section class="formula-card area-formula"><span>圆面积</span><strong>S＝πr²</strong><small>近似长方形面积＝πr×r</small></section></article>
+        </div>
+        <article class="experiment-card">
+          <div class="lab-heading"><div><small>互动验证</small><h3>圆和扇形占整圆的比例</h3></div><output id="circleValues"></output></div>
+          <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="圆和扇形"><path id="sectorShape" class="shape-fill"></path><line id="circleRadiusLine" x1="300" y1="180" x2="430" y2="180" class="guide-line"></line><circle id="circleHandle" cy="180" r="10" class="drag-handle"></circle><circle cx="300" cy="180" r="5" class="concept-dot"></circle><text x="286" y="200" class="diagram-label">O 圆心</text><text id="circleRadiusLabel" class="measure-label" text-anchor="middle">半径 r</text><text id="circleArcLabel" class="measure-label">弧</text><text id="circleAngleLabel" x="315" y="145" class="measure-label">圆心角</text></svg>
+          <div class="controls"><label>半径<div class="number-control"><input id="circleRadius" type="range" min="1" max="8" step="0.5" value="5"><input id="circleRadiusNumber" type="number" min="1" max="8" step="0.5" value="5"></div></label><label>圆心角<div class="number-control"><input id="sectorAngle" type="range" min="15" max="360" step="5" value="120"><input id="sectorAngleNumber" type="number" min="15" max="360" step="5" value="120"></div></label></div>
+          <div class="formula-grid four-formulas"><section class="formula-card perimeter-formula"><span>整圆周长</span><strong id="circlePerimeterFormula"></strong><small>绕整圆一圈</small></section><section class="formula-card area-formula"><span>整圆面积</span><strong id="circleAreaFormula"></strong><small>里面全部区域</small></section><section class="formula-card perimeter-formula"><span>扇形弧长</span><strong id="arcLengthFormula"></strong><small>圆心角÷360 × 整圆周长</small></section><section class="formula-card area-formula"><span>扇形面积</span><strong id="sectorAreaFormula"></strong><small>圆心角÷360 × 整圆面积</small></section></div>
+        </article>
+        <div class="circle-quick-formulas" aria-label="半圆和四分之一圆公式">
+          <figure class="shape-formula-row"><svg viewBox="0 0 220 150" role="img" aria-label="半圆"><path d="M35 115 A75 75 0 0 1 185 115 L35 115 Z" class="shape-fill"></path><line x1="35" y1="115" x2="185" y2="115" class="shape-formula-base"></line><text x="110" y="138" text-anchor="middle" class="measure-label">直径 2r</text></svg><figcaption><h3>半圆</h3><p><b>面积：</b>S＝½πr²</p><p><b>周长：</b>C＝πr＋2r</p><small>周长要算半圆弧和直径。</small></figcaption></figure>
+          <figure class="shape-formula-row"><svg viewBox="0 0 220 150" role="img" aria-label="四分之一圆"><path d="M45 120 L45 35 A85 85 0 0 1 130 120 Z" class="shape-fill"></path><line x1="45" y1="120" x2="45" y2="35" class="shape-formula-base"></line><line x1="45" y1="120" x2="130" y2="120" class="shape-formula-base"></line><text x="87" y="140" text-anchor="middle" class="measure-label">r</text><text x="30" y="80" class="measure-label">r</text></svg><figcaption><h3>四分之一圆</h3><p><b>面积：</b>S＝¼πr²</p><p><b>周长：</b>C＝½πr＋2r</p><small>周长要算圆弧和两条半径。</small></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="course-chapter" id="chapter-composite">
+        <header class="chapter-heading"><p>第五章</p><h2>组合图形与阴影：加、减、分割</h2><span>先判断由哪些基本图形组成，再决定关系式。</span></header>
+        <div class="strategy-grid" data-principle hidden>
+          <article><span>＋</span><h3>加法</h3><div class="strategy-shape add-shape"></div><p>阴影＝图形 1＋图形 2</p></article>
+          <article><span>−</span><h3>减法</h3><div class="strategy-shape subtract-shape"></div><p>阴影＝大图形－空白部分</p></article>
+          <article><span>÷</span><h3>分割</h3><div class="strategy-shape split-shape"></div><p>把复杂图形分成几个会算的小图形</p></article>
+        </div>
+        <div class="problem-steps" data-principle hidden><b>阴影面积四步法</b><ol><li>看：由哪些基本图形组成？</li><li>标：半径、底、高和必要长度。</li><li>写：先写关系式，再代数。</li><li>算：分别计算，最后加减并写平方单位。</li></ol></div>
+        <div class="question-check" data-principle hidden><strong>求阴影周长时：</strong><span>只沿阴影的外边界走一圈。</span><span>内部虚线一般不算。</span><span>圆弧和直线分开算，最后相加。</span></div>
+      </section>
+
+      <section class="course-chapter" id="chapter-solid">
+        <header class="chapter-heading"><p>第六章</p><h2>立体图形要先展开，再看表面和内部</h2><span>表面积看外面的每个面；体积看内部能装多少个单位小方块。</span></header>
+        <article class="experiment-card">
+          <div class="lab-heading"><div><small>长方体</small><h3>每层方块数 × 层数</h3></div><output id="cuboidValues"></output></div>
+          <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="长方体的长、宽、高、顶点、棱和面"><path id="cuboidBack" class="solid-fill"></path><path id="cuboidFront" class="solid-fill"></path><path id="cuboidEdges" class="shape-line thin-line"></path><text id="cuboidLengthLabel" class="measure-label" text-anchor="middle">长</text><text id="cuboidWidthLabel" class="measure-label">宽</text><text id="cuboidHeightLabel" class="measure-label">高</text><text id="cuboidVertexLabel" class="diagram-label">顶点</text><text id="cuboidEdgeLabel" class="measure-label">棱</text><text id="cuboidFaceLabel" class="measure-label">面</text></svg>
+          <div class="controls three-controls"><label>长<div class="number-control"><input id="cuboidLength" type="range" min="2" max="10" step="0.5" value="7"><input id="cuboidLengthNumber" type="number" min="2" max="10" step="0.5" value="7"></div></label><label>宽<div class="number-control"><input id="cuboidWidth" type="range" min="2" max="8" step="0.5" value="4"><input id="cuboidWidthNumber" type="number" min="2" max="8" step="0.5" value="4"></div></label><label>高<div class="number-control"><input id="cuboidHeight" type="range" min="2" max="8" step="0.5" value="5"><input id="cuboidHeightNumber" type="number" min="2" max="8" step="0.5" value="5"></div></label></div>
+          <div class="formula-grid two-formulas"><section class="formula-card surface-formula"><span>表面积</span><strong id="cuboidSurfaceFormula"></strong><small>2 个长×宽面＋2 个长×高面＋2 个宽×高面</small></section><section class="formula-card volume-formula"><span>体积</span><strong id="cuboidVolumeFormula"></strong><small>每层长×宽个方块，一共有高这么多层</small></section></div>
+          <div class="formula-grid two-formulas compact-formulas"><section class="formula-card surface-formula"><span>正方体表面积</span><strong>S＝6a²</strong><small>6 个完全相同的正方形面</small></section><section class="formula-card volume-formula"><span>正方体体积</span><strong>V＝a³</strong><small>a³ 表示 a×a×a</small></section></div>
+        </article>
+
+        <div class="net-grid">
+          <article class="derivation-card" data-derivation><div class="derivation-title" data-principle hidden><div><small>6.1 · 原理推导</small><h3>圆柱侧面展开</h3></div></div><div class="derive-step" data-step data-principle hidden><div class="cylinder-icon" aria-hidden="true"></div><p><b>第 1 步：</b>圆柱有两个圆形底面和一个弯曲的侧面。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 190"><path d="M110 35V155M110 35A65 16 0 0 1 240 35M110 155A65 16 0 0 0 240 155M240 35V155" class="solid-outline"></path><path d="M245 95H335" class="unfold-arrow"></path><text x="290" y="80" class="measure-label">沿高剪开</text></svg><p><b>第 2 步：</b>沿一条高把侧面剪开，再向两边展开。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 190"><rect x="55" y="35" width="310" height="120" class="solid-fill"></rect><text x="210" y="180" class="measure-label">长＝底面周长 2πr</text><text x="320" y="100" class="measure-label">宽＝h</text></svg><p><b>第 3 步：</b>侧面展开是长方形：长等于底面周长，宽等于圆柱的高。</p></div><div class="formula-grid three-formulas"><section class="formula-card surface-formula"><span>圆柱侧面积</span><strong>S侧＝2πrh</strong><small>底面周长 × 高</small></section><section class="formula-card surface-formula"><span>圆柱表面积</span><strong>S表＝2πrh＋2πr²</strong><small>侧面积＋两个底面积</small></section><section class="formula-card volume-formula"><span>圆柱体积</span><strong>V＝πr²h</strong><small>底面积 × 高</small></section></div></article>
+
+          <article class="derivation-card" data-derivation><div class="derivation-title" data-principle hidden><div><small>6.2 · 原理推导</small><h3>圆锥侧面展开</h3></div></div><div class="derive-step" data-step data-principle hidden><div class="cone-icon" aria-hidden="true"></div><p><b>第 1 步：</b>圆锥的侧面从顶点向底面展开。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 190"><path d="M210 30 L330 150 A150 150 0 0 1 90 150 Z" class="shape-fill"></path><text x="210" y="180" class="measure-label">展开后是扇形</text></svg><p><b>第 2 步：</b>圆锥侧面展开后不是三角形，而是一个扇形；母线是扇形半径。</p></div><div class="derive-step" data-step data-principle hidden><svg viewBox="0 0 420 190"><path d="M210 30 L330 150 A150 150 0 0 1 90 150 Z" class="shape-fill"></path><path d="M90 150 A150 150 0 0 0 330 150" class="arc-highlight"></path><text x="210" y="180" class="measure-label">扇形弧长＝底面周长 2πr</text></svg><p><b>第 3 步：</b>扇形的弧围成圆锥底面一圈，所以弧长恰好等于底面圆周长。</p></div><div class="formula-grid three-formulas"><section class="formula-card surface-formula"><span>圆锥侧面积</span><strong>S侧＝πrl</strong><small>r 是底面半径，l 是母线</small></section><section class="formula-card surface-formula"><span>圆锥表面积</span><strong>S表＝πrl＋πr²</strong><small>侧面积＋一个底面积</small></section><section class="formula-card volume-formula"><span>圆锥体积</span><strong>V＝⅓πr²h</strong><small>同底同高圆柱体积的三分之一</small></section></div></article>
+        </div>
+
+        <article class="experiment-card">
+          <div class="lab-heading"><div><small>互动验证</small><h3>同底同高的圆柱与圆锥</h3></div><output id="solidValues"></output></div>
+          <svg class="lab-canvas" viewBox="0 0 600 360" role="img" aria-label="同底同高圆柱和圆锥"><rect id="cylSide" y="95" class="solid-fill"></rect><ellipse id="cylTop" cx="170" cy="95" ry="18" class="solid-top"></ellipse><ellipse id="cylBottom" cx="170" ry="18" class="solid-top"></ellipse><polygon id="coneShape" class="solid-fill"></polygon><ellipse id="coneBase" cx="430" ry="18" class="solid-top"></ellipse><text x="170" y="350" text-anchor="middle">圆柱</text><text x="430" y="350" text-anchor="middle">圆锥</text><line id="cylHeightGuide" class="guide-line" x1="170" x2="170"></line><line id="coneRadiusGuide" class="guide-line" x1="430"></line><text id="solidHeightLabel" class="measure-label">高 h</text><text id="solidRadiusLabel" class="measure-label" text-anchor="middle">底面半径 r</text></svg>
+          <div class="volume-transfer" aria-label="三个同底同高圆锥装满一个圆柱" data-principle hidden><div class="transfer-cone"></div><b>＋</b><div class="transfer-cone"></div><b>＋</b><div class="transfer-cone"></div><b>＝</b><div class="transfer-cylinder"></div><span>同底同高：3 个圆锥体积＝1 个圆柱体积</span></div>
+          <div class="controls"><label>半径<div class="number-control"><input id="solidRadius" type="range" min="1" max="7" step="0.5" value="4"><input id="solidRadiusNumber" type="number" min="1" max="7" step="0.5" value="4"></div></label><label>高<div class="number-control"><input id="solidHeight" type="range" min="2" max="10" step="0.5" value="7"><input id="solidHeightNumber" type="number" min="2" max="10" step="0.5" value="7"></div></label></div>
+          <div class="formula-grid two-formulas"><section class="formula-card volume-formula"><span>圆柱体积</span><strong id="cylinderVolumeFormula"></strong><small>底面积 × 高</small></section><section class="formula-card volume-formula cone-volume"><span>圆锥体积</span><strong id="coneVolumeFormula"></strong><small>同底同高时，装满 3 个圆锥才等于 1 个圆柱</small></section></div>
+        </article>
+      </section>
+
+      <section class="course-chapter" id="chapter-relation">
+        <header class="chapter-heading"><p>第七章</p><h2>角与正多边形：先认结构，再找关系</h2><span>这一章研究边、顶点、角及它们随边数变化的关系。</span></header>
+        <div class="experiment-pair">
+          <article class="experiment-card"><div class="lab-heading"><div><small>角</small><h3>张开的程度决定角的大小</h3></div><output id="angleValues"></output></div><svg class="lab-canvas" viewBox="0 0 600 360"><line id="angleRayA" class="shape-line"></line><line id="angleRayB" class="shape-line"></line><path id="angleArc" class="angle-arc"></path><circle id="angleVertex" r="6" class="concept-dot"></circle><text id="angleVertexLabel" class="diagram-label">O 顶点</text><text id="anglePointA" class="diagram-label">A</text><text id="anglePointB" class="diagram-label">B</text><text id="angleDegreeLabel" class="measure-label"></text><text id="angleRayALabel" class="measure-label">射线 OA</text><text id="angleRayBLabel" class="measure-label">射线 OB</text></svg><div class="controls one-control"><label>∠AOB<div class="number-control"><input id="angleDegree" type="range" min="10" max="180" step="1" value="55"><input id="angleDegreeNumber" type="number" min="10" max="180" step="1" value="55"></div></label></div><section class="formula-card relation-formula single-formula"><span>角的分类</span><strong id="angleFormula"></strong><small>射线长短不改变角的大小</small></section></article>
+          <article class="experiment-card"><div class="lab-heading"><div><small>正多边形</small><h3>从一个顶点分成三角形</h3></div><output id="polygonValues"></output></div><svg class="lab-canvas" viewBox="0 0 600 360"><polygon id="polygonShape" class="shape-fill"></polygon><g id="polygonLabels"></g><path id="polygonAngleArc" class="angle-arc"></path><text id="polygonAngleLabel" class="measure-label"></text><text x="300" y="330" text-anchor="middle" class="measure-label">边长相等，内角相等</text></svg><div class="controls"><label>边数<div class="number-control"><input id="polygonSides" type="range" min="3" max="12" step="1" value="5"><input id="polygonSidesNumber" type="number" min="3" max="12" step="1" value="5"></div></label><label>边长<div class="number-control"><input id="polygonSideLength" type="range" min="1" max="10" step="0.5" value="4"><input id="polygonSideLengthNumber" type="number" min="1" max="10" step="0.5" value="4"></div></label></div><div class="formula-grid two-formulas"><section class="formula-card perimeter-formula"><span>周长</span><strong id="polygonPerimeterFormula"></strong><small>边数 × 每条边长</small></section><section class="formula-card relation-formula"><span>内角关系</span><strong id="polygonAngleFormula"></strong><small>内角和＝（边数－2）×180°</small></section></div></article>
+        </div>
+      </section>
+
+      <section class="course-chapter" id="chapter-motion">
+        <header class="chapter-heading"><p>第八章</p><h2>坐标与平移：位置改变，形状不变</h2><span>每个点沿同一方向移动相同距离，图形的边长和角度都不变。</span></header>
+        <article class="experiment-card"><div class="lab-heading"><div><small>互动验证</small><h3>点在坐标系中的平移</h3></div><output id="coordinateValues"></output></div><svg class="lab-canvas" viewBox="0 0 600 360"><g id="coordinateGrid" class="coordinate-grid"></g><line x1="60" y1="180" x2="550" y2="180" class="axis-line"></line><line x1="300" y1="330" x2="300" y2="30" class="axis-line"></line><text x="555" y="175" class="diagram-label">x</text><text x="307" y="34" class="diagram-label">y</text><text x="307" y="198" class="measure-label">O 原点</text><line id="translationVector" class="guide-line"></line><circle id="pointOriginal" r="9" class="concept-dot"></circle><circle id="pointMoved" r="9" class="drag-handle"></circle><text id="pointOriginalLabel" class="diagram-label"></text><text id="pointMovedLabel" class="diagram-label"></text><text id="translationLabel" class="measure-label"></text></svg><div class="controls four-controls"><label>原点 x<div class="number-control"><input id="pointX" type="range" min="-4" max="4" step="1" value="-2"><input id="pointXNumber" type="number" min="-4" max="4" step="1" value="-2"></div></label><label>原点 y<div class="number-control"><input id="pointY" type="range" min="-3" max="3" step="1" value="1"><input id="pointYNumber" type="number" min="-3" max="3" step="1" value="1"></div></label><label>横向移动<div class="number-control"><input id="deltaX" type="range" min="-4" max="4" step="1" value="3"><input id="deltaXNumber" type="number" min="-4" max="4" step="1" value="3"></div></label><label>纵向移动<div class="number-control"><input id="deltaY" type="range" min="-3" max="3" step="1" value="2"><input id="deltaYNumber" type="number" min="-3" max="3" step="1" value="2"></div></label></div><section class="formula-card relation-formula single-formula"><span>坐标变化</span><strong id="coordinateFormula"></strong><small>向右 x 增加，向左 x 减少；向上 y 增加，向下 y 减少</small></section></article>
+      </section>
+    </div>
   </main>
   <script src="config.js" onerror="this.remove()"></script>
-  <script type="module" src="js/common.js?v=20260820-3"></script>
-  <script type="module" src="js/geometry.js?v=20260820-3"></script>
+  <script type="module" src="js/common.js?v=20260821-1"></script>
+  <script type="module" src="js/geometry.js?v=20260821-2"></script>
 </body>
 </html>

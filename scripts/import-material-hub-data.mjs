@@ -87,9 +87,12 @@ export function buildPublicCatalog(source, sequenceSource, generatedAt = new Dat
   };
 }
 
-export function buildGradeCatalog(source, generatedAt = new Date().toISOString()) {
+export function buildGradeCatalog(source, notesSource, generatedAt = new Date().toISOString()) {
   if (source?.schema_version !== 1 || !Array.isArray(source.grades)) {
     throw new Error('site-knowledge-map.json 不是支持的 schema_version 1');
+  }
+  if (notesSource?.schema_version !== 1 || !notesSource.notes || Array.isArray(notesSource.notes)) {
+    throw new Error('site-knowledge-notes.json 不是支持的 schema_version 1');
   }
   const seen = new Set();
   const knowledgePoints = [];
@@ -103,6 +106,12 @@ export function buildGradeCatalog(source, generatedAt = new Date().toISOString()
         const knowledgeId = requiredText(item[0], 'knowledge_id');
         if (seen.has(knowledgeId)) throw new Error(`公共知识点存在重复 ID：${knowledgeId}`);
         seen.add(knowledgeId);
+        const note = notesSource.notes[knowledgeId];
+        if (!note || typeof note !== 'object') throw new Error(`网站知识点缺少具体笔记：${knowledgeId}`);
+        const rules = Array.isArray(note.rules)
+          ? note.rules.map((value, ruleIndex) => requiredText(value, `${knowledgeId}.rules[${ruleIndex}]`))
+          : [];
+        if (rules.length < 2) throw new Error(`${knowledgeId} 至少需要两条具体规则`);
         knowledgePoints.push({
           knowledge_id: knowledgeId,
           grade: gradeNumber,
@@ -110,6 +119,12 @@ export function buildGradeCatalog(source, generatedAt = new Date().toISOString()
           domain,
           title: requiredText(item[1], 'title'),
           summary: requiredText(item[2], 'summary'),
+          notes: {
+            idea: requiredText(note.idea, `${knowledgeId}.idea`),
+            rules,
+            example: requiredText(note.example, `${knowledgeId}.example`),
+            caution: requiredText(note.caution, `${knowledgeId}.caution`)
+          },
           sort_order: knowledgePoints.length + 1
         });
         return knowledgeId;
@@ -119,13 +134,16 @@ export function buildGradeCatalog(source, generatedAt = new Date().toISOString()
     return { grade: gradeNumber, title: requiredText(grade.title, 'grade title'), groups };
   });
   if (grades.length !== 7) throw new Error('网站知识地图必须包含 1—7 年级');
-  return { schema_version: 3, generated_at: generatedAt, grades, knowledge_points: knowledgePoints };
+  const unknownNoteIds = Object.keys(notesSource.notes).filter(knowledgeId => !seen.has(knowledgeId));
+  if (unknownNoteIds.length) throw new Error(`具体笔记引用未知知识点：${unknownNoteIds.join('、')}`);
+  return { schema_version: 4, generated_at: generatedAt, grades, knowledge_points: knowledgePoints };
 }
 
 export async function importMaterialHubData(materialRoot) {
   const stateRoot = path.join(path.resolve(materialRoot), 'state');
   const source = await readFile(path.join(stateRoot, 'site-knowledge-map.json'), 'utf8').then(JSON.parse);
-  const safe = buildGradeCatalog(source);
+  const notesSource = await readFile(path.join(stateRoot, 'site-knowledge-notes.json'), 'utf8').then(JSON.parse);
+  const safe = buildGradeCatalog(source, notesSource);
   const outputDir = path.join(siteRoot, 'data');
   const outputPath = path.join(outputDir, 'knowledge-catalog.json');
   const temporaryPath = `${outputPath}.tmp`;

@@ -149,6 +149,12 @@ export function normalizeCatalog(value) {
     textbookRef: text(point.textbook_ref),
     grade: Number(point.grade) || Number(String(point.stage || '').replace(/^g/, '')) || 0,
     summary: text(point.summary),
+    notes: {
+      idea: text(point.notes?.idea),
+      rules: Array.isArray(point.notes?.rules) ? point.notes.rules.map(text).filter(Boolean) : [],
+      example: text(point.notes?.example),
+      caution: text(point.notes?.caution)
+    },
     sortOrder: Number(point.sort_order) || 0
   }));
 }
