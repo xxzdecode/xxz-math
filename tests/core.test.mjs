@@ -116,7 +116,18 @@ test('geometry course follows derivation order, expands principles by default, a
   assert.match(css, /--shape:\s*#64b3cf/);
   assert.doesNotMatch(css, /\.shape-fill\s*\{[^}]*207,\s*102,\s*117/s);
   assert.match(css, /\.derivation-card\s*\{[^}]*grid-template-columns:\s*repeat\(3/s);
-  assert.match(css, /\.derive-step\s*\{[^}]*background-image:/s);
+  assert.match(script, /const GRID_UNIT = 20/);
+  assert.match(script, /installUnitGrids\(\)/);
+  assert.match(css, /\.svg-grid-minor\s*\{/);
+  assert.doesNotMatch(css, /\.lab-canvas\s*\{[^}]*background-image:/s);
+  assert.match(html, /每小格代表 1 个长度单位/);
+  assert.match(html, /points="40,160 160,40 280,160"/);
+  assert.match(html, /points="160,40 280,160 400,40"/);
+  assert.match(html, /points="80,40 200,40 280,160 40,160"/);
+  assert.match(html, /points="200,40 440,40 400,160 280,160"/);
+  assert.match(script, /S＝a×b＝\$\{width\}×\$\{height\}/);
+  assert.match(script, /S＝（a＋b）×h÷2/);
+  assert.match(script, /V＝abh＝/);
 });
 
 test('catalog removes duplicate ids and progress stays student-specific', () => {

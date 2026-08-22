@@ -159,15 +159,14 @@ main {
   margin: 16px 0;
   touch-action: none;
   background-color: #fbfdff;
-  background-image:
-    linear-gradient(rgba(71, 127, 174, .12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(71, 127, 174, .12) 1px, transparent 1px),
-    linear-gradient(rgba(71, 127, 174, .2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(71, 127, 174, .2) 1px, transparent 1px);
-  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
   border: 1px solid #d7e4ee;
   border-radius: 8px;
 }
+
+.svg-grid-background { pointer-events: none; }
+.svg-grid-minor { fill: none; stroke: rgba(71, 127, 174, .13); stroke-width: 1; }
+.svg-grid-major { fill: none; stroke: rgba(71, 127, 174, .24); stroke-width: 1.5; }
+.grid-note { margin: -8px 0 16px; color: var(--muted); font-size: 13px; line-height: 1.5; }
 
 .shape-fill { fill: rgba(100, 179, 207, .3); stroke: var(--shape-dark); stroke-width: 4; }
 .drag-handle { cursor: grab; fill: var(--sun); stroke: white; stroke-width: 5; }
@@ -283,12 +282,13 @@ main {
 .derivation-title { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
 .derivation-title small { color: var(--mint-dark); font-weight: 850; }
 .derivation-title h3 { margin: 5px 0 12px; font-size: 25px; }
-.derive-step { min-height: 300px; padding: 16px; background-color: #fbfdff; background-image: linear-gradient(rgba(71,127,174,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(71,127,174,.1) 1px, transparent 1px); background-size: 20px 20px; border: 1px solid var(--line); border-radius: 16px; }
+.derive-step { min-height: 300px; padding: 16px; background-color: #fbfdff; border: 1px solid var(--line); border-radius: 16px; }
 .derive-step svg { display: block; width: 100%; height: 220px; }
 .derive-step p { margin: 12px 0 0; color: #40596f; font-size: 16px; line-height: 1.7; }
 .derive-step p b { color: var(--ink); }
 .cut-piece, .copy-piece { fill: rgba(243, 189, 93, .48); stroke: #d48b21; stroke-width: 4; }
 .cut-line { fill: none; stroke: #d66c57; stroke-width: 3; stroke-dasharray: 7 6; }
+.join-line { fill: none; stroke: #52657a; stroke-width: 3; stroke-dasharray: 6 5; }
 
 .formula-grid { display: grid; gap: 12px; margin-top: 18px; }
 .two-formulas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -327,7 +327,7 @@ main {
 .circle-quick-formulas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 22px; }
 .shape-formula-row { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; align-items: center; gap: 24px; margin: 0; padding: 8px 0; }
 .shape-formula-row.single-reference { margin-top: 20px; }
-.shape-formula-row svg { display: block; width: 100%; min-height: 160px; background-color: #fbfdff; background-image: linear-gradient(rgba(71,127,174,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(71,127,174,.1) 1px, transparent 1px); background-size: 20px 20px; border: 1px solid #d7e4ee; }
+.shape-formula-row svg { display: block; width: 100%; min-height: 160px; background-color: #fbfdff; border: 1px solid #d7e4ee; }
 .shape-formula-row h3 { margin: 0 0 10px; font-size: 22px; }
 .shape-formula-row p { margin: 7px 0; font-size: 18px; line-height: 1.55; }
 .shape-formula-row small { color: var(--muted); line-height: 1.5; }

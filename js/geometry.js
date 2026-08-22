@@ -14,49 +14,90 @@ import {
 const q = selector => document.querySelector(selector);
 const number = selector => Number(q(selector)?.value || 0);
 const fmt = value => Number(value).toFixed(2).replace(/\.00$/, '');
+const GRID_UNIT = 20;
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
 function setText(selector, value) {
   const target = q(selector);
   if (target) target.textContent = value;
 }
 
+function installUnitGrids() {
+  document.querySelectorAll('.unit-grid-canvas, #chapter-cut .derive-step svg').forEach((svg, index) => {
+    const viewBox = svg.viewBox.baseVal;
+    const minorId = `unit-grid-minor-${index}`;
+    const majorId = `unit-grid-major-${index}`;
+    const defs = document.createElementNS(SVG_NS, 'defs');
+    defs.innerHTML = `
+      <pattern id="${minorId}" width="${GRID_UNIT}" height="${GRID_UNIT}" patternUnits="userSpaceOnUse">
+        <path d="M ${GRID_UNIT} 0 L 0 0 0 ${GRID_UNIT}" class="svg-grid-minor"></path>
+      </pattern>
+      <pattern id="${majorId}" width="${GRID_UNIT * 5}" height="${GRID_UNIT * 5}" patternUnits="userSpaceOnUse">
+        <rect width="${GRID_UNIT * 5}" height="${GRID_UNIT * 5}" fill="url(#${minorId})"></rect>
+        <path d="M ${GRID_UNIT * 5} 0 L 0 0 0 ${GRID_UNIT * 5}" class="svg-grid-major"></path>
+      </pattern>`;
+    const background = document.createElementNS(SVG_NS, 'rect');
+    background.setAttribute('x', viewBox.x);
+    background.setAttribute('y', viewBox.y);
+    background.setAttribute('width', viewBox.width);
+    background.setAttribute('height', viewBox.height);
+    background.setAttribute('fill', `url(#${majorId})`);
+    background.setAttribute('class', 'svg-grid-background');
+    background.setAttribute('aria-hidden', 'true');
+    svg.insertBefore(defs, svg.firstChild);
+    svg.insertBefore(background, defs.nextSibling);
+  });
+}
+
 function renderRectangle() {
   const width = number('#rectWidth');
   const height = number('#rectHeight');
   const metrics = rectangleMetrics(width, height);
-  const scale = 24;
+  const scale = GRID_UNIT;
+  const originX = 100;
+  const originY = 60;
   q('#rectShape').setAttribute('width', width * scale);
   q('#rectShape').setAttribute('height', height * scale);
-  q('#rectHandle').setAttribute('cx', 90 + width * scale);
-  q('#rectHandle').setAttribute('cy', 55 + height * scale);
-  const x2 = 90 + width * scale;
-  const y2 = 55 + height * scale;
-  [['#rectVertexA', 70, 48], ['#rectVertexB', x2 + 12, 48], ['#rectVertexC', x2 + 12, y2 + 22], ['#rectVertexD', 70, y2 + 22]].forEach(([selector, x, y]) => {
+  const x2 = originX + width * scale;
+  const y2 = originY + height * scale;
+  q('#rectHandle').setAttribute('cx', x2);
+  q('#rectHandle').setAttribute('cy', y2);
+  [['#rectVertexA', originX - 22, originY - 10], ['#rectVertexB', x2 + 10, originY - 10], ['#rectVertexC', x2 + 10, y2 + 22], ['#rectVertexD', originX - 22, y2 + 22]].forEach(([selector, x, y]) => {
     q(selector).setAttribute('x', x); q(selector).setAttribute('y', y);
   });
-  q('#rectWidthLabel').setAttribute('x', (90 + x2) / 2);
+  q('#rectWidthLabel').setAttribute('x', (originX + x2) / 2);
   q('#rectWidthLabel').setAttribute('y', y2 + 28);
-  q('#rectHeightLabel').setAttribute('x', 65);
-  q('#rectHeightLabel').setAttribute('y', (55 + y2) / 2);
-  setText('#rectAreaFormula', `S＝${width} × ${height}＝${fmt(metrics.area)}`);
-  setText('#rectPerimeterFormula', `C＝2 ×（${width}＋${height}）＝${fmt(metrics.perimeter)}`);
-  setText('#rectValues', `长 ${width} · 宽 ${height}`);
+  q('#rectHeightLabel').setAttribute('x', originX - 36);
+  q('#rectHeightLabel').setAttribute('y', (originY + y2) / 2);
+  q('#rectRightAngle').setAttribute('d', `M ${originX} ${originY + GRID_UNIT} L ${originX + GRID_UNIT} ${originY + GRID_UNIT} L ${originX + GRID_UNIT} ${originY}`);
+  setText('#rectWidthLabel', `长 a＝${width}`);
+  setText('#rectHeightLabel', `宽 b＝${height}`);
+  setText('#rectAreaFormula', `S＝a×b＝${width}×${height}＝${fmt(metrics.area)}`);
+  setText('#rectPerimeterFormula', `C＝2（a＋b）＝2×（${width}＋${height}）＝${fmt(metrics.perimeter)}`);
+  setText('#rectValues', `长 a＝${width} · 宽 b＝${height}`);
 }
 
 function renderTriangle() {
   const base = number('#triBase');
   const height = number('#triHeight');
-  const half = base * 22 / 2;
-  const y = 300 - height * 22;
-  q('#triShape').setAttribute('points', `${300-half},300 ${300+half},300 300,${y}`);
-  q('#triHeightLine').setAttribute('y2', y);
-  q('#triVertexA').setAttribute('x', 300); q('#triVertexA').setAttribute('y', y - 14);
-  q('#triVertexB').setAttribute('x', 300 - half - 24); q('#triVertexB').setAttribute('y', 322);
-  q('#triVertexC').setAttribute('x', 300 + half + 10); q('#triVertexC').setAttribute('y', 322);
-  q('#triBaseLabel').setAttribute('x', 300); q('#triBaseLabel').setAttribute('y', 342);
-  q('#triHeightLabel').setAttribute('x', 330); q('#triHeightLabel').setAttribute('y', (300 + y) / 2);
-  setText('#triAreaFormula', `S＝${base} × ${height} ÷ 2＝${fmt(triangleMetrics(base, height).area)}`);
-  setText('#triValues', `底 ${base} · 高 ${height}`);
+  const baseLeft = 160;
+  const baseRight = baseLeft + base * GRID_UNIT;
+  const baseY = 300;
+  const apexX = baseLeft + Math.floor(base / 2) * GRID_UNIT;
+  const apexY = baseY - height * GRID_UNIT;
+  q('#triShape').setAttribute('points', `${baseLeft},${baseY} ${baseRight},${baseY} ${apexX},${apexY}`);
+  q('#triHeightLine').setAttribute('x1', apexX); q('#triHeightLine').setAttribute('x2', apexX);
+  q('#triHeightLine').setAttribute('y1', baseY); q('#triHeightLine').setAttribute('y2', apexY);
+  q('#triRightAngle').setAttribute('d', `M ${apexX} ${baseY - GRID_UNIT} L ${apexX + GRID_UNIT} ${baseY - GRID_UNIT} L ${apexX + GRID_UNIT} ${baseY}`);
+  q('#triVertexA').setAttribute('x', apexX); q('#triVertexA').setAttribute('y', apexY - 14);
+  q('#triVertexB').setAttribute('x', baseLeft - 24); q('#triVertexB').setAttribute('y', baseY + 22);
+  q('#triVertexC').setAttribute('x', baseRight + 10); q('#triVertexC').setAttribute('y', baseY + 22);
+  q('#triBaseLabel').setAttribute('x', (baseLeft + baseRight) / 2); q('#triBaseLabel').setAttribute('y', baseY + 42);
+  q('#triHeightLabel').setAttribute('x', apexX + 30); q('#triHeightLabel').setAttribute('y', (baseY + apexY) / 2);
+  setText('#triBaseLabel', `底 a＝${base}`);
+  setText('#triHeightLabel', `高 h＝${height}`);
+  setText('#triAreaFormula', `S＝a×h÷2＝${base}×${height}÷2＝${fmt(triangleMetrics(base, height).area)}`);
+  setText('#triValues', `底 a＝${base} · 高 h＝${height}`);
 }
 
 function sectorPath(cx, cy, r, angle) {
@@ -70,18 +111,18 @@ function sectorPath(cx, cy, r, angle) {
 function renderCircle() {
   const radius = number('#circleRadius');
   const angle = number('#sectorAngle');
-  const r = radius * 18;
+  const r = radius * GRID_UNIT;
   const metrics = circleMetrics(radius, angle);
   q('#sectorShape').setAttribute('d', sectorPath(300, 180, r, angle));
   q('#circleHandle').setAttribute('cx', 300 + r);
   q('#circleRadiusLine').setAttribute('x2', 300 + r);
   q('#circleRadiusLabel').setAttribute('x', 300 + r / 2); q('#circleRadiusLabel').setAttribute('y', 158);
   q('#circleArcLabel').setAttribute('x', 300 + r * .82); q('#circleArcLabel').setAttribute('y', 168 - r * .62);
-  setText('#circlePerimeterFormula', `C＝2π×${radius}≈${fmt(metrics.circumference)}`);
-  setText('#circleAreaFormula', `S＝π×${radius}²≈${fmt(metrics.area)}`);
-  setText('#arcLengthFormula', `L＝${angle}/360×2π×${radius}≈${fmt(metrics.arcLength)}`);
-  setText('#sectorAreaFormula', `S＝${angle}/360×π×${radius}²≈${fmt(metrics.sectorArea)}`);
-  setText('#circleValues', `半径 ${radius} · 圆心角 ${angle}°`);
+  setText('#circlePerimeterFormula', `C＝2πr＝2×π×${radius}≈${fmt(metrics.circumference)}`);
+  setText('#circleAreaFormula', `S＝πr²＝π×${radius}²≈${fmt(metrics.area)}`);
+  setText('#arcLengthFormula', `l＝n/360×2πr＝${angle}/360×2π×${radius}≈${fmt(metrics.arcLength)}`);
+  setText('#sectorAreaFormula', `S扇＝n/360×πr²＝${angle}/360×π×${radius}²≈${fmt(metrics.sectorArea)}`);
+  setText('#circleValues', `半径 r＝${radius} · 圆心角 n＝${angle}°`);
 }
 
 function renderSolid() {
@@ -102,9 +143,11 @@ function renderSolid() {
   q('#coneRadiusGuide').setAttribute('x2', 430 + rx); q('#coneRadiusGuide').setAttribute('y1', 95 + h); q('#coneRadiusGuide').setAttribute('y2', 95 + h);
   q('#solidHeightLabel').setAttribute('x', 198); q('#solidHeightLabel').setAttribute('y', 100 + h / 2);
   q('#solidRadiusLabel').setAttribute('x', 430); q('#solidRadiusLabel').setAttribute('y', 132 + h);
-  setText('#cylinderVolumeFormula', `V＝π×${radius}²×${height}≈${fmt(metrics.cylinderVolume)}`);
-  setText('#coneVolumeFormula', `V＝⅓×π×${radius}²×${height}≈${fmt(metrics.coneVolume)}`);
-  setText('#solidValues', `半径 ${radius} · 高 ${height}`);
+  setText('#solidHeightLabel', `高 h＝${height}`);
+  setText('#solidRadiusLabel', `底面半径 r＝${radius}`);
+  setText('#cylinderVolumeFormula', `V柱＝πr²h＝π×${radius}²×${height}≈${fmt(metrics.cylinderVolume)}`);
+  setText('#coneVolumeFormula', `V锥＝⅓πr²h＝⅓×π×${radius}²×${height}≈${fmt(metrics.coneVolume)}`);
+  setText('#solidValues', `半径 r＝${radius} · 高 h＝${height}`);
 }
 
 function renderAngle() {
@@ -140,13 +183,13 @@ function renderQuadrilateral() {
   const top = number('#quadTop');
   const base = number('#quadBase');
   const height = number('#quadHeight');
-  const scale = 24;
-  const yTop = 75;
+  const scale = GRID_UNIT;
+  const yTop = 60;
   const yBottom = yTop + height * scale;
   const baseLeft = 160;
   const baseRight = baseLeft + base * scale;
-  const shift = 65;
-  const topWidth = (type === 'parallelogram' ? base : Math.min(top, base)) * scale;
+  const shift = 60;
+  const topWidth = (type === 'parallelogram' ? base : top) * scale;
   const topLeft = baseLeft + shift;
   const topRight = topLeft + topWidth;
   q('#quadShape').setAttribute('points', `${topLeft},${yTop} ${topRight},${yTop} ${baseRight},${yBottom} ${baseLeft},${yBottom}`);
@@ -160,25 +203,37 @@ function renderQuadrilateral() {
   q('#quadBottomLabel').setAttribute('x', (baseLeft + baseRight) / 2); q('#quadBottomLabel').setAttribute('y', yBottom + 30);
   q('#quadHeightLabel').setAttribute('x', topLeft + 30); q('#quadHeightLabel').setAttribute('y', (yTop + yBottom) / 2);
   q('#quadTopControl').hidden = type === 'parallelogram';
+  setText('#quadHeightLabel', `高 h＝${height}`);
   if (type === 'parallelogram') {
     const side = Math.hypot(shift / scale, height);
     const metrics = parallelogramMetrics(base, side, height);
-    setText('#quadTopLabel', '对边平行且相等');
-    setText('#quadValues', `底 ${base} · 高 ${height}`);
-    setText('#quadAreaFormula', `S＝${base}×${height}＝${fmt(metrics.area)}`);
+    setText('#quadTopLabel', `底 a＝${base}`);
+    setText('#quadBottomLabel', `底 a＝${base}`);
+    setText('#quadLeftSideLabel', `边 b≈${fmt(side)}`);
+    setText('#quadRightSideLabel', '');
+    setText('#quadBaseControlLabel', '底 a');
+    q('#quadLeftSideLabel').setAttribute('x', baseLeft - 18); q('#quadLeftSideLabel').setAttribute('y', (yTop + yBottom) / 2);
+    setText('#quadValues', `底 a＝${base} · 边 b≈${fmt(side)} · 高 h＝${height}`);
+    setText('#quadAreaFormula', `S＝a×h＝${base}×${height}＝${fmt(metrics.area)}`);
     setText('#quadAreaNote', '割补成长方形：底 × 高');
-    setText('#quadPerimeterFormula', `C＝2×（${base}＋${fmt(side)}）≈${fmt(metrics.perimeter)}`);
+    setText('#quadPerimeterFormula', `C＝2（a＋b）＝2×（${base}＋${fmt(side)}）≈${fmt(metrics.perimeter)}`);
     setText('#quadHint', '高必须垂直于底；斜边不是高。平行四边形的两组对边分别平行。');
   } else {
     const metrics = trapezoidMetrics(top, base, height);
-    setText('#quadTopLabel', `上底 ${top}`);
-    setText('#quadValues', `上底 ${top} · 下底 ${base} · 高 ${height}`);
+    setText('#quadTopLabel', `上底 a＝${top}`);
+    setText('#quadBottomLabel', `下底 b＝${base}`);
+    setText('#quadBaseControlLabel', '下底 b');
+    setText('#quadValues', `上底 a＝${top} · 下底 b＝${base} · 高 h＝${height}`);
     const leftSide = Math.hypot(shift / scale, height);
     const rightOffset = (base * scale - shift - top * scale) / scale;
     const rightSide = Math.hypot(rightOffset, height);
-    setText('#quadAreaFormula', `S＝（${top}＋${base}）×${height}÷2＝${fmt(metrics.area)}`);
+    setText('#quadLeftSideLabel', `腰 c≈${fmt(leftSide)}`);
+    setText('#quadRightSideLabel', `腰 d≈${fmt(rightSide)}`);
+    q('#quadLeftSideLabel').setAttribute('x', baseLeft - 18); q('#quadLeftSideLabel').setAttribute('y', (yTop + yBottom) / 2);
+    q('#quadRightSideLabel').setAttribute('x', baseRight + 12); q('#quadRightSideLabel').setAttribute('y', (yTop + yBottom) / 2);
+    setText('#quadAreaFormula', `S＝（a＋b）×h÷2＝（${top}＋${base}）×${height}÷2＝${fmt(metrics.area)}`);
     setText('#quadAreaNote', '两个相同梯形拼成平行四边形');
-    setText('#quadPerimeterFormula', `C≈${top}＋${base}＋${fmt(leftSide)}＋${fmt(rightSide)}＝${fmt(top + base + leftSide + rightSide)}`);
+    setText('#quadPerimeterFormula', `C＝a＋b＋c＋d≈${top}＋${base}＋${fmt(leftSide)}＋${fmt(rightSide)}＝${fmt(top + base + leftSide + rightSide)}`);
     setText('#quadHint', '梯形只有一组对边平行；两条平行边叫上底和下底，它们之间的垂直距离叫高。');
   }
 }
@@ -215,8 +270,8 @@ function renderPolygon() {
   q('#polygonAngleLabel').setAttribute('x', cx + 48); q('#polygonAngleLabel').setAttribute('y', cy - radius + 54);
   setText('#polygonAngleLabel', `内角 ${fmt(metrics.interiorAngle)}°`);
   setText('#polygonValues', `${sides} 边 · 边长 ${sideLength}`);
-  setText('#polygonPerimeterFormula', `C＝${sides}×${sideLength}＝${fmt(metrics.perimeter)}`);
-  setText('#polygonAngleFormula', `内角和＝${metrics.interiorAngleSum}°；每个内角＝${fmt(metrics.interiorAngle)}°`);
+  setText('#polygonPerimeterFormula', `C＝n×a＝${sides}×${sideLength}＝${fmt(metrics.perimeter)}`);
+  setText('#polygonAngleFormula', `内角和＝（n－2）×180°＝（${sides}－2）×180°＝${metrics.interiorAngleSum}°；每个内角＝内角和÷n＝${metrics.interiorAngleSum}°÷${sides}＝${fmt(metrics.interiorAngle)}°`);
 }
 
 function renderCoordinateGrid() {
@@ -269,9 +324,12 @@ function renderCuboid() {
   q('#cuboidVertexLabel').setAttribute('x', back[1][0] + 8); q('#cuboidVertexLabel').setAttribute('y', back[1][1] - 8);
   q('#cuboidEdgeLabel').setAttribute('x', x + w / 2); q('#cuboidEdgeLabel').setAttribute('y', y - 10);
   q('#cuboidFaceLabel').setAttribute('x', x + w / 2); q('#cuboidFaceLabel').setAttribute('y', y + h / 2);
-  setText('#cuboidValues', `长 ${length} · 宽 ${width} · 高 ${height}`);
-  setText('#cuboidVolumeFormula', `V＝${length}×${width}×${height}＝${fmt(metrics.volume)}`);
-  setText('#cuboidSurfaceFormula', `S＝2×（${length}×${width}＋${length}×${height}＋${width}×${height}）＝${fmt(metrics.surfaceArea)}`);
+  setText('#cuboidLengthLabel', `长 a＝${length}`);
+  setText('#cuboidWidthLabel', `宽 b＝${width}`);
+  setText('#cuboidHeightLabel', `高 h＝${height}`);
+  setText('#cuboidValues', `长 a＝${length} · 宽 b＝${width} · 高 h＝${height}`);
+  setText('#cuboidVolumeFormula', `V＝abh＝${length}×${width}×${height}＝${fmt(metrics.volume)}`);
+  setText('#cuboidSurfaceFormula', `S＝2（ab＋ah＋bh）＝2×（${length}×${width}＋${length}×${height}＋${width}×${height}）＝${fmt(metrics.surfaceArea)}`);
 }
 
 function bindNumberPair(rangeSelector, numberSelector, render) {
@@ -282,8 +340,11 @@ function bindNumberPair(rangeSelector, numberSelector, render) {
   input.addEventListener('input', () => {
     if (input.value === '') return;
     const min = Number(range.min), max = Number(range.max);
-    const value = Math.max(min, Math.min(max, Number(input.value)));
+    const step = Number(range.step) || 1;
+    const raw = Math.max(min, Math.min(max, Number(input.value)));
+    const value = min + Math.round((raw - min) / step) * step;
     range.value = String(value);
+    input.value = String(value);
     render();
   });
   input.addEventListener('change', () => { input.value = range.value; });
@@ -300,8 +361,8 @@ function bindRectangleDrag() {
     const point = svg.createSVGPoint();
     point.x = event.clientX; point.y = event.clientY;
     const local = point.matrixTransform(svg.getScreenCTM().inverse());
-    q('#rectWidth').value = Math.max(2, Math.min(12, Math.round((local.x - 90) / 24)));
-    q('#rectHeight').value = Math.max(2, Math.min(9, Math.round((local.y - 55) / 24)));
+    q('#rectWidth').value = Math.max(2, Math.min(12, Math.round((local.x - 100) / GRID_UNIT)));
+    q('#rectHeight').value = Math.max(2, Math.min(9, Math.round((local.y - 60) / GRID_UNIT)));
     q('#rectWidthNumber').value = q('#rectWidth').value;
     q('#rectHeightNumber').value = q('#rectHeight').value;
     renderRectangle();
@@ -334,6 +395,7 @@ function setPrinciplesVisible(visible) {
 q('#quadType')?.addEventListener('change', renderQuadrilateral);
 q('#showPrinciples')?.addEventListener('click', () => setPrinciplesVisible(true));
 q('#hidePrinciples')?.addEventListener('click', () => setPrinciplesVisible(false));
+installUnitGrids();
 setPrinciplesVisible(true);
 bindRectangleDrag();
 renderRectangle();
