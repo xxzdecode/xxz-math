@@ -1,5 +1,6 @@
 const MATH_KEYS = Object.freeze({
-  progress: 'math_student_progress_v1'
+  progress: 'math_student_progress_v1',
+  weaknesses: 'math_weakness_view_v1'
 });
 
 export class SupabaseMathStore {
@@ -23,18 +24,29 @@ export class SupabaseMathStore {
     };
   }
 
-  async read(key) {
+  async read(key, { allowMissing = false } = {}) {
     if (!Object.values(MATH_KEYS).includes(key)) throw new Error('Unknown math storage key');
     const endpoint = `${this.url}/rest/v1/${this.table}?key=eq.${encodeURIComponent(key)}&select=value`;
     const response = await fetch(endpoint, { headers: this.headers(), cache: 'no-store' });
     const body = await response.json().catch(() => null);
     if (!response.ok) throw new Error(`Supabase math read failed (${response.status})`);
-    if (!Array.isArray(body) || body.length !== 1 || !body[0]?.value) throw new Error(`Supabase math key is missing: ${key}`);
+    if (!Array.isArray(body) || body.length > 1) throw new Error(`Supabase math key is invalid: ${key}`);
+    if (!body.length && allowMissing) return null;
+    if (body.length !== 1 || !body[0]?.value) throw new Error(`Supabase math key is missing: ${key}`);
     return body[0].value;
   }
 
   progress() {
     return this.read(MATH_KEYS.progress);
+  }
+
+  async weaknesses() {
+    return await this.read(MATH_KEYS.weaknesses, { allowMissing: true }) || {
+      schema_version: 1,
+      source_updated_at: '',
+      source_hash: '',
+      students: { sister: { items: [] }, brother: { items: [] } }
+    };
   }
 
   async saveTeachingStatus({ studentId, knowledgeId, teachingStatus }) {

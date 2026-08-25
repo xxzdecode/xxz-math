@@ -20,9 +20,10 @@ test('browser API uses only the backend endpoint and session-scoped token', asyn
   assert.doesNotMatch(api, /localStorage|supabase\.co|service[_-]?role/i);
 });
 
-test('server storage is restricted to the math progress key and teaching-status RPC', async () => {
+test('server storage is restricted to approved private math keys and teaching-status RPC', async () => {
   const store = await read('server/supabase-store.mjs');
   assert.match(store, /math_student_progress_v1/);
+  assert.match(store, /math_weakness_view_v1/);
   assert.match(store, /saveTeachingStatus/);
   assert.doesNotMatch(store, /assessment|grading|paper_id|question_id|kp_ids/i);
   assert.match(store, /\/rpc\//);
@@ -31,4 +32,12 @@ test('server storage is restricted to the math progress key and teaching-status 
 test('the website has only geometry and knowledge navigation', async () => {
   const pages = `${await read('index.html')}\n${await read('knowledge.html')}`;
   assert.doesNotMatch(pages, /grading\.html|在线批改|paper_id|question_id|kp_ids/i);
+});
+
+test('weakness UI is teacher-only and never embeds question details', async () => {
+  const html = await read('knowledge.html');
+  const script = await read('js/knowledge.js');
+  assert.match(html, /id="teacherWeaknesses"[^>]*hidden/);
+  assert.match(script, /loadWeaknesses/);
+  assert.doesNotMatch(`${html}\n${script}`, /student_answer|correct_answer|source_ref|teacher_note/);
 });

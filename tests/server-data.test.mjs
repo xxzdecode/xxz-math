@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { teacherProgressResponse, validateDisplayStatusUpdate, validateTeachingStatusUpdate } from '../server/math-data.mjs';
+import { teacherProgressResponse, teacherWeaknessResponse, validateDisplayStatusUpdate, validateTeachingStatusUpdate } from '../server/math-data.mjs';
 
 test('teacher progress response strips evidence and preserves handoff versus mastery', () => {
   const result = teacherProgressResponse({ records: [{
@@ -25,6 +25,22 @@ test('teacher progress response strips evidence and preserves handoff versus mas
     status_source: 'manual',
     status_updated_at: '2026-08-20T10:00:00.000Z'
   });
+});
+
+test('teacher weakness response exposes only the display contract', () => {
+  const result = teacherWeaknessResponse({
+    schema_version: 1,
+    source_updated_at: '2026-08-25',
+    source_hash: 'safe-hash',
+    students: { sister: { items: [] }, brother: { items: [{
+      knowledge_id: 'g4-rounding', title: '近似数', status: 'watching', last_seen_at: '2026-08-24',
+      prompt: 'private question', student_answer: 'private answer', source_ref: 'private.jpg'
+    }] } }
+  });
+  assert.deepEqual(result.students.brother.items[0], {
+    knowledge_id: 'g4-rounding', title: '近似数', status: 'watching', last_seen_at: '2026-08-24'
+  });
+  assert.doesNotMatch(JSON.stringify(result), /private question|private answer|source_ref/);
 });
 
 test('teacher write accepts only known students, stable knowledge ids and teaching status', () => {

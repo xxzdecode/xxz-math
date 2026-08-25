@@ -10,6 +10,8 @@ test('edge teacher API reads all secrets from environment and keeps math namespa
   assert.match(edge, /requiredEnv\('MATH_SESSION_SECRET'\)/);
   assert.match(edge, /math_teacher_auth_v1/);
   assert.match(edge, /math_private_state_v1/);
+  assert.match(edge, /math_weakness_view_v1/);
+  assert.ok(edge.indexOf('verifySession(request)') < edge.indexOf("path === '/teacher/weaknesses'"));
   assert.match(edge, /math_teacher_rate_limit_v1/);
   assert.match(edge, /math_set_teaching_status_v1/);
   assert.doesNotMatch(edge, /https:\/\/[a-z0-9-]+\.supabase\.co/i);

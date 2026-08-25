@@ -91,6 +91,7 @@ export function logout() {
 }
 
 export const loadProgress = () => request('/teacher/progress');
+export const loadWeaknesses = () => request('/teacher/weaknesses');
 export const saveTeachingStatus = (studentId, knowledgeId, teachingStatus) => request(
   `/teacher/progress/${encodeURIComponent(studentId)}/${encodeURIComponent(knowledgeId)}`,
   {
