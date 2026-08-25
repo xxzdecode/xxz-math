@@ -79,6 +79,10 @@
 
 返回以下安全字段：`student_id`、`knowledge_id`、`handoff_status`、`teaching_status`、`mastery_status`、`display_status`、`status_source`、`status_updated_at`。不返回证据 ID、照片路径、教师诊断或其他私有材料。
 
+### `GET /teacher/weaknesses`
+
+返回 `math_weakness_view_v1` 的脱敏摘要。只允许学生 ID、知识点 ID、简短标题、`watching / active / improving`、最近日期、来源时间和哈希；不得返回原题、答案、照片路径、学生初答、错误机制或教师说明。缺少快照时返回两名学生的空列表。
+
 ### `PUT /teacher/progress/:student_id/:knowledge_id`
 
 请求接受且一次只处理一种状态：`display_status` 为 `red`、`yellow` 或 `green`；兼容的 `teaching_status` 为 `not_recorded`、`learning` 或 `taught_by_us`。服务端 RPC 必须验证学生与知识点，只改目标字段；不能修改交接基线、实测掌握状态或证据。

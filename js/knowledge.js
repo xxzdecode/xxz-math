@@ -1,10 +1,13 @@
 import './common.js?v=20260821-1';
 import { DISPLAY_STATUS_LABELS, STUDENTS, describeProgressState, emptyProgressState, normalizeCatalog, normalizeProgress } from './core.js';
-import { hasTeacherSession, isTeacherApiConfigured, loadProgress, saveDisplayStatus } from './api.js?v=20260820-3';
+import { hasTeacherSession, isTeacherApiConfigured, loadProgress, loadWeaknesses, saveDisplayStatus } from './api.js?v=20260825-1';
 import { knowledgeContent } from './knowledge-content.js';
+import { WEAKNESS_STATUS_LABELS, normalizeWeaknessView } from './weakness-view.js?v=20260825-1';
 
 let catalogValue = null;
 let progressValue = { schema_version: 2, records: [] };
+let weaknessValue = normalizeWeaknessView(null);
+let weaknessLoadState = 'idle';
 let activeStudent = 'sister';
 const expandedKnowledgeIds = new Set();
 
@@ -178,6 +181,90 @@ function renderTeacherSummary(items, progress, teacherActive) {
   root.append(heading, grid, note);
 }
 
+function shortDate(value) {
+  const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? `${Number(match[2])}月${Number(match[3])}日` : '日期未知';
+}
+
+function focusKnowledge(knowledgeId) {
+  q('#knowledgeSearch').value = '';
+  q('#gradeFilter').value = 'all';
+  q('#domainFilter').value = 'all';
+  render();
+  const details = document.querySelector(`[data-knowledge-id="${knowledgeId}"]`);
+  if (!details) {
+    q('#knowledgeStatus').textContent = '这个薄弱项暂未进入当前学生的知识地图';
+    return;
+  }
+  expandedKnowledgeIds.add(knowledgeId);
+  details.open = true;
+  details.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  details.classList.add('is-focused');
+  setTimeout(() => details.classList.remove('is-focused'), 1600);
+}
+
+function renderTeacherWeaknesses(teacherActive) {
+  const root = q('#teacherWeaknesses');
+  root.hidden = !teacherActive;
+  root.replaceChildren();
+  if (!teacherActive) return;
+  const header = document.createElement('header');
+  const copy = document.createElement('div');
+  const eyebrow = document.createElement('p');
+  eyebrow.className = 'eyebrow';
+  eyebrow.textContent = '错题分析';
+  const heading = document.createElement('h2');
+  heading.textContent = `${STUDENTS.find(value => value.id === activeStudent)?.name}的薄弱项`;
+  copy.append(eyebrow, heading);
+  const updated = document.createElement('span');
+  updated.className = 'teacher-weaknesses-updated';
+  updated.textContent = weaknessValue.sourceUpdatedAt ? `更新于 ${shortDate(weaknessValue.sourceUpdatedAt)}` : '';
+  header.append(copy, updated);
+  root.append(header);
+
+  if (weaknessLoadState === 'loading') {
+    const message = document.createElement('p');
+    message.className = 'teacher-weaknesses-message';
+    message.textContent = '正在读取薄弱项…';
+    root.append(message);
+    return;
+  }
+  if (weaknessLoadState === 'error') {
+    const message = document.createElement('p');
+    message.className = 'teacher-weaknesses-message is-error';
+    message.textContent = '薄弱项暂时无法读取，知识点库仍可正常使用。';
+    root.append(message);
+    return;
+  }
+
+  const items = weaknessValue.students[activeStudent].items;
+  if (!items.length) {
+    const message = document.createElement('p');
+    message.className = 'teacher-weaknesses-message';
+    message.textContent = '目前没有需要显示的薄弱知识点。';
+    root.append(message);
+    return;
+  }
+  const list = document.createElement('div');
+  list.className = 'teacher-weakness-list';
+  for (const item of items) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'teacher-weakness-item';
+    button.addEventListener('click', () => focusKnowledge(item.knowledgeId));
+    const title = document.createElement('strong');
+    title.textContent = item.title;
+    const meta = document.createElement('span');
+    meta.textContent = `最近 ${shortDate(item.lastSeenAt)}`;
+    const status = document.createElement('span');
+    status.className = `weakness-status ${item.status}`;
+    status.textContent = WEAKNESS_STATUS_LABELS[item.status];
+    button.append(title, meta, status);
+    list.append(button);
+  }
+  root.append(list);
+}
+
 function render() {
   if (!catalogValue) return;
   const root = q('#knowledgeGroups');
@@ -193,6 +280,7 @@ function render() {
   q('#visibleDomainCount').textContent = new Set(visible.map(item => item.domain)).size;
   root.replaceChildren();
   renderTeacherSummary(catalog, progress, teacherActive);
+  renderTeacherWeaknesses(teacherActive);
 
   for (let grade = 1; grade <= gradeLimit; grade += 1) {
     const gradeItems = visible.filter(item => item.grade === grade);
@@ -233,16 +321,28 @@ function render() {
 async function refreshTeacherProgress() {
   if (!hasTeacherSession()) {
     progressValue = { schema_version: 2, records: [] };
+    weaknessValue = normalizeWeaknessView(null);
+    weaknessLoadState = 'idle';
     render();
     return;
   }
   q('#knowledgeStatus').textContent = '正在读取学生进度…';
-  try {
-    progressValue = await loadProgress();
+  weaknessLoadState = 'loading';
+  render();
+  const [progressResult, weaknessResult] = await Promise.allSettled([loadProgress(), loadWeaknesses()]);
+  if (progressResult.status === 'fulfilled') {
+    progressValue = progressResult.value;
     q('#knowledgeStatus').textContent = '学生进度已更新';
-  } catch (error) {
+  } else {
     progressValue = { schema_version: 2, records: [] };
-    q('#knowledgeStatus').textContent = error?.message || '学生进度读取失败';
+    q('#knowledgeStatus').textContent = progressResult.reason?.message || '学生进度读取失败';
+  }
+  if (weaknessResult.status === 'fulfilled') {
+    weaknessValue = normalizeWeaknessView(weaknessResult.value);
+    weaknessLoadState = 'ready';
+  } else {
+    weaknessValue = normalizeWeaknessView(null);
+    weaknessLoadState = hasTeacherSession() ? 'error' : 'idle';
   }
   render();
 }

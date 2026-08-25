@@ -5,6 +5,7 @@ const HANDOFF = new Set(['not_reported', 'reported_taught', 'reported_needs_rein
 const TEACHING = new Set(['not_recorded', 'learning', 'taught_by_us']);
 const MASTERY = new Set(['unverified', 'learning', 'stable', 'reinforce']);
 const DISPLAY = new Set(['red', 'yellow', 'green']);
+const WEAKNESS = new Set(['watching', 'active', 'improving']);
 
 const text = value => typeof value === 'string' ? value.trim() : '';
 
@@ -28,6 +29,29 @@ export function teacherProgressResponse(value) {
       if (text(record.status_updated_at)) safe.status_updated_at = text(record.status_updated_at);
       return [safe];
     })
+  };
+}
+
+export function teacherWeaknessResponse(value) {
+  const students = {};
+  for (const studentId of STUDENT_IDS) {
+    const items = Array.isArray(value?.students?.[studentId]?.items) ? value.students[studentId].items : [];
+    students[studentId] = {
+      items: items.flatMap(item => {
+        const knowledgeId = text(item?.knowledge_id);
+        const title = text(item?.title);
+        const status = text(item?.status);
+        const lastSeenAt = text(item?.last_seen_at);
+        if (!/^[a-z0-9][a-z0-9-]{1,99}$/.test(knowledgeId) || !title || !WEAKNESS.has(status) || !lastSeenAt) return [];
+        return [{ knowledge_id: knowledgeId, title, status, last_seen_at: lastSeenAt }];
+      })
+    };
+  }
+  return {
+    schema_version: 1,
+    source_updated_at: text(value?.source_updated_at),
+    source_hash: text(value?.source_hash),
+    students
   };
 }
 

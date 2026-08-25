@@ -187,6 +187,30 @@ function safeProgress(value) {
   };
 }
 
+function safeWeaknesses(value) {
+  const allowedStudents = ['sister', 'brother'];
+  const allowedStatuses = ['watching', 'active', 'improving'];
+  const students = Object.fromEntries(allowedStudents.map(studentId => {
+    const items = Array.isArray(value?.students?.[studentId]?.items) ? value.students[studentId].items : [];
+    return [studentId, {
+      items: items.flatMap(item => {
+        const knowledgeId = String(item?.knowledge_id || '').trim();
+        const title = String(item?.title || '').trim();
+        const status = String(item?.status || '').trim();
+        const lastSeenAt = String(item?.last_seen_at || '').trim();
+        if (!/^[a-z0-9][a-z0-9-]{1,99}$/.test(knowledgeId) || !title || !allowedStatuses.includes(status) || !lastSeenAt) return [];
+        return [{ knowledge_id: knowledgeId, title, status, last_seen_at: lastSeenAt }];
+      })
+    }];
+  }));
+  return {
+    schema_version: 1,
+    source_updated_at: typeof value?.source_updated_at === 'string' ? value.source_updated_at : '',
+    source_hash: typeof value?.source_hash === 'string' ? value.source_hash : '',
+    students
+  };
+}
+
 async function handleAuth(request, origin) {
   const verifier = await loadPinVerifier();
   if (!verifier) return json(origin, 409, { message: '请先完成首次密码设置' });
@@ -232,6 +256,11 @@ Deno.serve(async request => {
       const rows = await supabase('/rest/v1/math_private_state_v1?key=eq.math_student_progress_v1&select=value');
       if (!Array.isArray(rows) || rows.length > 1) throw new Error('Math progress state is invalid');
       return json(origin, 200, safeProgress(rows[0]?.value || { records: [] }));
+    }
+    if (request.method === 'GET' && path === '/teacher/weaknesses') {
+      const rows = await supabase('/rest/v1/math_private_state_v1?key=eq.math_weakness_view_v1&select=value');
+      if (!Array.isArray(rows) || rows.length > 1) throw new Error('Math weakness state is invalid');
+      return json(origin, 200, safeWeaknesses(rows[0]?.value || { students: {} }));
     }
     const match = /^\/teacher\/progress\/([^/]+)\/([^/]+)$/.exec(path);
     if (request.method === 'PUT' && match) {

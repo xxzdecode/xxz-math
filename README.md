@@ -5,7 +5,7 @@
 - 图形实验室：按“概念 → 推导 → 公式 → 互动验证”组织八章学习路线；用方格、割补、复制拼接、圆周拉直、圆面剪拼和立体展开解释公式，并以固定颜色区分面积、周长、表面积和体积；
 - 知识点库：按沪教版口径从一年级到七年级顺序列出非图形知识点；每条在列表内展开核心理解、具体方法、算例和易错点，支持全部展开/收起、搜索和筛选；老师登录后用红、黄、绿圆点直接标记掌握状态。
 
-数学错题不进入网站。Stella 拍照并说明错题后，由 Codex 在 Material Hub 中归档、分析，并按需要制作错题集或举一反三。
+数学原题、照片、答案和详细分析不进入网站。Stella 拍照并说明错题后，由 Codex 在私有 Material Hub 中归档原图和结构化逐题内容、重算薄弱状态，并向网站老师模式发布只含大致知识点、状态和最近日期的脱敏摘要；后续可使用同一原题档案制作错题集或举一反三。
 
 ## 本地运行
 
@@ -33,6 +33,12 @@ node scripts/import-material-hub-data.mjs D:\xxz-work\projects\xxz-material-hub\
 `server/` 保存本地可测试的教师 API 参考实现：单一 4 位 PIN 由服务端使用不可逆 verifier 校验，错误尝试受限，成功后签发最长 15 分钟的会话。生产 Edge Function 支持一次性网页设密，verifier 写入仅 service-role 可见的 `math_teacher_auth_v1`；私有状态使用 `math_student_progress_v1`，教学状态写入走独立 `math_*` RPC。
 
 当前仓库已有 Supabase 迁移与 Edge Function 源码，但尚无真实 PIN 或生产配置，也不代表迁移已经执行。详见 `docs/teacher-api.md`。
+
+薄弱项快照使用独立私有 key `math_weakness_view_v1`。以下命令默认只在本地构建并检查脱敏结果；`--audit` 才读取线上，`--apply` 才写入 Supabase：
+
+```powershell
+npm run publish:weakness -- D:\path\to\xxz-material-hub\math
+```
 
 `supabase/` 中提供独立 `math_*` 迁移与 Edge Function 源码；它们只有在正式执行迁移、设置 secrets、完成首次网页设密、初始化私有进度并配置 `apiBase` 后才会生效。真实 PIN、verifier、pepper、会话密钥和 service-role key 不进入 Git。
 

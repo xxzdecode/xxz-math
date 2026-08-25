@@ -8,6 +8,8 @@
     <p class="notice" id="teacherProgressHint">当前为公共视图。学生状态需要进入老师模式。</p>
     <div class="student-switch" id="studentSwitch" hidden></div>
     <p class="inline-status" id="knowledgeStatus" aria-live="polite"></p>
+    <section class="teacher-summary" id="teacherSummary" hidden></section>
+    <section class="teacher-weaknesses" id="teacherWeaknesses" aria-live="polite" hidden></section>
     <section class="knowledge-toolbar" aria-label="知识点筛选">
       <label>搜索<input id="knowledgeSearch" type="search" placeholder="知识点、章节、公式或能力标签…" autocomplete="off"></label>
       <label>年级<select id="gradeFilter"><option value="all">全部年级</option><option value="1">一年级</option><option value="2">二年级</option><option value="3">三年级</option><option value="4">四年级</option><option value="5">五年级</option><option value="6">六年级</option><option value="7">七年级</option></select></label>
@@ -19,10 +21,9 @@
       <div><strong id="visibleGradeCount">0</strong><span>年级</span></div>
       <div><strong id="visibleDomainCount">0</strong><span>知识领域</span></div>
     </section>
-    <section class="teacher-summary" id="teacherSummary" hidden></section>
     <div id="knowledgeGroups"></div>
     <p class="empty-state" id="knowledgeEmpty" hidden>没有符合当前条件的知识点，请调整搜索或筛选条件。</p>
   </main>
-  <script src="config.js" onerror="this.remove()"></script><script type="module" src="js/knowledge.js?v=20260821-1"></script>
+  <script src="config.js" onerror="this.remove()"></script><script type="module" src="js/knowledge.js?v=20260825-1"></script>
 </body>
 </html>

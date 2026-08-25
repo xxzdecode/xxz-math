@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { PinRateLimiter, createSessionToken, validatePinVerifier, verifyPin, verifySessionToken } from './security.mjs';
-import { teacherProgressResponse, validateDisplayStatusUpdate, validateTeachingStatusUpdate } from './math-data.mjs';
+import { teacherProgressResponse, teacherWeaknessResponse, validateDisplayStatusUpdate, validateTeachingStatusUpdate } from './math-data.mjs';
 import { SupabaseMathStore } from './supabase-store.mjs';
 
 const PORT = Number(process.env.MATH_TEACHER_API_PORT || 8787);
@@ -110,6 +110,10 @@ async function handleRequest(request, response) {
   requireTeacher(request);
   if (request.method === 'GET' && url.pathname === '/math/teacher/progress') {
     send(response, 200, teacherProgressResponse(await store.progress()));
+    return;
+  }
+  if (request.method === 'GET' && url.pathname === '/math/teacher/weaknesses') {
+    send(response, 200, teacherWeaknessResponse(await store.weaknesses()));
     return;
   }
   const progressMatch = /^\/math\/teacher\/progress\/([^/]+)\/([^/]+)$/.exec(url.pathname);
